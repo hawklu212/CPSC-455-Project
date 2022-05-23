@@ -14,6 +14,7 @@ In order to create a repo, you will need to decide on a project name
 Project Description: Write 3-5 sentences on your project topic. (try to address all points below) 
 
 **Appname**
+
 **A11yMaps**
 
 **Who is it for?**
@@ -91,7 +92,7 @@ With pre-saved locations individuals will more rapidly be able to input start po
 
 -Store credentials in database
 
-**User Input/Output UI **
+**User Input/Output UI**
 
 -Have search boxes for start/destination locations
 
