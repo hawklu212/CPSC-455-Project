@@ -17,6 +17,8 @@ Project Description: Write 3-5 sentences on your project topic. (try to address 
 
 **A11yMaps**
 
+# Project Description
+
 **Who is it for?**
 
 Individuals with impaired mobility/those constrained to utilising a wheelchair
@@ -39,7 +41,7 @@ With pre-saved locations individuals will more rapidly be able to input start po
 
 **What is some additional functionality you can add/remove based on time constraints? **
 
-
+# Project Task Requirements
 ● Project task requirements: 
 
 **3-5 minimal requirements (will definitely complete)**
@@ -81,6 +83,8 @@ With pre-saved locations individuals will more rapidly be able to input start po
 -Add “use my location”, both as a start/end point, but also when initialising the map view
 
 -Pick 2 of your minimal requirements and break each of them down into ~2-5 smaller tasks! 
+
+# Task Breakdown
 
 **User setup**
 
