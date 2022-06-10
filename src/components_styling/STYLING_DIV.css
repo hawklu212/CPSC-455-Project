@@ -1,0 +1,56 @@
+.Title{
+    border:10px;
+    border-style: ridge;
+    border-color: gray;
+    background-color: greenyellow;
+}
+
+textarea {
+    resize: none;
+    overflow: hidden;
+    height: 20px;
+    min-height: 20px;
+    width: 400px;
+}
+
+#RIGHT_TOP{
+    border:10px;
+    border-style: ridge;
+    border-color: gray;
+    position: relative;
+    text-align: left;
+    
+}
+
+#LEFT_TOP{
+    border:10px;
+    border-style: ridge;
+    border-color: gray;
+    
+}
+
+#TOP_DIV{
+    border:10px;
+    border-style: ridge;
+    border-color: gray;
+}
+
+#RIGHT_BOTTOM{
+    border:10px;
+    border-style: ridge;
+    border-color: gray;
+    
+}
+
+#LEFT_BOTTOM{
+    border:10px;
+    border-style: ridge;
+    border-color: gray;
+    
+}
+
+#BOTTOM_DIV{
+    border:10px;
+    border-style: ridge;
+    border-color: gray;
+}
