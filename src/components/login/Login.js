@@ -1,5 +1,5 @@
 import { Grid, Typography, Button, Divider } from "@mui/material";
-import "../../components_styling/colours.css";
+import "../../components-styling/colours.css";
 import { TextField } from "@mui/material";
 
 export default function Login() {

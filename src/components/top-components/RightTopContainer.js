@@ -1,6 +1,6 @@
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
-import MAP_COMPONENT from "./MAP_COMPONENT";
-export default function RIGHT_TOP_CONTAINER(){
+import MapComponent from "./MapComponent";
+export default function RightTopContainer(){
     const center = {lat: 49.2606, lng: -123.2460};
     const zoom =14;
     const render = (status) => {
@@ -17,7 +17,7 @@ export default function RIGHT_TOP_CONTAINER(){
 
     return (
     <Wrapper apiKey={""} render={render}>
-        <MAP_COMPONENT center={center} zoom={zoom}/>
+        <MapComponent center={center} zoom={zoom}/>
     </Wrapper>
     );
 }
