@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
-import MAIN_CONTAINER from "./components/MainContainer";
+import MainContainer from "./components/MainContainer";
 import Login from "./components/login/Login";
 import CreateAccount from "./components/create-account/CreateAccount";
 
@@ -10,7 +10,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/create-account" element={<CreateAccount />} />
-      <Route path="/search" element={<MAIN_CONTAINER />} />
+      <Route path="/search" element={<MainContainer />} />
     </Routes>
   );
 }

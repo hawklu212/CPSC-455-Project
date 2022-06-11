@@ -1,4 +1,4 @@
-import EVALUATION from "./Evaluation";
-export default function RIGHT_BOTTOM_CONTAINER(){
-    return (<span id="RIGHT_BOTTOM" style={{"display":"inline-block"}}><EVALUATION/></span>);
+import Evaluation from "./Evaluation";
+export default function RightBottomContainer(){
+    return (<span id="RIGHT_BOTTOM" style={{"display":"inline-block"}}><Evaluation/></span>);
 }

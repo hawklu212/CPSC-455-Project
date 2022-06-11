@@ -1,8 +1,8 @@
-import LEFT_TOP_CONTAINER from "./LeftTopContainer"
-import RIGHT_TOP_CONTAINER from "./RightTopContainer"
-export default function TOP_DIV(){
+import LeftTopContainer from "./LeftTopContainer"
+import RightTopContainer from "./RightTopContainer"
+export default function TopDiv(){
     return (<div id="TOP_DIV" style={{display: "flex"}}>
-        <LEFT_TOP_CONTAINER/>
-        <RIGHT_TOP_CONTAINER/>
+        <LeftTopContainer/>
+        <RightTopContainer/>
     </div>);
 }
