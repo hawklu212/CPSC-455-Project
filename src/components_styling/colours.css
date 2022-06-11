@@ -1,0 +1,24 @@
+/* putting this here for now for easy copy paste, 
+since we all know how to work with css 
+once we all start using Material and emotion, we may eventually want to do away
+with this and tie the css directly to the components, e.g. like in Title.js
+*/
+.yellow-1 {
+	background-color: #ffffff
+}
+
+.yellow-2 {
+	background-color: #fcf4d7
+}
+
+.yellow-3 {
+	background-color: #ffd400
+}
+
+.yellow-4 {
+	background-color: #7f6a00
+}
+
+.yellow-5 {
+	background-color: #000000
+}
