@@ -1,4 +1,4 @@
-import DETAILS from "./DETAILS";
+import DETAILS from "./Details";
 import React, { useRef } from 'react'
 export default function LEFT_BOTTOM_CONTAINER(){
     

@@ -1,4 +1,4 @@
-import INPUTS from "./INPUTS_DIV";
+import INPUTS from "./InputDiv";
 import React, { useRef } from 'react'
 export default function LEFT_TOP_CONTAINER(){
     

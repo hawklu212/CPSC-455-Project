@@ -1,5 +1,5 @@
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
-import MAP_COMPONENT from "./MAP_COMPONENT";
+import MAP_COMPONENT from "./MapComponent";
 export default function RIGHT_TOP_CONTAINER(){
     const center = {lat: 49.2606, lng: -123.2460};
     const zoom =14;

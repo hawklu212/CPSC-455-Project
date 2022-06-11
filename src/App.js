@@ -1,8 +1,7 @@
 import logo from "./logo.svg";
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
-import MAIN_CONTAINER from "./components/MAIN_CONTAINER";
-import TOP_DIV from "./components/TOP_COMPONENTS/TOP_DIV";
+import MAIN_CONTAINER from "./components/MainContainer";
 import Login from "./components/login/Login";
 import CreateAccount from "./components/create-account/CreateAccount";
 
