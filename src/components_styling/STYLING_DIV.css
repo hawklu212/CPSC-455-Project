@@ -1,8 +1,15 @@
+root {
+    --border-size: 5px;
+    --border-style: solid;
+    --border-color: #7f6a00;
+    --background-color: #ffd400;
+}
+
 .Title{
-    border:10px;
-    border-style: ridge;
-    border-color: gray;
-    background-color: greenyellow;
+    border: var(--border-size);
+    border-style: solid;
+    border-color: var(--border-color);
+    background-color: #ffd400;
 }
 
 textarea {
@@ -14,43 +21,43 @@ textarea {
 }
 
 #RIGHT_TOP{
-    border:10px;
-    border-style: ridge;
-    border-color: gray;
+    border: var(--border-size);
+    border-style: solid;
+    border-color: var(--border-color);
     position: relative;
     text-align: left;
     
 }
 
 #LEFT_TOP{
-    border:10px;
-    border-style: ridge;
-    border-color: gray;
+    border: var(--border-size);
+    border-style: solid;
+    border-color: var(--border-color);
     
 }
 
 #TOP_DIV{
-    border:10px;
-    border-style: ridge;
-    border-color: gray;
+    border: var(--border-size);
+    border-style: none;
+    border-color: var(--border-color);
 }
 
-#RIGHT_BOTTOM{
-    border:10px;
-    border-style: ridge;
-    border-color: gray;
+#RIGHT_BOTTOM {
+    border: var(--border-size);
+    border-style: none;
+    border-color: var(--border-color);
     
 }
 
 #LEFT_BOTTOM{
-    border:10px;
-    border-style: ridge;
-    border-color: gray;
+    border: var(--border-size);
+    border-style: none;
+    border-color: var(--border-color);
     
 }
 
 #BOTTOM_DIV{
-    border:10px;
-    border-style: ridge;
-    border-color: gray;
+    border: var(--border-size);
+    border-style: solid;
+    border-color: var(--border-color);
 }
