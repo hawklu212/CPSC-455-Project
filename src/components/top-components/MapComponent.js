@@ -8,11 +8,11 @@ export default function MapComponent({center, zoom}) {
     const dispatch=useDispatch();
     useEffect(() => {
         if (ref.current && !map) {
-            dispatch(render({"center":center, "zoom":zoom,"ref":ref}));
+            dispatch(render({"center":JSON.stringify(center), "zoom":zoom,"ref":ref}));
         }
     }, [ref, map]);
 
-    console.log(ref)
+    //console.log(ref)
     return <div ref={ref} id={"map"} style={{display: "inline-flex", height: `500px`, width: `500px`}}/>;
 
 }
