@@ -1,13 +1,14 @@
-import {useEffect, useRef, useState} from "react";
-
+import {useEffect, useRef} from "react";
+import {useSelector, useDispatch} from 'react-redux';
+import { render } from "../../actions";
 
 export default function MapComponent({center, zoom}) {
     const ref = useRef(null);
-    const [map, setMap] = useState();
-
+    const map = useSelector(state=>state.mapData);
+    const dispatch=useDispatch();
     useEffect(() => {
         if (ref.current && !map) {
-            setMap(new window.google.maps.Map(ref.current, {center, zoom}));
+            dispatch(render({"center":center, "zoom":zoom,"ref":ref}));
         }
     }, [ref, map]);
 
