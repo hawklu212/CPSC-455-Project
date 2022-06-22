@@ -17,7 +17,7 @@ import {
 import "../components-styling/colours.css";
 import { useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
-import NordicWalkingIcon from "@mui/icons-material/NordicWalking";
+import SavedSearchIcon from "@mui/icons-material/SavedSearch";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 import { useState } from "react";
 
@@ -45,7 +45,7 @@ export default function Navigation() {
                 {index % 2 === 0 ? (
                   <LocationSearchingIcon />
                 ) : (
-                  <NordicWalkingIcon />
+                  <SavedSearchIcon />
                 )}
               </ListItemIcon>
               <ListItemText primary={text} />
