@@ -19,7 +19,6 @@ export default function Login() {
 
   return (
     <>
-      <Navigation></Navigation>
       <Grid
         className="yellow-2"
         container
