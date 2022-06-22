@@ -18,6 +18,7 @@ import "../components-styling/colours.css";
 import { useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import NordicWalkingIcon from "@mui/icons-material/NordicWalking";
+import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 import { useState } from "react";
 
 export default function Navigation() {
@@ -41,7 +42,11 @@ export default function Navigation() {
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <MenuIcon />
+                {index % 2 === 0 ? (
+                  <LocationSearchingIcon />
+                ) : (
+                  <NordicWalkingIcon />
+                )}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -49,18 +54,6 @@ export default function Navigation() {
         ))}
       </List>
       <Divider />
-      {/* <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <MenuIcon />
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List> */}
     </Box>
   );
 
