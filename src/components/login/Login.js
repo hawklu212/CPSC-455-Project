@@ -21,7 +21,7 @@ export default function Login() {
       <br />
       <TextField variant="filled" label="Username"></TextField>
       <br />
-      <TextField label="Password"></TextField>
+      <TextField label="Password" type="password"></TextField>
       <br />
       <span>
         <Button variant="outlined">Sign in</Button>
