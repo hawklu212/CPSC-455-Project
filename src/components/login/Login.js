@@ -63,10 +63,14 @@ export default function Login() {
           }
           else if (userPass===""){
             setpassError(true);
+            setuserError(false);
             setpassErrorMessage(errorMSG("Password"));
+            setuserErrorMessage("");   
           }
           else if (userName===""){
             setuserError(true);
+            setpassError(false);
+            setpassErrorMessage("");
             setuserErrorMessage(errorMSG("Username"));
           }
           //loginAttempt();
