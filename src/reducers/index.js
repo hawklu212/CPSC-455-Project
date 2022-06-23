@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
-import {template} from './reducer'
+import directionsReducer from './directionsReducer'
 
 
 const rootReducer = combineReducers({
-template
+    directionsReducer
 });
 
 export default rootReducer;

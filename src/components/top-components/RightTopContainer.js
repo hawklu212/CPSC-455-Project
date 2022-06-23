@@ -2,6 +2,8 @@ import React, {useRef} from 'react'
 import {GoogleMap, useJsApiLoader, DirectionsRenderer} from '@react-google-maps/api';
 import Inputs from "./InputDiv";
 import {Button} from "@mui/material";
+import {useDispatch, useSelector} from "react-redux";
+import {addDirections} from "../../actions/addDirections";
 
 const containerStyle = {
     display: "inline-flex",
@@ -16,15 +18,17 @@ const center = {
 
 
 
+
 function MainMapComponent() {
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: "",
+        googleMapsApiKey: "AIzaSyDvwRJY_4ws-EBa5qaIpuH9H_McBjRIK7Q",
         libraries: ['places']
     })
 
     const [map, setMap] = React.useState(/** @type google.maps.Map */(null));
     const [directions, setDirections] = React.useState(null);
+    const dispatch = useDispatch();
 
     /** @type React.MutableRefObject<HTMLInputElement> */
     const originRef = useRef();
@@ -50,10 +54,27 @@ function MainMapComponent() {
                 origin: originRef.current.value,
                 destination: destRef.current.value,
                 // eslint-disable-next-line no-undef
-                travelMode: google.maps.TravelMode.DRIVING,
+                travelMode: google.maps.TravelMode.WALKING,
                 provideRouteAlternatives: true
             }
         );
+        console.log(results.routes);
+        let directionArray = [];
+        for (let i = 0; i < results.routes.length; i++) {
+            let leg = results.routes[i];
+            console.log(leg);
+            directionArray.push({
+                // distance in meters
+                distance: leg[0].distance.value,
+                // duration in seconds
+                duration: leg[0].duration.value,
+                // addresses are strings
+                startAddress: leg[0].startAddress,
+                endAddress: leg[0].endAddress,
+            })
+            //console.log(directionArray);
+        }
+        //dispatch(addDirections(directionArray));
         setDirections(results);
     }
 
