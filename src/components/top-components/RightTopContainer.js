@@ -1,34 +1,10 @@
-/*
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
-import MapComponent from "./MapComponent";
-export default function RightTopContainer(){
-    const center = {lat: 49.2606, lng: -123.2460};
-    const zoom =14;
-    const render = (status) => {
-        return <h1>status</h1>
-/!*        switch (status) {
-            case Status.LOADING:
-                return <h1>Loading</h1>;
-            case Status.FAILURE:
-                return <h1>Failure</h1>;
-            case Status.SUCCESS:
-                return <MAP_COMPONENT center={center} zoom={zoom} />;
-        }*!/
-    };
-
-    return (
-    <Wrapper apiKey={"AIzaSyBOwbCNPNPwnb_uyHDP1Fto7seTTwgM-1E"} render={render}>
-        <MapComponent center={center} zoom={zoom}/>
-    </Wrapper>
-    );
-}*/
-
 import React, {useRef} from 'react'
 import {GoogleMap, useJsApiLoader, DirectionsRenderer} from '@react-google-maps/api';
 import Inputs from "./InputDiv";
 import {Button} from "@mui/material";
 
 const containerStyle = {
+    display: "inline-flex",
     width: '500px',
     height: '500px'
 };
@@ -43,7 +19,7 @@ const center = {
 function MainMapComponent() {
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: "AIzaSyC3HlMXLDnjpcZRxYlp0MNQq1xy6VDZ6hE",
+        googleMapsApiKey: "",
         libraries: ['places']
     })
 
@@ -74,12 +50,11 @@ function MainMapComponent() {
                 origin: originRef.current.value,
                 destination: destRef.current.value,
                 // eslint-disable-next-line no-undef
-                travelMode: google.maps.TravelMode.WALKING,
+                travelMode: google.maps.TravelMode.DRIVING,
                 provideRouteAlternatives: true
             }
         );
         setDirections(results);
-        console.log(results[0]);
     }
 
     return isLoaded ? (
@@ -89,7 +64,7 @@ function MainMapComponent() {
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
-                zoom={12}
+                zoom={9}
                 onLoad={onLoad}
                 onUnmount={onUnmount}
                 options={{
