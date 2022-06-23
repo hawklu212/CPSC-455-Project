@@ -7,3 +7,21 @@ export const template=(exp=null,action)=>{
             return exp;
     }
 }
+
+export const drawerState=(dS=false,action)=>{
+    switch(action.type){
+        case "TOGGLE_STATE":
+            return !dS;
+        default:
+            return dS;
+    }
+}
+
+export const loginState=(lS="",action)=>{
+    switch(action.type){
+        case "LOGIN":
+            return ;
+        default:
+            return lS;
+    }
+}

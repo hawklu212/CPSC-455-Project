@@ -3,6 +3,10 @@ import "../../components-styling/colours.css";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Navigation from "../Navigation";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+
+var userName="";
+var userPass="";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -18,6 +22,7 @@ export default function Login() {
   };
 
   return (
+    <>
     <Grid
       className="yellow-2"
       container
@@ -32,12 +37,20 @@ export default function Login() {
       <br />
       <Typography variant="h4">Welcome Back!</Typography>
       <br />
-      <TextField variant="filled" label="Username"></TextField>
+      <TextField variant="filled" label="Username" onChange={(event)=>
+      {userName=event.target.value;
+        console.log(userName);
+      }}></TextField>
       <br />
-      <TextField label="Password" type="password"></TextField>
+      <TextField label="Password" type="password" onChange={(event)=>
+        {userPass=event.target.value;
+          console.log(userPass);
+        }}></TextField>
       <br />
       <span>
-        <Button variant="outlined">Sign in</Button>
+        <Button variant="outlined" onClick={()=>{
+          loginAttempt();
+        }}>Sign in</Button>
       </span>
       <br />
       <br />
@@ -47,5 +60,6 @@ export default function Login() {
       <br />
       <Button variant="outlined">Sign up</Button>
     </Grid>
+    </>
   );
 }
