@@ -9,6 +9,7 @@ export default function MapComponent({center, zoom}) {
         if (ref.current && !map) {
             setMap(new window.google.maps.Map(ref.current, {center, zoom}));
         }
+        // eslint-disable-next-line
     }, [ref, map]);
 
     console.log(ref)
