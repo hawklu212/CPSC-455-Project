@@ -1,8 +1,22 @@
 import { Grid, Typography, Button, Divider } from "@mui/material";
 import "../../components-styling/colours.css";
 import { TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import Navigation from "../Navigation";
 
 export default function Login() {
+  const navigate = useNavigate();
+
+  const loginAttempt = () => {
+    //TODO: add authentication (maybe following this? https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications)
+    // if login attempt succeeds, then:
+    navigate("../search");
+  };
+  const signUp = () => {
+    //NTH: maybe carry over username if it is already entered
+    navigate("../create-account");
+  };
+
   return (
     <Grid
       className="yellow-2"
@@ -11,8 +25,7 @@ export default function Login() {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      style={{ minHeight: "100vh" }}
-    >
+      style={{ minHeight: "100vh" }}>
       <Typography variant="h2">A11yMaps</Typography>
       <br />
       <br />
