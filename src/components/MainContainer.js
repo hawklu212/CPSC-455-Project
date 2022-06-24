@@ -6,7 +6,6 @@ export default function MainContainer() {
   return (
     <div>
       <Navigation></Navigation>
-      <Title />
       <div>
         <TopDiv />
       </div>
