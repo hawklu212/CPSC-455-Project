@@ -20,7 +20,7 @@ export const drawerState=(dS=false,action)=>{
 export const loginState=(lS="",action)=>{
     switch(action.type){
         case "LOGIN":
-            return ;
+            return action.payload;
         default:
             return lS;
     }

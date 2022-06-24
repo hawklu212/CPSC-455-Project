@@ -5,16 +5,40 @@ import { useNavigate } from "react-router-dom";
 import Navigation from "../Navigation";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useState } from "react";
+import { postCurl } from "../../async_functions/async";
+import { loginState } from "../../actions";
 
 var userName="";
 var userPass="";
 
 export default function Login() {
+  const dispatch=useDispatch();
   const navigate = useNavigate();
   const [userError,setuserError]=useState(false);
   const [passError,setpassError]=useState(false);
   const [userErrorMessage,setuserErrorMessage]=useState("");
   const [passErrorMessage,setpassErrorMessage]=useState("");
+  let errorMSG =data =>{return `Missing ${data}`};
+  const failpass=()=>{
+    setpassError(true);
+    setuserError(false);
+    setpassErrorMessage(errorMSG("Password"));
+    setuserErrorMessage("");  
+  }
+  
+  const failuser=()=>{
+    setuserError(true);
+            setpassError(false);
+            setpassErrorMessage("");
+            setuserErrorMessage(errorMSG("Username"));
+  }
+
+  const failboth=()=>{
+    setuserError(true);
+            setpassError(true);
+            setpassErrorMessage(errorMSG("Password"));
+            setuserErrorMessage(errorMSG("Username"));
+  }
 
   const loginAttempt = () => {
     //TODO: add authentication (maybe following this? https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications)
@@ -54,24 +78,32 @@ export default function Login() {
       <br />
       <span>
         <Button variant="outlined" onClick={()=>{
-          let errorMSG =data =>{return `Missing ${data}`};
           if (userPass==="" && userName===""){
-            setpassError(true);
-            setuserError(true);
-            setpassErrorMessage(errorMSG("Password"));
-            setuserErrorMessage(errorMSG("Username"));            
+           failboth();          
           }
           else if (userPass===""){
-            setpassError(true);
-            setuserError(false);
-            setpassErrorMessage(errorMSG("Password"));
-            setuserErrorMessage("");   
+            failpass(); 
           }
           else if (userName===""){
-            setuserError(true);
-            setpassError(false);
-            setpassErrorMessage("");
-            setuserErrorMessage(errorMSG("Username"));
+            failuser();
+          }else{
+            postCurl({"userName":userName,"userPass":userPass}).then(data=>{
+            if(data["status"]===1){
+              setpassError(false);
+              setpassErrorMessage("");
+              setuserError(true);
+              setuserErrorMessage("Username does not exist");
+            }else if(data["status"]===2){
+              setpassError(true);
+              setpassErrorMessage("Password is Incorrect");
+              setuserError(false);
+              setuserErrorMessage("");
+            }
+            else if(data["status"]===0){
+              dispatch(loginState(data["userName"]));
+              navigate("../search");
+            }
+            });
           }
           //loginAttempt();
         }}>Sign in</Button>
