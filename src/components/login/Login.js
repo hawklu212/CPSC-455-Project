@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Navigation from "../Navigation";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useState } from "react";
-import { postCurl } from "../../async_functions/async";
+import { loginCurl } from "../../async-functions/async";
 import { loginState } from "../../actions";
 
 var userName="";
@@ -14,30 +14,30 @@ var userPass="";
 export default function Login() {
   const dispatch=useDispatch();
   const navigate = useNavigate();
-  const [userError,setuserError]=useState(false);
-  const [passError,setpassError]=useState(false);
-  const [userErrorMessage,setuserErrorMessage]=useState("");
-  const [passErrorMessage,setpassErrorMessage]=useState("");
-  let errorMSG =data =>{return `Missing ${data}`};
-  const failpass=()=>{
-    setpassError(true);
-    setuserError(false);
-    setpassErrorMessage(errorMSG("Password"));
-    setuserErrorMessage("");  
+  const [userError,setUserError]=useState(false);
+  const [passError,setPassError]=useState(false);
+  const [userErrorMessage,setUserErrorMessage]=useState("");
+  const [passErrorMessage,setPassErrorMessage]=useState("");
+  let errorMsg =data =>{return `Missing ${data}`};
+  const failPass=()=>{
+    setPassError(true);
+    setUserError(false);
+    setPassErrorMessage(errorMsg("Password"));
+    setUserErrorMessage("");  
   }
   
-  const failuser=()=>{
-    setuserError(true);
-            setpassError(false);
-            setpassErrorMessage("");
-            setuserErrorMessage(errorMSG("Username"));
+  const failUser=()=>{
+    setUserError(true);
+            setPassError(false);
+            setPassErrorMessage("");
+            setUserErrorMessage(errorMsg("Username"));
   }
 
-  const failboth=()=>{
-    setuserError(true);
-            setpassError(true);
-            setpassErrorMessage(errorMSG("Password"));
-            setuserErrorMessage(errorMSG("Username"));
+  const failBoth=()=>{
+    setUserError(true);
+            setPassError(true);
+            setPassErrorMessage(errorMsg("Password"));
+            setUserErrorMessage(errorMsg("Username"));
   }
 
   const loginAttempt = () => {
@@ -68,36 +68,34 @@ export default function Login() {
       <br />
       <TextField error={userError} helperText={userErrorMessage} required variant="filled" label="Username" onChange={(event)=>
       {userName=event.target.value;
-        console.log(userName);
       }}></TextField>
       <br />
       <TextField error={passError} helperText={passErrorMessage} required label="Password" type="password" onChange={(event)=>
         {userPass=event.target.value;
-          console.log(userPass);
         }}></TextField>
       <br />
       <span>
         <Button variant="outlined" onClick={()=>{
           if (userPass==="" && userName===""){
-           failboth();          
+           failBoth();          
           }
           else if (userPass===""){
-            failpass(); 
+            failPass(); 
           }
           else if (userName===""){
-            failuser();
+            failUser();
           }else{
-            postCurl({"userName":userName,"userPass":userPass}).then(data=>{
+            loginCurl({"userName":userName,"userPass":userPass}).then(data=>{
             if(data["status"]===1){
-              setpassError(false);
-              setpassErrorMessage("");
-              setuserError(true);
-              setuserErrorMessage("Username does not exist");
+              setPassError(false);
+              setPassErrorMessage("");
+              setUserError(true);
+              setUserErrorMessage("Username does not exist");
             }else if(data["status"]===2){
-              setpassError(true);
-              setpassErrorMessage("Password is Incorrect");
-              setuserError(false);
-              setuserErrorMessage("");
+              setPassError(true);
+              setPassErrorMessage("Password is Incorrect");
+              setUserError(false);
+              setUserErrorMessage("");
             }
             else if(data["status"]===0){
               dispatch(loginState(data["userName"]));

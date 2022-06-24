@@ -1,5 +1,5 @@
-export async function postCurl(data){
-    let response= await fetch("http://localhost:3001/login",{
+export async function loginCurl(data){
+    let response= await fetch("http://localhost:3001/users",{
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
