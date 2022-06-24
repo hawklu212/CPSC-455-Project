@@ -2,7 +2,6 @@
 
 # dependencies
 /src/server/node_modules
-/src/server/tempcred.json
 /node_modules
 /.pnp
 .pnp.js
