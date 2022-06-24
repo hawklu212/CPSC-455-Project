@@ -99,7 +99,7 @@ export default function Login() {
             }
             else if(data["status"]===0){
               dispatch(loginState(data["userName"]));
-              navigate("../search");
+              loginAttempt();
             }
             });
           }
@@ -112,7 +112,7 @@ export default function Login() {
       <Divider></Divider>
       <Typography variant="h6">Don't have an account? Sign up here!</Typography>
       <br />
-      <Button variant="outlined">Sign up</Button>
+      <Button variant="outlined" onClick={signUp}>Sign up</Button>
     </Grid>
     </>
   );
