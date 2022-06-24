@@ -65,12 +65,12 @@ function MainMapComponent() {
             console.log(leg);
             directionArray.push({
                 // distance in meters
-                distance: leg[0].distance.value,
+                distance: leg.legs[0].distance.value,
                 // duration in seconds
-                duration: leg[0].duration.value,
+                duration: leg.legs[0].duration.value,
                 // addresses are strings
-                startAddress: leg[0].startAddress,
-                endAddress: leg[0].endAddress,
+                startAddress: leg.legs[0].startAddress,
+                endAddress: leg.legs[0].endAddress,
             })
             //console.log(directionArray);
         }
