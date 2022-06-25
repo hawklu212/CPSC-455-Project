@@ -27,6 +27,7 @@ export default function Navigation() {
   const navigate = useNavigate();
   const drawerState=useSelector(state=>state.drawerState);
   //const [drawerState, setDrawerState] = useState(false);
+  const loginState=useSelector(state=>state.loginState);
   const dispatch=useDispatch();
   const toggleDrawer = () => {
     //setDrawerState(!drawerState);
@@ -76,7 +77,7 @@ export default function Navigation() {
           {list()}
         </Drawer>
         <Typography variant="h6" color="inherit" component="div">
-          A11yMaps
+          A11yMaps User:{loginState}
         </Typography>
       </Toolbar>
     </AppBar>
