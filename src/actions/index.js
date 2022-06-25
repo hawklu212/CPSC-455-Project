@@ -4,3 +4,17 @@ export const template = element => {
 		payload: element
 	};
 }; 
+
+export const toggleDrawerState = element => {
+	return {
+		type: 'TOGGLE_STATE',
+		payload: element
+	};
+}; 
+
+export const loginState = element => {
+	return {
+		type: 'LOGIN',
+		payload: element
+	};
+}; 
