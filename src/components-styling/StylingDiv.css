@@ -58,6 +58,6 @@ textarea {
 
 #BOTTOM_DIV{
     border: var(--border-size);
-    border-style: solid;
+    border-style: none;
     border-color: var(--border-color);
 }

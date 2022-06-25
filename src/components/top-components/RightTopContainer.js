@@ -80,11 +80,11 @@ function MainMapComponent() {
 
     return isLoaded ? (
         <Grid container spacing={2}>
-            <Grid item xs={4}>
+            <Grid item xs={3}>
                 <Inputs origin={originRef} destination={destRef}/>
                 <Button variant="contained" type="submit" onClick={calculateRoute}>Calculate Route</Button>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={9}>
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={center}
