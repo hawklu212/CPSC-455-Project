@@ -22,7 +22,7 @@ const center = {
 function MainMapComponent() {
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: "AIzaSyDvwRJY_4ws-EBa5qaIpuH9H_McBjRIK7Q",
+        googleMapsApiKey: "",
         libraries: ['places']
     })
 
@@ -64,41 +64,45 @@ function MainMapComponent() {
             let leg = results.routes[i];
             console.log(leg);
             directionArray.push({
-                // distance in meters
-                distance: leg.legs[0].distance.value,
-                // duration in seconds
-                duration: leg.legs[0].duration.value,
+                // distance in kilometers
+                distance: (leg.legs[0].distance.value / 1000).toFixed(2),
+                // duration in minutes
+                duration: (leg.legs[0].duration.value / 60).toFixed(0),
                 // addresses are strings
-                startAddress: leg.legs[0].startAddress,
-                endAddress: leg.legs[0].endAddress,
+                startAddress: leg.legs[0].start_address,
+                endAddress: leg.legs[0].end_address,
             })
             //console.log(directionArray);
         }
-        //dispatch(addDirections(directionArray));
+        dispatch(addDirections(directionArray));
         setDirections(results);
     }
 
     return isLoaded ? (
-        <div>
-            <Inputs origin={originRef} destination={destRef}/>
-            <Button variant="contained" type="submit" onClick={calculateRoute}>Calculate Route</Button>
-            <GoogleMap
-                mapContainerStyle={containerStyle}
-                center={center}
-                zoom={9}
-                onLoad={onLoad}
-                onUnmount={onUnmount}
-                options={{
-                    mapTypeControl: false,
-                    fullscreenControl: false
-                }}
-            >
-                { /* Child components, such as markers, info windows, etc. */ }
-                <></>
-                { /* this will render any directions on the map when received from the server */}
-                {directions && <DirectionsRenderer directions={directions} />}
-            </GoogleMap>
-        </div>
+        <flex>
+            <box style={{flex:1}}>
+                <Inputs origin={originRef} destination={destRef}/>
+                <Button variant="contained" type="submit" onClick={calculateRoute}>Calculate Route</Button>
+            </box>
+            <box style={{flex:2}}>
+                <GoogleMap
+                    mapContainerStyle={containerStyle}
+                    center={center}
+                    zoom={5}
+                    onLoad={onLoad}
+                    onUnmount={onUnmount}
+                    options={{
+                        mapTypeControl: false,
+                        fullscreenControl: false
+                    }}
+                >
+                    { /* Child components, such as markers, info windows, etc. */ }
+                    <></>
+                    { /* this will render any directions on the map when received from the server */}
+                    {directions && <DirectionsRenderer directions={directions} />}
+                </GoogleMap>
+            </box>
+        </flex>
     ) : <></>
 }
 
