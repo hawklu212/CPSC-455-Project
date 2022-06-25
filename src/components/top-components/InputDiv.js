@@ -2,14 +2,14 @@ import {Autocomplete} from '@react-google-maps/api';
 import {Button} from "@mui/material";
 
 export default function Inputs(props){
-    return (<span>
+    return (<box>
         <Autocomplete>
                     <input type='text' placeholder='Origin' ref={props.origin}/>
         </Autocomplete>
         <Autocomplete>
                     <input type='text' placeholder='Destination' ref={props.destination}/>
         </Autocomplete>
-    </span>);
+    </box>);
 }
 
 function auto_grow(referen) {
