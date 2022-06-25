@@ -1,13 +1,13 @@
 import React, {useRef} from 'react'
 import {GoogleMap, useJsApiLoader, DirectionsRenderer} from '@react-google-maps/api';
 import Inputs from "./InputDiv";
-import {Button} from "@mui/material";
+import {Box, Button, Grid} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {addDirections} from "../../actions/addDirections";
 
 const containerStyle = {
     display: "inline-flex",
-    width: '500px',
+    width: '100%',
     height: '500px'
 };
 
@@ -79,12 +79,12 @@ function MainMapComponent() {
     }
 
     return isLoaded ? (
-        <flex>
-            <box style={{flex:1}}>
+        <Grid container spacing={2}>
+            <Grid item xs={4}>
                 <Inputs origin={originRef} destination={destRef}/>
                 <Button variant="contained" type="submit" onClick={calculateRoute}>Calculate Route</Button>
-            </box>
-            <box style={{flex:2}}>
+            </Grid>
+            <Grid item xs={8}>
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={center}
@@ -101,8 +101,8 @@ function MainMapComponent() {
                     { /* this will render any directions on the map when received from the server */}
                     {directions && <DirectionsRenderer directions={directions} />}
                 </GoogleMap>
-            </box>
-        </flex>
+            </Grid>
+        </Grid>
     ) : <></>
 }
 
