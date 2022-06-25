@@ -19,15 +19,19 @@ import { useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import SavedSearchIcon from "@mui/icons-material/SavedSearch";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
-import { useState } from "react";
+//import { useState } from "react";
+import { useDispatch,useSelector } from "react-redux";
+import { toggleDrawerState } from "../actions";
 
 export default function Navigation() {
   const navigate = useNavigate();
-
-  const [drawerState, setDrawerState] = useState(false);
-
+  const drawerState=useSelector(state=>state.drawerState);
+  //const [drawerState, setDrawerState] = useState(false);
+  const loginState=useSelector(state=>state.loginState);
+  const dispatch=useDispatch();
   const toggleDrawer = () => {
-    setDrawerState(!drawerState);
+    //setDrawerState(!drawerState);
+    dispatch(toggleDrawerState(drawerState));
   };
 
   const list = () => (
@@ -73,7 +77,7 @@ export default function Navigation() {
           {list()}
         </Drawer>
         <Typography variant="h6" color="inherit" component="div">
-          A11yMaps
+          A11yMaps User:{loginState}
         </Typography>
       </Toolbar>
     </AppBar>
