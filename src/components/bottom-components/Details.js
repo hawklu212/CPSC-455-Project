@@ -6,7 +6,7 @@ export default function Details(props){
             <Typography variant={'h5'}>Preferences</Typography>
         </Grid>
         <Grid item xs={6}>
-            <Typography variant={'h6'}>Max Allowable Incline</Typography>
+            <Typography variant={'h6'}>Maximum Allowable Incline</Typography>
         </Grid>
         <Grid item xs={6}>
             <Slider aria-label={'Max incline'}
