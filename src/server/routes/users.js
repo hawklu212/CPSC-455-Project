@@ -1,6 +1,23 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
+var express = require('express');
+var router = express.Router();
+var fs = require('fs');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var loginSchema = new Schema({
+  name: String,
+  password: String
+});
+
+function initial(user,pass){
+    var LoginModel = mongoose.model('LoginModel', loginSchema );
+    const test = new LoginModel({ name: user,password:pass });
+    test.save().then(stuff=>{
+        console.log(stuff);
+    })
+}
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -42,8 +59,9 @@ router.post('/', function(req, res, next) {
                 return;
     }
 }   
-    currentFile.push({"userName":name,"userPass":req.body[pass]});
-    fs.writeFileSync("tempcred.json",JSON.stringify(currentFile));
+    // currentFile.push({"userName":name,"userPass":req.body[pass]});
+    // fs.writeFileSync("tempcred.json",JSON.stringify(currentFile));
+    initial(name,req.body[pass]);
     res.send(getReturnHelper(0,name));
     return;
 });
