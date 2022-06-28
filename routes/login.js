@@ -1,6 +1,21 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var loginSchema = new Schema({
+  name: String,
+  password: String
+});
+
+function initial(){
+    var LoginModel = mongoose.model('LoginModel', loginSchema );
+    const test = new LoginModel({ name: 'Bob',password:"Joe" });
+    test.save().then(stuff=>{
+        console.log(stuff);
+    })
+}
+
 
 function getReturnHelper(stat,payload){
     return {"status":stat,"userName":payload};
@@ -26,3 +41,4 @@ router.post('/', function(req, res, next) {
 });
 
 module.exports = router;
+module.exports.initial=initial;
