@@ -1,5 +1,5 @@
-export const clearDirections = ()=> {
-    return {
-        type: 'CLEAR_DIRECTIONS'
-    };
-}
+export const clearDirections = () => {
+  return {
+    type: "CLEAR_DIRECTIONS",
+  };
+};

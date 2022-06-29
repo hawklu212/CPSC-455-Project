@@ -1,63 +1,59 @@
 root {
-    --border-size: 5px;
-    --border-style: solid;
-    --border-color: #7f6a00;
-    --background-color: #ffd400;
+  --border-size: 5px;
+  --border-style: solid;
+  --border-color: #7f6a00;
+  --background-color: #ffd400;
 }
 
-.Title{
-    border: var(--border-size);
-    border-style: solid;
-    border-color: var(--border-color);
-    background-color: #ffd400;
+.Title {
+  border: var(--border-size);
+  border-style: solid;
+  border-color: var(--border-color);
+  background-color: #ffd400;
 }
 
 textarea {
-    resize: none;
-    overflow: hidden;
-    height: 20px;
-    min-height: 20px;
-    width: 400px;
+  resize: none;
+  overflow: hidden;
+  height: 20px;
+  min-height: 20px;
+  width: 400px;
 }
 
-#RIGHT_TOP{
-    border: var(--border-size);
-    border-style: solid;
-    border-color: var(--border-color);
-    position: relative;
-    text-align: left;
-    
+#RIGHT_TOP {
+  border: var(--border-size);
+  border-style: solid;
+  border-color: var(--border-color);
+  position: relative;
+  text-align: left;
 }
 
-#LEFT_TOP{
-    border: var(--border-size);
-    border-style: solid;
-    border-color: var(--border-color);
-    
+#LEFT_TOP {
+  border: var(--border-size);
+  border-style: solid;
+  border-color: var(--border-color);
 }
 
-#TOP_DIV{
-    border: var(--border-size);
-    border-style: none;
-    border-color: var(--border-color);
+#TOP_DIV {
+  border: var(--border-size);
+  border-style: none;
+  border-color: var(--border-color);
 }
 
 #RIGHT_BOTTOM {
-    border: var(--border-size);
-    border-style: none;
-    border-color: var(--border-color);
-    
+  border: var(--border-size);
+  border-style: none;
+  border-color: var(--border-color);
 }
 
-#LEFT_BOTTOM{
-    border: var(--border-size);
-    border-style: none;
-    border-color: var(--border-color);
-    
+#LEFT_BOTTOM {
+  border: var(--border-size);
+  border-style: none;
+  border-color: var(--border-color);
 }
 
-#BOTTOM_DIV{
-    border: var(--border-size);
-    border-style: none;
-    border-color: var(--border-color);
+#BOTTOM_DIV {
+  border: var(--border-size);
+  border-style: none;
+  border-color: var(--border-color);
 }

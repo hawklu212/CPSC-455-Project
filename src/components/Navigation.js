@@ -20,15 +20,15 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SavedSearchIcon from "@mui/icons-material/SavedSearch";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 //import { useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleDrawerState } from "../actions";
 
 export default function Navigation() {
   const navigate = useNavigate();
-  const drawerState=useSelector(state=>state.drawerState);
+  const drawerState = useSelector((state) => state.drawerState);
   //const [drawerState, setDrawerState] = useState(false);
-  const loginState=useSelector(state=>state.loginState);
-  const dispatch=useDispatch();
+  const loginState = useSelector((state) => state.loginState);
+  const dispatch = useDispatch();
   const toggleDrawer = () => {
     //setDrawerState(!drawerState);
     dispatch(toggleDrawerState(drawerState));
