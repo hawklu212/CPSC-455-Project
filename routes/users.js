@@ -7,17 +7,9 @@ var fs = require('fs');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var loginSchema = new Schema({
-  name: String,
-  password: String
+  userName: String,
+  userPass: String
 });
-
-function initial(user,pass){
-    var LoginModel = mongoose.model('LoginModel', loginSchema );
-    const test = new LoginModel({ name: user,password:pass });
-    test.save().then(stuff=>{
-        console.log(stuff);
-    })
-}
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -28,41 +20,48 @@ router.get('/', function(req, res, next) {
 function getReturnHelper(stat,payload){
     return {"status":stat,"userName":payload};
 }
+
+let user="userName";
+let pass="userPass";
+
 /* GET users listing. */
 router.put('/', function(req, res, next) {
-    let user="userName";
-    let pass="userPass";
-    var currentFile=JSON.parse(fs.readFileSync("tempcred.json"));
-    for (let i=0;i<currentFile.length;i++){
-        if (req.body[user]===currentFile[i][user]){
-            if (req.body[pass]===currentFile[i][pass]){
-                res.send(getReturnHelper(0,req.body[user]));
-                return;
-            }else{
+    let name=req.body[user];
+    var LoginModel = mongoose.model('LoginModel', loginSchema );
+    LoginModel.find({userName:name}).then((arr)=>{
+        if (arr.length!==0){
+            console.log(arr[0]);
+            console.log(req.body[pass]);
+            if (arr[0][pass]===req.body[pass]){
+                res.send(getReturnHelper(0,name));
+            } else{
                 res.send(getReturnHelper(2,""));
                 return;
             }
         }
-    }
-    res.send(getReturnHelper(1,""));
+        else {
+            res.send(getReturnHelper(1,""));
+            return;
+        }
+    })
         return;
 });
 
 router.post('/', function(req, res, next) {
-    let user="userName";
-    let pass="userPass";
     let name=req.body[user];
-    var currentFile=JSON.parse(fs.readFileSync("tempcred.json"));
-    for (let i=0;i<currentFile.length;i++){
-        if (name===currentFile[i][user]){
-                res.send(getReturnHelper(1,""));
-                return;
-    }
-}   
-    // currentFile.push({"userName":name,"userPass":req.body[pass]});
-    // fs.writeFileSync("tempcred.json",JSON.stringify(currentFile));
-    initial(name,req.body[pass]);
-    res.send(getReturnHelper(0,name));
+    var LoginModel = mongoose.model('LoginModel', loginSchema );
+    LoginModel.find({userName:name}).then((arr)=>{
+        if (arr.length==0){
+            const test = new LoginModel({ userName: name,userPass:req.body[pass] });
+            test.save().then(stuff=>{
+                res.send(getReturnHelper(0,name));
+                console.log(stuff);
+            })
+        }
+        else {
+            res.send(getReturnHelper(1,""));
+        }
+    })
     return;
 });
 
