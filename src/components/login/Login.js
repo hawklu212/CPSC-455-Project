@@ -4,15 +4,15 @@ import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Navigation from "../Navigation";
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { loginCurl } from "../../async-functions/async";
 import { loginState } from "../../actions";
-
+import { getCookieCurl, getCookieValidationCurl } from "../../async-functions/async";
 var userName="";
 var userPass="";
-
 export default function Login() {
   const dispatch=useDispatch();
+  const loginUser=useSelector(state=>state.loginState);
   const navigate = useNavigate();
   const [userError,setUserError]=useState(false);
   const [passError,setPassError]=useState(false);
@@ -25,7 +25,16 @@ export default function Login() {
     setPassErrorMessage(errorMsg("Password"));
     setUserErrorMessage("");  
   }
-  
+  useEffect(() => {
+      getCookieValidationCurl().then(res=>{
+        if (res.status==200){
+          dispatch(loginState(""));
+          navigate("./search");
+        }else{
+          dispatch(loginState("NoUser"));
+        }
+      });
+    },[]);
   const failUser=()=>{
     setUserError(true);
             setPassError(false);
@@ -50,7 +59,7 @@ export default function Login() {
     navigate("../create-account");
   };
 
-  return (
+  return loginUser!==""?(
     <>
     <Grid
       className="yellow-2"
@@ -99,7 +108,13 @@ export default function Login() {
             }
             else if(data["status"]===0){
               dispatch(loginState(data["userName"]));
-              loginAttempt();
+              getCookieCurl().then(status=>{
+                if (status!=200){
+                  navigate("/");
+                }else{
+                  loginAttempt();
+                }
+              });
             }
             });
           }
@@ -115,5 +130,5 @@ export default function Login() {
       <Button variant="outlined" onClick={signUp}>Sign up</Button>
     </Grid>
     </>
-  );
+  ):"";
 }
