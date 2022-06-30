@@ -107,14 +107,8 @@ export default function Login() {
               setUserErrorMessage("");
             }
             else if(data["status"]===0){
-              dispatch(loginState(data["userName"]));
-              getCookieCurl().then(status=>{
-                if (status!=200){
-                  navigate("/");
-                }else{
-                  loginAttempt();
-                }
-              });
+              dispatch(loginState(data["accessToken"]));
+              loginAttempt();
             }
             });
           }
