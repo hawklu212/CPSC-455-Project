@@ -9,6 +9,8 @@ import { Box, Button, Divider, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { addDirections } from "../../actions/addDirections";
 import { clearDirections } from "../../actions/clearDirections";
+import { APIKey } from "../../apiKey";
+import { getRouteResults } from "../../async-functions/async";
 
 const containerStyle = {
   display: "inline-flex",
@@ -24,7 +26,7 @@ const center = {
 function MainMapComponent() {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyDOfD7Zg-UjT8Z2zlh9QrMEXOOs5QzOsak",
+    googleMapsApiKey: APIKey,
     libraries: ["places"],
   });
 
@@ -48,6 +50,11 @@ function MainMapComponent() {
   }, []);
 
   async function calculateRoute() {
+    console.log("waw", originRef.current.value, destRef.current.value);
+    let routeResults = getRouteResults([
+      originRef.current.value,
+      destRef.current.value,
+    ]);
     // eslint-disable-next-line no-undef
     const directionService = new google.maps.DirectionsService();
     // hand direction service the origin, destination and travel mode as well as options
