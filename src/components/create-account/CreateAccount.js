@@ -86,7 +86,7 @@ export default function CreateAccount() {
                setUserErrorMessage("Username already exist");
              }
              else if(data["status"]===0){
-               dispatch(loginState(data["userName"]));
+               dispatch(loginState(data["accessToken"]));
                signUpFunc();
              }
              });
