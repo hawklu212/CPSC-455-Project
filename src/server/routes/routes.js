@@ -8,6 +8,8 @@ router.get("/", function (req, res, next) {
   let locations = [routeParams.orig];
   // console.log(`orig == ${orig}`);
   console.log(routeParams);
+  console.log(locations);
+  console.log(typeof locations);
   // res.send('respond with a resource');
 });
 
