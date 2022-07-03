@@ -12,7 +12,7 @@ router.get("/", async function (req, res, next) {
     let results = await getDirectionsResults(orig, dest, []);
     res.send({ routes: results.data.routes });
   } catch (e) {
-    res.send({ error: e.response.data.error_message });
+    res.send({ error: e });
   }
 });
 

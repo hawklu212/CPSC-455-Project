@@ -1,20 +1,23 @@
-const { Client } = require("@googlemaps/google-maps-services-js");
+const { Client, TravelMode } = require("@googlemaps/google-maps-services-js");
 const APIKey = require("./apiKeyExpress");
 
 const client = new Client({});
 
 const getDirectionsResults = async (orig, dest, waypoints) => {
+  console.log("got here");
+
   let directionsRequest = {
     params: {
-      key: APIKey.Key,
+      key: APIKey.APIKey,
       origin: orig,
       destination: dest,
-      mode: "WALKING",
+      mode: TravelMode.walking, // google.maps.TravelMode.WALKING,
       alternatives: true,
       waypoints: waypoints,
     },
     timeout: 1000,
   };
+  // console.log(directionsRequest.params.mode);
   return await client.directions(directionsRequest);
 };
 // Note: elevation API can consume multiple types. For now, let's either pass in
