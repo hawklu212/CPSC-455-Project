@@ -1,15 +1,14 @@
+import { getDirectionsResults } from "../MapsClientService";
 var express = require("express");
 var router = express.Router();
 
 /* GET routes listing. */
 router.get("/", function (req, res, next) {
   let routeParams = req.query;
-  let orig = routeParams;
-  let locations = [routeParams.orig];
-  // console.log(`orig == ${orig}`);
-  console.log(routeParams);
-  console.log(locations);
-  console.log(typeof locations);
+
+  let [orig, dest] = routeParams;
+  let result = getDirectionsResults(orig, dest, []);
+  console.log(result);
   // res.send('respond with a resource');
 });
 
