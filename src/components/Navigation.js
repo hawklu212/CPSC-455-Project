@@ -13,25 +13,37 @@ import {
   ListItemIcon,
   ListItemButton,
   ListItemText,
+  MenuItem,
+  Menu,
 } from "@mui/material";
 import "../components-styling/colours.css";
 import { useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import SavedSearchIcon from "@mui/icons-material/SavedSearch";
+import AccountCircle from "@mui/icons-material/AccountCircle";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
-//import { useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleDrawerState } from "../actions";
 
 export default function Navigation() {
   const navigate = useNavigate();
-  const drawerState=useSelector(state=>state.drawerState);
+  const drawerState = useSelector((state) => state.drawerState);
   //const [drawerState, setDrawerState] = useState(false);
-  const loginState=useSelector(state=>state.loginState);
-  const dispatch=useDispatch();
+  const loginState = useSelector((state) => state.loginState);
+  const dispatch = useDispatch();
   const toggleDrawer = () => {
     //setDrawerState(!drawerState);
     dispatch(toggleDrawerState(drawerState));
+  };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const list = () => (
@@ -62,7 +74,7 @@ export default function Navigation() {
   );
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Toolbar variant="dense">
         <IconButton
           edge="start"
@@ -76,9 +88,45 @@ export default function Navigation() {
         <Drawer anchor="left" open={drawerState} onClose={toggleDrawer}>
           {list()}
         </Drawer>
-        <Typography variant="h6" color="inherit" component="div">
+        <Typography
+          variant="h6"
+          color="inherit"
+          component="div"
+          sx={{ flexGrow: 1 }}
+        >
           A11yMaps User:{loginState}
         </Typography>
+
+        <div>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleMenu}
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>My Account</MenuItem>
+          </Menu>
+        </div>
       </Toolbar>
     </AppBar>
   );
