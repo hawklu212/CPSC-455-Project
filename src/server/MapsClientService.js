@@ -1,16 +1,15 @@
-import { Client } from "@googlemaps/google-maps-services-js";
-import { APIKey } from "../../apiKey";
+const { Client } = require("@googlemaps/google-maps-services-js");
+const APIKey = require("./apiKeyExpress");
 
 const client = new Client({});
 
-export const getDirectionsResults = async (orig, dest, waypoints) => {
+const getDirectionsResults = async (orig, dest, waypoints) => {
   let directionsRequest = {
     params: {
-      key: APIKey,
-      origin: "",
-      destination: "",
-      // eslint-disable-next-line no-undef
-      mode: google.maps.TravelMode.WALKING,
+      key: APIKey.Key,
+      origin: orig,
+      destination: dest,
+      mode: "WALKING",
       alternatives: true,
       waypoints: waypoints,
     },
@@ -20,28 +19,30 @@ export const getDirectionsResults = async (orig, dest, waypoints) => {
 };
 // Note: elevation API can consume multiple types. For now, let's either pass in
 // an address, or latitude and longitude
-export const getElevation = async (location) => {
+const getElevation = async (location) => {
   let elevationRequest = {
     params: {
       locations: [location],
-      key: APIKey,
+      key: APIKey.Key,
     },
     timeout: 1000,
   };
 
   return await client.elevation(elevationRequest);
 };
-client
-  .elevation({
-    params: {
-      locations: [{ lat: 45, lng: -110 }],
-      key: "placeholderKey",
-    },
-    timeout: 1000, // milliseconds
-  })
-  .then((r) => {
-    console.log(r.data.results[0].elevation);
-  })
-  .catch((e) => {
-    console.log(e.response.data.error_message);
-  });
+// client
+//   .elevation({
+//     params: {
+//       locations: [{ lat: 45, lng: -110 }],
+//       key: APIKey.APIKey,
+//     },
+//     timeout: 1000, // milliseconds
+//   })
+//   .then((r) => {
+//     console.log(r.data.results[0].elevation);
+//   })
+//   .catch((e) => {
+//     console.log(e.response.data.error_message);
+//   });
+
+module.exports = { getDirectionsResults, getElevation };
