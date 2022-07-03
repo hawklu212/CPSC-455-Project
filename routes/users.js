@@ -21,6 +21,7 @@ function valCookie(req,res,next){
         console.log("session_id exists");
         if (cookies.session_id===""){
         res.status(403).send({"msg":"no session present"});
+        return
         }else{
         next();
         }
@@ -51,9 +52,16 @@ router.get('/cookie',valCookie ,function(req, res) {
     if (ref.length!==0){
         res.status(200).send({[user]:ref[0][user]});
     }else{
-        res.status(403).send({"msg":"cookie not valid"});
+        res.cookie("session_id", "").status(403).send({"msg":"cookie not valid"});
     }
   })
+});
+
+/*logout verification*/
+router.get('/cookie/logout',valCookie , async function(req, res) {
+    const {cookies}=req;
+    let newLog= await LoginModel.findOneAndUpdate({"accessToken":cookies.session_id},{"accessToken":""},{new: true});
+    res.cookie("session_id","").send({});
 });
 
 
