@@ -50,8 +50,7 @@ function MainMapComponent() {
   }, []);
 
   async function calculateRoute() {
-    console.log("waw", originRef.current.value, destRef.current.value);
-    let routeResults = getRouteResults([
+    let routeResults = await getRouteResults([
       originRef.current.value,
       destRef.current.value,
     ]);
