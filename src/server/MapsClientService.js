@@ -4,25 +4,23 @@ const APIKey = require("./apiKeyExpress");
 const client = new Client({});
 
 const getDirectionsResults = async (orig, dest, waypoints) => {
-  console.log("got here");
-
   let directionsRequest = {
     params: {
       key: APIKey.APIKey,
       origin: orig,
       destination: dest,
-      mode: TravelMode.walking, // google.maps.TravelMode.WALKING,
+      mode: TravelMode.walking,
       alternatives: true,
       waypoints: waypoints,
     },
     timeout: 1000,
   };
-  // console.log(directionsRequest.params.mode);
+
   return await client.directions(directionsRequest);
 };
 // Note: elevation API can consume multiple types. For now, let's either pass in
 // an address, or latitude and longitude
-const getElevation = async (location) => {
+const getElevationResults = async (location) => {
   let elevationRequest = {
     params: {
       locations: [location],
@@ -48,4 +46,4 @@ const getElevation = async (location) => {
 //     console.log(e.response.data.error_message);
 //   });
 
-module.exports = { getDirectionsResults, getElevation };
+module.exports = { getDirectionsResults, getElevationResults };
