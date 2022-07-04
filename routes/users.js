@@ -58,7 +58,7 @@ router.get('/cookie',valCookie ,function(req, res) {
 });
 
 /*logout verification*/
-router.get('/cookie/logout',valCookie , async function(req, res) {
+router.put('/cookie/logout',valCookie , async function(req, res) {
     const {cookies}=req;
     let newLog= await LoginModel.findOneAndUpdate({"accessToken":cookies.session_id},{"accessToken":""},{new: true});
     res.cookie("session_id","").send({});
