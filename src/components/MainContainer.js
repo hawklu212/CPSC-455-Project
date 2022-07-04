@@ -1,8 +1,7 @@
-import Title from "./TitleDiv";
 import TopDiv from "./top-components/TopDiv";
 import BottomDiv from "./bottom-components/BottomDiv";
 import Navigation from "./Navigation";
-import { useEffect ,useMemo} from "react";
+import { useEffect } from "react";
 import { loginState } from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { setInitialCookieCurl, getCookieValidationCurl } from "../async-functions/async";
@@ -19,6 +18,8 @@ export default function MainContainer() {
         }else{
           dispatch(loginState(res["userName"]));
         }
+      }).catch((error)=>{
+        console.log(error);
       });
     } else{
       getCookieValidationCurl().then(res=>{
@@ -29,8 +30,12 @@ export default function MainContainer() {
           res.json().then(ret=>{
             console.log(ret);
             dispatch(loginState(ret["userName"]));
+          }).catch((error)=>{
+            console.log(error);
           });
         }
+      }).catch((error)=>{
+        console.log(error);
       });
     }
   }, []);

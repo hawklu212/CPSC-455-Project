@@ -42,6 +42,9 @@ router.put('/cookie', function(req, res, next) {
     }else{
         res.send(getReturnHelper(1,"","")).status(403);
     }
+  }).catch((error)=>{
+    res.send({"error":error});
+    return;
   });
 });
 
@@ -54,13 +57,23 @@ router.get('/cookie',valCookie ,function(req, res) {
     }else{
         res.cookie("session_id", "").status(403).send({"msg":"cookie not valid"});
     }
+  }).catch((error)=>{
+    res.send({"error":error});
+    return;
   })
 });
 
 /*logout verification*/
 router.put('/cookie/logout',valCookie , async function(req, res) {
     const {cookies}=req;
-    let newLog= await LoginModel.findOneAndUpdate({"accessToken":cookies.session_id},{"accessToken":""},{new: true});
+    let newLog
+    try{
+    newLog= await LoginModel.findOneAndUpdate({"accessToken":cookies.session_id},{"accessToken":""},{new: true});
+    } catch (error){
+    res.send({"error":error});
+    return;
+    }
+    console.log("made it here");
     res.cookie("session_id","").send({});
 });
 
@@ -80,7 +93,10 @@ router.put('/', function(req, res, next) {
                 LoginModel.findOneAndUpdate({[user]:name},{"accessToken":`${uuid}`},{new: true}).then((newStuff)=>{
                 console.log(`this is newStuff: ${newStuff}`);
                 res.cookie("session_id", `${newStuff["accessToken"]}`).send(getReturnHelper(0,name,newStuff["accessToken"]));
-            });
+            }).catch((error)=>{
+            res.send({"error":error})});
+            return;
+            
         } else{
                 res.send(getReturnHelper(2,"",""));
                 return;
@@ -90,7 +106,8 @@ router.put('/', function(req, res, next) {
             res.send(getReturnHelper(1,"",""));
             return;
         }
-    })
+    }).catch((error)=>{
+    res.send({"error":error})});
         return;
 });
 
@@ -105,12 +122,15 @@ router.post('/', function(req, res, next) {
             test.save().then(stuff=>{
                 res.send(getReturnHelper(0,name,`${uuid}`));
                 console.log(`signup ${stuff}`);
-            })
+            }).catch((error)=>{
+            res.send({"error":error})});
+            return;
         }
         else {
             res.send(getReturnHelper(1,""));
         }
-    })
+    }).catch((error)=>{
+    res.send({"error":error})});
     return;
 });
 

@@ -21,12 +21,14 @@ export default function CreateAccount() {
   let errorMsg =data =>{return `Missing ${data}`};
   useEffect(() => {
     getCookieValidationCurl().then(res=>{
-      if (res.status==200){
+      if (res.status===200){
         dispatch(loginState(""));
         navigate("../search");
       }else{
         dispatch(loginState("NoUser"));
       }
+    }).catch((error)=>{
+      console.log(error);
     });
   },[]);
   const failPass=()=>{
@@ -101,7 +103,9 @@ export default function CreateAccount() {
                dispatch(loginState(data["accessToken"]));
                signUpFunc();
              }
-             });
+             }).catch((error)=>{
+              console.log(error);
+            });
            }
 
         }}>

@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useEffect, useState } from "react";
 import { loginCurl } from "../../async-functions/async";
 import { loginState } from "../../actions";
-import { getCookieCurl, getCookieValidationCurl } from "../../async-functions/async";
+import { getCookieValidationCurl } from "../../async-functions/async";
 var userName="";
 var userPass="";
 export default function Login() {
@@ -27,12 +27,14 @@ export default function Login() {
   }
   useEffect(() => {
       getCookieValidationCurl().then(res=>{
-        if (res.status==200){
+        if (res.status===200){
           dispatch(loginState(""));
           navigate("./search");
         }else{
           dispatch(loginState("NoUser"));
         }
+      }).catch((error)=>{
+        console.log(error);
       });
     },[]);
   const failUser=()=>{
@@ -110,6 +112,8 @@ export default function Login() {
               dispatch(loginState(data["accessToken"]));
               loginAttempt();
             }
+            }).catch((error)=>{
+              console.log(error);
             });
           }
           //loginAttempt();
