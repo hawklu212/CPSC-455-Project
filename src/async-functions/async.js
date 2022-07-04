@@ -33,7 +33,7 @@ export async function loginCurl(data){
         return response.json(); // parses JSON response into native JavaScript objects
       }
 
-      export async function retrieveCookieCurl(data){
+      export async function setInitialCookieCurl(data){
         let response= await fetch(`${endpoint}users/cookie`,{
             method: 'PUT', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
@@ -70,7 +70,7 @@ export async function loginCurl(data){
 
           export async function logoutCurl(){
             let response= await fetch(`${endpoint}users/cookie/logout`,{
-                method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                method: 'PUT', // *GET, POST, PUT, DELETE, etc.
                 mode: 'cors', // no-cors, *cors, same-origin
                 cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
                 credentials: 'include', // include, *same-origin, omit

@@ -5,7 +5,7 @@ import Navigation from "./Navigation";
 import { useEffect ,useMemo} from "react";
 import { loginState } from "../actions";
 import { useDispatch, useSelector } from "react-redux";
-import { retrieveCookieCurl, getCookieValidationCurl } from "../async-functions/async";
+import { setInitialCookieCurl, getCookieValidationCurl } from "../async-functions/async";
 import { useNavigate } from "react-router-dom";
 export default function MainContainer() {
   const navigate=useNavigate()
@@ -13,7 +13,7 @@ export default function MainContainer() {
   const loginUser=useSelector(state=>state.loginState);
   useEffect(() => {
     if(loginUser!==""){
-      retrieveCookieCurl({"userName":loginUser}).then(res=>{
+      setInitialCookieCurl({"userName":loginUser}).then(res=>{
         if (res["status"]!==0){
           navigate("../");
         }else{
