@@ -8,8 +8,8 @@ import { loginState } from "../../actions";
 import { signUpCurl } from "../../async-functions/async";
 import { getCookieValidationCurl } from "../../async-functions/async";
 
-var userName="";
-var userPass="";
+var userName = "";
+var userPass = "";
 export default function CreateAccount() {
   const navigate = useNavigate();
   const loginUser=useSelector(state=>state.loginState);
@@ -35,23 +35,22 @@ export default function CreateAccount() {
     setPassError(true);
     setUserError(false);
     setPassErrorMessage(errorMsg("Password"));
-    setUserErrorMessage("");  
+    setUserErrorMessage("");
   };
-  const failUser=()=>{
+  const failUser = () => {
     setUserError(true);
-            setPassError(false);
-            setPassErrorMessage("");
-            setUserErrorMessage(errorMsg("Username"));
+    setPassError(false);
+    setPassErrorMessage("");
+    setUserErrorMessage(errorMsg("Username"));
   };
-  const failBoth=()=>{
+  const failBoth = () => {
     setUserError(true);
-            setPassError(true);
-            setPassErrorMessage(errorMsg("Password"));
-            setUserErrorMessage(errorMsg("Username"));
+    setPassError(true);
+    setPassErrorMessage(errorMsg("Password"));
+    setUserErrorMessage(errorMsg("Username"));
   };
 
-
-  const signUpFunc=()=>{
+  const signUpFunc = () => {
     // TODO: create account in database
     navigate("/search");
   };

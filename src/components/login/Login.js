@@ -14,12 +14,14 @@ export default function Login() {
   const dispatch=useDispatch();
   const loginUser=useSelector(state=>state.loginState);
   const navigate = useNavigate();
-  const [userError,setUserError]=useState(false);
-  const [passError,setPassError]=useState(false);
-  const [userErrorMessage,setUserErrorMessage]=useState("");
-  const [passErrorMessage,setPassErrorMessage]=useState("");
-  let errorMsg =data =>{return `Missing ${data}`};
-  const failPass=()=>{
+  const [userError, setUserError] = useState(false);
+  const [passError, setPassError] = useState(false);
+  const [userErrorMessage, setUserErrorMessage] = useState("");
+  const [passErrorMessage, setPassErrorMessage] = useState("");
+  let errorMsg = (data) => {
+    return `Missing ${data}`;
+  };
+  const failPass = () => {
     setPassError(true);
     setUserError(false);
     setPassErrorMessage(errorMsg("Password"));
@@ -37,19 +39,19 @@ export default function Login() {
         console.log(error);
       });
     },[]);
-  const failUser=()=>{
+  const failUser = () => {
     setUserError(true);
-            setPassError(false);
-            setPassErrorMessage("");
-            setUserErrorMessage(errorMsg("Username"));
-  }
+    setPassError(false);
+    setPassErrorMessage("");
+    setUserErrorMessage(errorMsg("Username"));
+  };
 
-  const failBoth=()=>{
+  const failBoth = () => {
     setUserError(true);
-            setPassError(true);
-            setPassErrorMessage(errorMsg("Password"));
-            setUserErrorMessage(errorMsg("Username"));
-  }
+    setPassError(true);
+    setPassErrorMessage(errorMsg("Password"));
+    setUserErrorMessage(errorMsg("Username"));
+  };
 
   const loginAttempt = () => {
     //TODO: add authentication (maybe following this? https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications)
