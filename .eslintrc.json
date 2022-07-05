@@ -19,7 +19,10 @@
         "react"
     ],
     "rules": {
+<<<<<<< HEAD
         "react/jsx-uses-react": "off",
         "react/react-in-jsx-scope": "off"
+=======
+>>>>>>> 421b6a6a9a38765ef87ea4a3ed58490251111eba
     }
 }

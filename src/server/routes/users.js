@@ -1,6 +1,5 @@
 var express = require("express");
 var router = express.Router();
-var fs = require('fs');
 var mongoose = require('mongoose');
 const { v4: uuidv4 } = require('uuid');
 var Schema = mongoose.Schema;

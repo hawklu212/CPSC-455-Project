@@ -30,7 +30,6 @@ import { logoutCurl } from "../async-functions/async";
 export default function Navigation() {
   const navigate = useNavigate();
   const logout=async ()=>{
-    console.log("bob");
     try{
     await logoutCurl();
     }catch (e) {
