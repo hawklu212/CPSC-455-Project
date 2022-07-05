@@ -7,21 +7,12 @@ import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useEffect, useState } from "react";
 import { loginCurl } from "../../async-functions/async";
 import { loginState } from "../../actions";
-<<<<<<< HEAD
 import { getCookieValidationCurl } from "../../async-functions/async";
 var userName="";
 var userPass="";
 export default function Login() {
   const dispatch=useDispatch();
   const loginUser=useSelector(state=>state.loginState);
-=======
-
-var userName = "";
-var userPass = "";
-
-export default function Login() {
-  const dispatch = useDispatch();
->>>>>>> 421b6a6a9a38765ef87ea4a3ed58490251111eba
   const navigate = useNavigate();
   const [userError, setUserError] = useState(false);
   const [passError, setPassError] = useState(false);
@@ -34,7 +25,6 @@ export default function Login() {
     setPassError(true);
     setUserError(false);
     setPassErrorMessage(errorMsg("Password"));
-<<<<<<< HEAD
     setUserErrorMessage("");  
   }
   useEffect(() => {
@@ -58,20 +48,6 @@ export default function Login() {
 
   const failBoth = () => {
     setUserError(true);
-=======
-    setUserErrorMessage("");
-  };
-
-  const failUser = () => {
-    setUserError(true);
-    setPassError(false);
-    setPassErrorMessage("");
-    setUserErrorMessage(errorMsg("Username"));
-  };
-
-  const failBoth = () => {
-    setUserError(true);
->>>>>>> 421b6a6a9a38765ef87ea4a3ed58490251111eba
     setPassError(true);
     setPassErrorMessage(errorMsg("Password"));
     setUserErrorMessage(errorMsg("Username"));
@@ -89,7 +65,6 @@ export default function Login() {
 
   return loginUser!==""?(
     <>
-<<<<<<< HEAD
     <Grid
       className="yellow-2"
       container
@@ -154,93 +129,6 @@ export default function Login() {
       <br />
       <Button variant="outlined" onClick={signUp}>Sign up</Button>
     </Grid>
-=======
-      <Grid
-        className="yellow-2"
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        style={{ minHeight: "100vh" }}
-      >
-        <Typography variant="h2">A11yMaps</Typography>
-        <br />
-        <br />
-        <br />
-        <Typography variant="h4">Welcome Back!</Typography>
-        <br />
-        <TextField
-          error={userError}
-          helperText={userErrorMessage}
-          required
-          variant="filled"
-          label="Username"
-          onChange={(event) => {
-            userName = event.target.value;
-          }}
-        ></TextField>
-        <br />
-        <TextField
-          error={passError}
-          helperText={passErrorMessage}
-          required
-          label="Password"
-          type="password"
-          onChange={(event) => {
-            userPass = event.target.value;
-          }}
-        ></TextField>
-        <br />
-        <span>
-          <Button
-            variant="outlined"
-            onClick={() => {
-              if (userPass === "" && userName === "") {
-                failBoth();
-              } else if (userPass === "") {
-                failPass();
-              } else if (userName === "") {
-                failUser();
-              } else {
-                loginCurl({ userName: userName, userPass: userPass }).then(
-                  (data) => {
-                    if (data["status"] === 1) {
-                      setPassError(false);
-                      setPassErrorMessage("");
-                      setUserError(true);
-                      setUserErrorMessage("Username does not exist");
-                    } else if (data["status"] === 2) {
-                      setPassError(true);
-                      setPassErrorMessage("Password is Incorrect");
-                      setUserError(false);
-                      setUserErrorMessage("");
-                    } else if (data["status"] === 0) {
-                      dispatch(loginState(data["userName"]));
-                      loginAttempt();
-                    }
-                  }
-                );
-              }
-              //loginAttempt();
-            }}
-          >
-            Sign in
-          </Button>
-        </span>
-        <br />
-        <br />
-        <br />
-        <Divider></Divider>
-        <Typography variant="h6">
-          Don't have an account? Sign up here!
-        </Typography>
-        <br />
-        <Button variant="outlined" onClick={signUp}>
-          Sign up
-        </Button>
-      </Grid>
->>>>>>> 421b6a6a9a38765ef87ea4a3ed58490251111eba
     </>
   ):"";
 }
