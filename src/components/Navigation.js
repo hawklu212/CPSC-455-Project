@@ -25,9 +25,19 @@ import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleDrawerState } from "../actions";
+import { logoutCurl } from "../async-functions/async";
 
 export default function Navigation() {
   const navigate = useNavigate();
+  const logout=async ()=>{
+    console.log("bob");
+    try{
+    await logoutCurl();
+    }catch (e) {
+      console.error(e);
+  }
+    navigate("../");
+  }
   const drawerState = useSelector((state) => state.drawerState);
   //const [drawerState, setDrawerState] = useState(false);
   const loginState = useSelector((state) => state.loginState);
@@ -94,7 +104,7 @@ export default function Navigation() {
           component="div"
           sx={{ flexGrow: 1 }}
         >
-          A11yMaps User:{loginState}
+          A11yMaps
         </Typography>
 
         <IconButton
@@ -124,7 +134,9 @@ export default function Navigation() {
         >
           <MenuItem onClick={handleClose}>Profile</MenuItem>
           <MenuItem onClick={handleClose}>My Account</MenuItem>
+          <MenuItem onClick={logout}>Logout</MenuItem>
         </Menu>
+        {loginState}
       </Toolbar>
     </AppBar>
   );
