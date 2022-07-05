@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 var fs = require('fs');
 var mongoose = require('mongoose');
@@ -109,7 +109,7 @@ router.put('/', function(req, res, next) {
     }).catch((error)=>{
     res.send({"error":error})});
         return;
-});
+      }) 
 
 /* initial signup.js*/
 router.post('/', function(req, res, next) {

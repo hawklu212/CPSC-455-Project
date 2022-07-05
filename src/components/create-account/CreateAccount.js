@@ -8,10 +8,11 @@ import { loginState } from "../../actions";
 import { signUpCurl } from "../../async-functions/async";
 import { getCookieValidationCurl } from "../../async-functions/async";
 
-var userName="";
-var userPass="";
+var userName = "";
+var userPass = "";
 export default function CreateAccount() {
   const navigate = useNavigate();
+<<<<<<< HEAD
   const loginUser=useSelector(state=>state.loginState);
   const [userError,setUserError]=useState(false);
   const [passError,setPassError]=useState(false);
@@ -32,32 +33,43 @@ export default function CreateAccount() {
     });
   },[]);
   const failPass=()=>{
+=======
+  const [userError, setUserError] = useState(false);
+  const [passError, setPassError] = useState(false);
+  const [userErrorMessage, setUserErrorMessage] = useState("");
+  const [passErrorMessage, setPassErrorMessage] = useState("");
+  const dispatch = useDispatch();
+  let errorMsg = (data) => {
+    return `Missing ${data}`;
+  };
+  const failPass = () => {
+>>>>>>> b8c72af (ran prettier)
     setPassError(true);
     setUserError(false);
     setPassErrorMessage(errorMsg("Password"));
-    setUserErrorMessage("");  
+    setUserErrorMessage("");
   };
-  const failUser=()=>{
+  const failUser = () => {
     setUserError(true);
-            setPassError(false);
-            setPassErrorMessage("");
-            setUserErrorMessage(errorMsg("Username"));
+    setPassError(false);
+    setPassErrorMessage("");
+    setUserErrorMessage(errorMsg("Username"));
   };
-  const failBoth=()=>{
+  const failBoth = () => {
     setUserError(true);
-            setPassError(true);
-            setPassErrorMessage(errorMsg("Password"));
-            setUserErrorMessage(errorMsg("Username"));
+    setPassError(true);
+    setPassErrorMessage(errorMsg("Password"));
+    setUserErrorMessage(errorMsg("Username"));
   };
 
-
-  const signUpFunc=()=>{
+  const signUpFunc = () => {
     // TODO: create account in database
     navigate("/search");
   };
 
   return loginUser!==""?(
     <>
+<<<<<<< HEAD
     <Grid
       className="yellow-2"
       container
@@ -113,6 +125,76 @@ export default function CreateAccount() {
         </Button>
       </span>
     </Grid>
+=======
+      <Grid
+        className="yellow-2"
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: "100vh" }}
+      >
+        <Typography variant="h2">A11yMaps</Typography>
+        <br />
+        <br />
+        <br />
+        <Typography variant="h4">Hi there! We're here to help</Typography>
+        <br />
+        <TextField
+          error={userError}
+          helperText={userErrorMessage}
+          variant="filled"
+          required
+          label="Username"
+          onChange={(event) => {
+            userName = event.target.value;
+          }}
+        ></TextField>
+        <br />
+        <TextField
+          error={passError}
+          helperText={passErrorMessage}
+          type="password"
+          required
+          label="Password"
+          onChange={(event) => {
+            userPass = event.target.value;
+          }}
+        ></TextField>
+        <br />
+        <span>
+          <Button
+            variant="outlined"
+            onClick={() => {
+              if (userPass === "" && userName === "") {
+                failBoth();
+              } else if (userPass === "") {
+                failPass();
+              } else if (userName === "") {
+                failUser();
+              } else {
+                signUpCurl({ userName: userName, userPass: userPass }).then(
+                  (data) => {
+                    if (data["status"] === 1) {
+                      setPassError(false);
+                      setPassErrorMessage("");
+                      setUserError(true);
+                      setUserErrorMessage("Username already exist");
+                    } else if (data["status"] === 0) {
+                      dispatch(loginState(data["userName"]));
+                      signUpFunc();
+                    }
+                  }
+                );
+              }
+            }}
+          >
+            Sign Up
+          </Button>
+        </span>
+      </Grid>
+>>>>>>> b8c72af (ran prettier)
     </>
   ):"";
 }
