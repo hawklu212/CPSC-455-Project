@@ -17,9 +17,18 @@ router.get("/", async function (req, res, next) {
     // // call some functions to calculate stuff
     // TODO: need to figure out how to add paths to this:
 
-    directions.data.routes.forEach((route) => getElevationResults(route));
+    // this will be a 2D array, where each entry represents
+    // an array of elevation results for each route
+    let elevationResultsArray = [];
+    directions.data.routes.forEach((route) => {
+      elevationResultsArray.push(getElevationResults(route));
+    });
+
+    // maybe we create a custom object containing the details we want to display
+    // on the card, just for ease of use?
+
     // let elevations = await getElevationResults(locations);
-    // res.send({ routes: directions.data.routes });
+    res.send({ routes: directions.data.routes });
   } catch (e) {
     res.send({ error: e });
   }

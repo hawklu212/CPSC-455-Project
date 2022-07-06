@@ -20,15 +20,23 @@ const getDirectionsResults = async (orig, dest, waypoints) => {
 };
 // Note: elevation API can consume multiple types. For now, let's either pass in
 // an address, or latitude and longitude
-const getElevationResults = async (location) => {
+const getElevationResults = async (route) => {
   let elevationRequest = {
     params: {
-      locations: [location],
+      path: [], //lat lon array, get from route.legs
+      samples: 10, // need to dynamically calculate this later, maybe something like 1/10th of distance of leg
       key: APIKey.Key,
     },
     timeout: 1000,
   };
 
+  // after calling client.elevation, we may want to await and return something else
+  // we need the bounds in routes for the viewport
+  // we need an array of elevation results so we can do calculations on it (e.g. find min)
+  //
+
+  // may actually need to call client.elevation for each leg within each step
+  // may want to do this iteration here, or in outer function that calls getElevationRequest
   return await client.elevation(elevationRequest);
 };
 // client
