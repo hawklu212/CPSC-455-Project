@@ -19,16 +19,40 @@ router.get("/", async function (req, res, next) {
 
     // this will be a 2D array, where each entry represents
     // an array of elevation results for each route
-    let elevationResultsArray = [];
+
+    let routeResultsArray = [];
     directions.data.routes.forEach((route) => {
-      elevationResultsArray.push(getElevationResults(route));
+      let leg = route.legs[0];
+
+      let routeDataResult = {
+        mapBoundsData: route.bounds, // need this for maps Viewport
+        totalDistance: leg.distance.value,
+        totalDuration: leg.duration.value, //in seconds
+        endAddress: leg.end_address,
+        endLocation: leg.end_location,
+        startAddress: leg.start_address,
+        startLocation: leg.start_location,
+        maxElevation: null,
+        steepestIncline: null,
+        rating: "neutral", // replace with "happy" or "sad" somehow
+        ranking: 0,
+      };
+      let elevationResults = getElevationResults(route, routeDataResult);
+
+      // TODO: calculate max elevation increase
+      // TODO: calculate steepest incline
+      // TODO: assign rating
+      // TODO: assign ranking somehow based on some criteria
+      // TODO: assign sort route data list
+
+      routeResultsArray.push();
     });
 
-    // maybe we create a custom object containing the details we want to display
-    // on the card, just for ease of use?
+    // maybe we create a custom object containing the details we need in the frontend,
+    // e.g. details on the card, just for ease of use?
 
-    // let elevations = await getElevationResults(locations);
-    res.send({ routes: directions.data.routes });
+    res.send({ routes: routeResultsArray });
+    // res.send({ routes: directions.data.routes });
   } catch (e) {
     res.send({ error: e });
   }
