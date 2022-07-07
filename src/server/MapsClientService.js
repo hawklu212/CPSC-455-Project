@@ -11,7 +11,7 @@ const getDirectionsResults = async (orig, dest, waypoints) => {
       destination: dest,
       mode: TravelMode.walking,
       alternatives: true,
-      waypoints: waypoints,
+      // waypoints: waypoints,
     },
     timeout: 1000,
   };
@@ -20,25 +20,41 @@ const getDirectionsResults = async (orig, dest, waypoints) => {
 };
 // Note: elevation API can consume multiple types. For now, let's either pass in
 // an address, or latitude and longitude
-const getElevationResults = async (route) => {
-  let elevationRequest = {
-    params: {
-      path: [], //lat lon array, get from route.legs
-      samples: 10, // need to dynamically calculate this later, maybe something like 1/10th of distance of leg
-      key: APIKey.Key,
-    },
-    timeout: 1000,
-  };
+const getElevationResults = async (route, routeDataResult) => {
+  // assuming we only have 1 leg for now, and we aren't using waypoints
+  let leg = route.legs[0];
 
-  // after calling client.elevation, we may want to await and return something else
-  // we need the bounds in routes for the viewport
-  // we need an array of elevation results so we can do calculations on it (e.g. find min)
-  //
+  let legSteps = leg.steps;
 
-  // may actually need to call client.elevation for each leg within each step
-  // may want to do this iteration here, or in outer function that calls getElevationRequest
-  return await client.elevation(elevationRequest);
+  let elevationDataArray = [];
+
+  legSteps.forEach(async (step) => {
+    let distanceOfStep = step.distance.value;
+    let suitableElevationSampleSize = distanceOfStep / 10; // to start, let's just do 1/10
+    let startLocation = [step.start_location.lat, step.start_location.lng];
+    let endLocation = [step.end_location.lat, step.end_location.lng];
+
+    let elevationRequest = {
+      params: {
+        path: [startLocation, endLocation],
+        samples: 10, // TODO: replace with ElevationSampleSize once done testing
+        key: APIKey.APIKey,
+      },
+      timeout: 1000,
+    };
+
+    let elevationData = await client.elevation(elevationRequest);
+    elevationData.data.results.forEach((coordinate) => {
+      elevationDataArray.push(coordinate.elevation);
+      console.log(elevationDataArray);
+    });
+  });
+
+  return elevationDataArray;
 };
+
+module.exports = { getDirectionsResults, getElevationResults };
+
 // client
 //   .elevation({
 //     params: {
@@ -53,5 +69,3 @@ const getElevationResults = async (route) => {
 //   .catch((e) => {
 //     console.log(e.response.data.error_message);
 //   });
-
-module.exports = { getDirectionsResults, getElevationResults };
