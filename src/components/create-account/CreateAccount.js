@@ -1,4 +1,4 @@
-import { Grid, Typography, Button, Divider } from "@mui/material";
+import { Grid, Typography, Button } from "@mui/material";
 import "../../components-styling/colours.css";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -8,8 +8,9 @@ import { loginState } from "../../actions";
 import { signUpCurl } from "../../async-functions/async";
 import { getCookieValidationCurl } from "../../async-functions/async";
 
-var userName = "";
-var userPass = "";
+let email = "";
+let name = ""
+let userPass = "";
 export default function CreateAccount() {
   const navigate = useNavigate();
   const loginUser=useSelector(state=>state.loginState);
@@ -18,7 +19,7 @@ export default function CreateAccount() {
   const [userErrorMessage,setUserErrorMessage]=useState("");
   const [passErrorMessage,setPassErrorMessage]=useState("");
   const dispatch=useDispatch();
-  let errorMsg =data =>{return `Missing ${data}`};
+  const errorMsg =data =>{return `Missing ${data}`};
   useEffect(() => {
     getCookieValidationCurl().then(res=>{
       if (res.status===200){
@@ -41,18 +42,18 @@ export default function CreateAccount() {
     setUserError(true);
     setPassError(false);
     setPassErrorMessage("");
-    setUserErrorMessage(errorMsg("Username"));
+    setUserErrorMessage(errorMsg("Email"));
   };
   const failBoth = () => {
     setUserError(true);
     setPassError(true);
     setPassErrorMessage(errorMsg("Password"));
-    setUserErrorMessage(errorMsg("Username"));
+    setUserErrorMessage(errorMsg("Email"));
   };
 
-  const signUpFunc = () => {
+  const verifyFunc = () => {
     // TODO: create account in database
-    navigate("/search");
+    navigate("/verify");
   };
 
   return loginUser!==""?(
@@ -70,37 +71,40 @@ export default function CreateAccount() {
       <br />
       <br />
       <br />
-      <Typography variant="h4">Hi there! We're here to help</Typography>
+      <Typography variant="h4">Hi there! We are here to help</Typography>
       <br />
-      <TextField error={userError} helperText={userErrorMessage} variant="filled" required label="Username" onChange={(event)=>
-      {userName=event.target.value;
+      <TextField error={userError} helperText={userErrorMessage} variant="filled" required label="Email" onChange={(event)=>
+      {email=event.target.value;
       }}></TextField>
       <br />
-      <TextField  error={passError} helperText={passErrorMessage} type="password" required label="Password" onChange={(event)=>
+      <TextField label="Name" onChange={(event)=>
+      {name=event.target.value;
+      }}></TextField>
+      <br />
+      <TextField  error={passError} helperText={passErrorMessage} variant="filled" type="password" required label="Password" onChange={(event)=>
         {userPass=event.target.value;
         }}></TextField>
       <br />
       <span>
         <Button variant="outlined" onClick={()=>{
-          if (userPass==="" && userName===""){
+          if (userPass==="" && email===""){
             failBoth();          
            }
            else if (userPass===""){
              failPass(); 
            }
-           else if (userName===""){
+           else if (email===""){
              failUser();
            }else{
-             signUpCurl({"userName":userName,"userPass":userPass}).then(data=>{
+             signUpCurl({"email":email,"userName":name,"userPass":userPass}).then(data=>{
              if(data["status"]===1){
                setPassError(false);
                setPassErrorMessage("");
                setUserError(true);
-               setUserErrorMessage("Username already exist");
+               setUserErrorMessage("Email already exist");
              }
              else if(data["status"]===0){
-               dispatch(loginState(data["accessToken"]));
-               signUpFunc();
+               verifyFunc();
              }
              }).catch((error)=>{
               console.log(error);
