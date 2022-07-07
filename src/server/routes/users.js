@@ -1,8 +1,26 @@
 var express = require("express");
 var router = express.Router();
 var mongoose = require('mongoose');
+var nodemailer = require('nodemailer');
 var {validate} = require("email-validator");
 const { v4: uuidv4 } = require('uuid');
+
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'A11ymaps1@gmail.com',
+      pass: ''
+    }
+  });
+
+  var mailOptions = {
+    from: 'a11lymaps1@gmail.com',
+    to: 'myfriend@yahoo.com',
+    subject: 'A11ymaps Recovery Code',
+    text: 'That was easy!'
+  };
+
 var Schema = mongoose.Schema;
 var loginSchema = new Schema({
   email:String,
@@ -70,9 +88,8 @@ router.get('/cookie',valCookie ,function(req, res) {
 /*logout verification*/
 router.put('/cookie/logout',valCookie , async function(req, res) {
     const {cookies}=req;
-    let newLog;
     try{
-    newLog=await LoginModel.findOneAndUpdate({"accessToken":cookies.session_id},{"accessToken":""},{new: true});
+    await LoginModel.findOneAndUpdate({"accessToken":cookies.session_id},{"accessToken":""},{new: true});
     } catch (error){
     res.send({"error":error});
     return;
@@ -121,18 +138,18 @@ router.put('/', function(req, res, next) {
 
 /* initial signup.js signupCurl error 1:email aready exists, error 2:email is not valid*/
 router.post('/', function(req, res, next) {
-    let email=req.body["email"];
+    let mail=req.body["email"];
     var LoginModel = mongoose.model('LoginModel', loginSchema );
-    LoginModel.find({email:email}).then((arr)=>{
-        if(!validate(email)){
-            res.send(getReturnHelper(1,email,"",""));
+    LoginModel.find({email:mail}).then((arr)=>{
+        if(!validate(mail)){
+            res.send(getReturnHelper(1,mail,"",""));
             return;
         }
         if (arr.length==0){
             let uuid=uuidv4();
-            const test = new LoginModel({ email:email,userName: req.body[user],userPass:req.body[pass],accessToken:`${uuid}`,verified:false});
+            const test = new LoginModel({ email:mail,userName: req.body[user],userPass:req.body[pass],accessToken:`${uuid}`,verified:false});
             test.save().then(stuff=>{
-                res.send(getReturnHelper(0,email,""));
+                res.send(getReturnHelper(0,mail,""));
             }).catch((error)=>{
             res.send({"error":error})});
             return;
@@ -172,5 +189,53 @@ router.put('/verify', function(req, res, next) {
     res.send({"error":error})});
         return;
       })
+
+
+/* PUT users listing. first new verification , error 1 is bad user, error 2 is bad password, error 3 is not verified*/
+router.post('/verify', function(req, res, next) {
+    let ver=req.body[verificationCode];
+    let mail=req.body[email];
+    LoginModel.find({email:mail}).then((arr)=>{
+        if (arr.length!==0){
+            if (arr[0]["accessToken"]===""){
+                let newUuid=uuidv4();
+                LoginModel.findOneAndUpdate({email:mail},{accessToken:newUuid},{new: true}).then((newStuff)=>{
+                mailOptions["to"]=newStuff["email"];
+                mailOptions["text"]=newStuff["accessToken"];
+                transporter.sendMail(mailOptions, function(error, info){
+                        if (error) {
+                          res.send({"error":error});
+                          console.log(error);
+                        } else {
+                          res.send(getReturnHelper(0,mail,""));
+                          console.log('Email sent: ' + info.response);
+                        }
+                      });
+            }).catch((error)=>{
+            res.send({"error":error})});
+            return;       
+        }else{
+            mailOptions["to"]=arr[0]["email"];
+            mailOptions["text"]=arr[0]["accessToken"];
+                transporter.sendMail(mailOptions, function(error, info){
+                        if (error) {
+                          res.send({"error":error});
+                          console.log(error);
+                        } else {
+                          res.send(getReturnHelper(0,mail,""));
+                          console.log('Email sent: ' + info.response);
+                        }
+                      });
+        } 
+        }
+        else {
+            res.send(getReturnHelper(1,"",""));
+            return;
+        }
+    }).catch((error)=>{
+    res.send({"error":error})});
+        return;
+      })
+
 
 module.exports = router;

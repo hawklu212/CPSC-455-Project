@@ -5,20 +5,26 @@ import { useNavigate } from "react-router-dom";
 import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginState } from "../../actions";
-import { verificationCurl } from "../../async-functions/async";
-import { getCookieValidationCurl } from "../../async-functions/async";
+import { recoveryCurl, recoverySendCodeCurl,getCookieValidationCurl } from "../../async-functions/async";
 import {validate} from "email-validator";
+
 
 let email = "";
 let verificationCode = "";
-export default function VerifyAccount() {
+let newPass="";
+let confirmPass="";
+export default function RecoverAccountPassword() {
   const navigate = useNavigate();
   const loginUser=useSelector(state=>state.loginState);
   const [emailSendError,setEmailSendError]=useState("");
   const [emailError,setEmailError]=useState(false);
   const [verificationError,setVerificationError]=useState(false);
+  const [newPassError,setNewPassError]=useState(false);
+  const [confirmPassError,setConfirmPassError]=useState(false);
   const [emailErrorMessage,setEmailErrorMessage]=useState("");
   const [verificationErrorMessage,setVerificationErrorMessage]=useState("");
+  const [newPassErrorMessage,setNewPassErrorMessage]=useState("");
+  const [confirmPassErrorMessage,setConfirmPassErrorMessage]=useState("");
   const dispatch=useDispatch();
   const errorMsg =data =>{return `Missing or Wrong ${data}`};
   useEffect(() => {
@@ -38,23 +44,49 @@ export default function VerifyAccount() {
       console.log(error);
     });
   },[]);
-  const failPass=()=>{
-    setVerificationError(true);
+  const resetEmail=()=>{
     setEmailError(false);
-    setVerificationErrorMessage(errorMsg("Code"));
-    setEmailErrorMessage("");
-  };
-  const failUser = () => {
-    setEmailError(true);
+    setEmailErrorMessage(""); 
+  }
+  const resetVerification=()=>{
     setVerificationError(false);
     setVerificationErrorMessage("");
-    setEmailErrorMessage(errorMsg("Email"));
-  };
-  const failBoth = () => {
-    setEmailError(true);
+  }
+  const resetNewPass=()=>{
+    setNewPassError(false);
+    setNewPassErrorMessage("");
+  }
+  const resetConfirmPass=()=>{
+    setConfirmPassError(false);
+    setConfirmPassErrorMessage("");
+  }
+  const failVerification=()=>{
     setVerificationError(true);
     setVerificationErrorMessage(errorMsg("Code"));
+    resetEmail();
+    resetConfirmPass();
+    resetNewPass();
+  };
+  const failEmail = () => {
+    setEmailError(true);
     setEmailErrorMessage(errorMsg("Email"));
+    resetVerification();
+    resetConfirmPass();
+    resetNewPass();
+  };
+  const failInitialPass = () => {
+    setNewPassError(true);
+    setNewPassErrorMessage(errorMsg("Password"));
+    resetVerification();
+    resetConfirmPass();
+    resetEmail();
+  };
+  const failConfirmPass = () => {
+    setConfirmPassError(true);
+    setNewPassErrorMessage("Password has to match");
+    resetVerification();
+    resetNewPass();
+    resetEmail();
   };
 
   const signUpFunc = () => {
@@ -79,7 +111,7 @@ export default function VerifyAccount() {
       <br />
       <Typography variant="h4">Hi there! Please enter the verification code sent to your email</Typography>
       <br />
-      <TextField defaultValue={loginUser} error={emailError} helperText={emailErrorMessage} variant="filled" required label="Email" onChange={(event)=>
+      <TextField error={emailError} helperText={emailErrorMessage} variant="filled" required label="Email" onChange={(event)=>
       {email=event.target.value;
       }}></TextField>
       <br />
@@ -87,39 +119,48 @@ export default function VerifyAccount() {
         {verificationCode=event.target.value;
         }}></TextField>
       <br />
+      <TextField  error={newPassError} helperText={newPassErrorMessage} type="password" required label="New Password" onChange={(event)=>
+        {newPass=event.target.value;
+        }}></TextField>
+      <br />
+      <TextField  error={confirmPassError} helperText={confirmPassErrorMessage} type="password" required label="Confirm Password" onChange={(event)=>
+        {confirmPass=event.target.value;
+        }}></TextField>
+      <br />
       <span>
-      <Button variant="outlined" onClick={async ()=>{
+        <Button variant="outlined" onClick={async ()=>{
           setEmailSendError("");
           if (email==="" || !validate(email)){
             failEmail();
           }else {
             try{
-            const res= await recoverySendCodeCurl();
+            const res = await recoverySendCodeCurl();
             setEmailSendError(`Code sent to ${res["userName"]}`);
-            } catch(error){
+            } catch (error){
               console.log(error);
             }
           }
         }}>Send Verification Code</Button>
         <Button variant="outlined" onClick={async ()=>{
           setEmailSendError("");
-          if (verificationCode==="" && email===""){
-            failBoth();          
+          if (email==="" || !validate(email)){
+            failEmail();
+          }else if (verificationCode===""){
+             failVerification(); 
+           }else if (newPass===""){
+            failInitialPass();
+           } else if (newPass!==confirmPass){
+            failConfirmPass();
            }
-           else if (verificationCode===""){
-             failPass(); 
-           }
-           else if (email==="" || !validate(email)){
-             failUser();
-           }else{
+           else{
           try{
-           const res=await verificationCurl({email:email,verificationCode:verificationCode});
+           const res=await recoveryCurl({email:email,verificationCode:verificationCode,userPass:newPass});
             if (res["status"]===1){
-              failUser();
+              failEmail();
               return;
             }
             if (res["status"]===2){
-              failPass();
+              failVerification();
               return;
             }else{
               dispatch(loginState(res["accessToken"]));
@@ -134,9 +175,10 @@ export default function VerifyAccount() {
            }
 
         }}>
-          Verify
+          Reset Password
         </Button>
       </span>
+      <h6>{emailSendError}</h6>
     </Grid>
     </>
   ):"";
