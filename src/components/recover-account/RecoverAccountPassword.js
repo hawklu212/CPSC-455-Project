@@ -127,6 +127,7 @@ export default function RecoverAccountPassword() {
         {confirmPass=event.target.value;
         }}></TextField>
       <br />
+      <h3>{emailSendError}</h3>
       <span>
         <Button variant="outlined" onClick={async ()=>{
           setEmailSendError("");
@@ -134,7 +135,7 @@ export default function RecoverAccountPassword() {
             failEmail();
           }else {
             try{
-            const res = await recoverySendCodeCurl();
+            const res = await recoverySendCodeCurl({email:email});
             setEmailSendError(`Code sent to ${res["userName"]}`);
             } catch (error){
               console.log(error);

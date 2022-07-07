@@ -9,8 +9,8 @@ const { v4: uuidv4 } = require('uuid');
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'A11ymaps1@gmail.com',
-      pass: ''
+      user: 'a11ymaps1@gmail.com',
+      pass: 'appPassword'
     }
   });
 
@@ -193,15 +193,17 @@ router.put('/verify', function(req, res, next) {
 
 /* PUT users listing. first new verification , error 1 is bad user, error 2 is bad password, error 3 is not verified*/
 router.post('/verify', function(req, res, next) {
-    let ver=req.body[verificationCode];
     let mail=req.body[email];
+    console.log(mail);
     LoginModel.find({email:mail}).then((arr)=>{
+        console.log(arr[0]["accessToken"]);
         if (arr.length!==0){
             if (arr[0]["accessToken"]===""){
                 let newUuid=uuidv4();
                 LoginModel.findOneAndUpdate({email:mail},{accessToken:newUuid},{new: true}).then((newStuff)=>{
                 mailOptions["to"]=newStuff["email"];
                 mailOptions["text"]=newStuff["accessToken"];
+                console.log(mailOptions["to"]);
                 transporter.sendMail(mailOptions, function(error, info){
                         if (error) {
                           res.send({"error":error});
@@ -217,6 +219,7 @@ router.post('/verify', function(req, res, next) {
         }else{
             mailOptions["to"]=arr[0]["email"];
             mailOptions["text"]=arr[0]["accessToken"];
+            console.log(mailOptions["to"]);
                 transporter.sendMail(mailOptions, function(error, info){
                         if (error) {
                           res.send({"error":error});

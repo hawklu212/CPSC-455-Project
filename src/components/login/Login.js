@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { loginCurl } from "../../async-functions/async";
 import { loginState } from "../../actions";
 import { getCookieValidationCurl } from "../../async-functions/async";
+import {validate} from "email-validator";
 let email="";
 let userPass="";
 export default function Login() {
@@ -19,7 +20,7 @@ export default function Login() {
   const [userErrorMessage, setUserErrorMessage] = useState("");
   const [passErrorMessage, setPassErrorMessage] = useState("");
   const errorMsg = (data) => {
-    return `Missing ${data}`;
+    return `Missing or Wrong ${data}`;
   };
   const failPass = () => {
     setPassError(true);
@@ -63,6 +64,14 @@ export default function Login() {
     navigate("../create-account");
   };
 
+  const recovery = () => {
+    navigate("../recover");
+  };
+
+  const verify = () => {
+    navigate("../verify");
+  };
+
   return loginUser!==""?(
     <>
     <Grid
@@ -95,7 +104,7 @@ export default function Login() {
           else if (userPass===""){
             failPass(); 
           }
-          else if (email===""){
+          else if (email==="" || !(validate(email))){
             failUser();
           }else{
             loginCurl({email:email,"userPass":userPass}).then(data=>{
@@ -134,6 +143,13 @@ export default function Login() {
       <Typography variant="h6">Don&apos;t have an account? Sign up here!</Typography>
       <br />
       <Button variant="outlined" onClick={signUp}>Sign up</Button>
+      <br />
+      <Typography variant="h6">Forgot password or need to verify an account?</Typography>
+      <br />
+      <span>
+      <Button variant="outlined" onClick={recovery}>Recover Password</Button>
+      <Button variant="outlined" onClick={verify}>Verify Account</Button>
+      </span>
     </Grid>
     </>
   ):"";

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginState } from "../../actions";
-import { verificationCurl } from "../../async-functions/async";
+import { verificationCurl, recoverySendCodeCurl } from "../../async-functions/async";
 import { getCookieValidationCurl } from "../../async-functions/async";
 import {validate} from "email-validator";
 
@@ -87,14 +87,15 @@ export default function VerifyAccount() {
         {verificationCode=event.target.value;
         }}></TextField>
       <br />
+      <h3>{emailSendError}</h3>
       <span>
       <Button variant="outlined" onClick={async ()=>{
           setEmailSendError("");
           if (email==="" || !validate(email)){
-            failEmail();
+            failUser();
           }else {
             try{
-            const res= await recoverySendCodeCurl();
+            const res= await recoverySendCodeCurl({email:email});
             setEmailSendError(`Code sent to ${res["userName"]}`);
             } catch(error){
               console.log(error);

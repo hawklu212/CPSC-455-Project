@@ -111,6 +111,7 @@ export default function CreateAccount() {
               setUserErrorMessage("Email already exist");
             }
              else if(data["status"]===0){
+               dispatch(loginState(email));
                verifyFunc();
              }
              }).catch((error)=>{

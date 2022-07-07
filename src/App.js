@@ -12,7 +12,7 @@ function App() {
       <Route path="/verify" element={<VerifyAccount />} />
       <Route path="/create-account" element={<CreateAccount />} />
       <Route path="/search" element={<MainContainer />} />
-      <Route path="/recover" element={<RecoverAccountPassword />} />
+      <Route path="/recovery" element={<RecoverAccountPassword />} />
     </Routes>
   );
 }
