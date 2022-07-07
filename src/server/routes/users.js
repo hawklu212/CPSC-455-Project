@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var mongoose = require('mongoose');
-var validator = require("email-validator");
+var {validate} = require("email-validator");
 const { v4: uuidv4 } = require('uuid');
 var Schema = mongoose.Schema;
 var loginSchema = new Schema({
@@ -119,22 +119,26 @@ router.put('/', function(req, res, next) {
         return;
       }) 
 
-/* initial signup.js signupCurl*/
+/* initial signup.js signupCurl error 1:email aready exists, error 2:email is not valid*/
 router.post('/', function(req, res, next) {
-    let mail=req.body["email"];
+    let email=req.body["email"];
     var LoginModel = mongoose.model('LoginModel', loginSchema );
-    LoginModel.find({email:mail}).then((arr)=>{
+    LoginModel.find({email:email}).then((arr)=>{
+        if(!validate(email)){
+            res.send(getReturnHelper(1,email,"",""));
+            return;
+        }
         if (arr.length==0){
             let uuid=uuidv4();
-            const test = new LoginModel({ email:mail,userName: req.body[user],userPass:req.body[pass],accessToken:`${uuid}`,verified:false});
+            const test = new LoginModel({ email:email,userName: req.body[user],userPass:req.body[pass],accessToken:`${uuid}`,verified:false});
             test.save().then(stuff=>{
-                res.send(getReturnHelper(0,mail,""));
+                res.send(getReturnHelper(0,email,""));
             }).catch((error)=>{
             res.send({"error":error})});
             return;
         }
         else {
-            res.send(getReturnHelper(1,"",""));
+            res.send(getReturnHelper(2,"",""));
         }
     }).catch((error)=>{
     res.send({"error":error})});

@@ -59,9 +59,9 @@ function MainMapComponent() {
       provideRouteAlternatives: true,
     });
     console.log(results.routes);
-    let directionArray = [];
+    const directionArray = [];
     for (let i = 0; i < results.routes.length; i++) {
-      let leg = results.routes[i];
+      const leg = results.routes[i];
       console.log(leg);
       directionArray.push({
         // distance in kilometers
@@ -72,7 +72,6 @@ function MainMapComponent() {
         startAddress: leg.legs[0].start_address,
         endAddress: leg.legs[0].end_address,
       });
-      //console.log(directionArray);
     }
     dispatch(addDirections(directionArray));
     setDirections(results);

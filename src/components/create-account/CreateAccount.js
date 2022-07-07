@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginState } from "../../actions";
 import { signUpCurl } from "../../async-functions/async";
 import { getCookieValidationCurl } from "../../async-functions/async";
+import {validate} from "email-validator";
 
 let email = "";
 let name = ""
@@ -101,8 +102,14 @@ export default function CreateAccount() {
                setPassError(false);
                setPassErrorMessage("");
                setUserError(true);
-               setUserErrorMessage("Email already exist");
+               setUserErrorMessage("Require a valid email");
              }
+             if(data["status"]===2){
+              setPassError(false);
+              setPassErrorMessage("");
+              setUserError(true);
+              setUserErrorMessage("Email already exist");
+            }
              else if(data["status"]===0){
                verifyFunc();
              }
