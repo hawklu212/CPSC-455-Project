@@ -240,5 +240,31 @@ router.post('/verify', function(req, res, next) {
         return;
       })
 
+router.put('/recovery', function(req, res, next) {
+        let ver=req.body[verificationCode];
+        let mail=req.body[email];
+        let password=req.body[pass];
+        LoginModel.find({email:mail}).then((arr)=>{
+            if (arr.length!==0){
+                if (arr[0]["accessToken"]===ver){
+                    LoginModel.findOneAndUpdate({email:mail},{[pass]:password},{new: true}).then((newStuff)=>{
+                    res.cookie("session_id", `${newStuff["accessToken"]}`).send(getReturnHelper(0,mail,newStuff["accessToken"]));
+                }).catch((error)=>{
+                res.send({"error":error})});
+                return;
+                
+            } else{
+                    res.send(getReturnHelper(2,"",""));
+                    return;
+                }
+            }
+            else {
+                res.send(getReturnHelper(1,"",""));
+                return;
+            }
+        }).catch((error)=>{
+        res.send({"error":error})});
+            return;
+          })
 
 module.exports = router;

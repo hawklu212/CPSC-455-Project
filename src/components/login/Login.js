@@ -65,7 +65,7 @@ export default function Login() {
   };
 
   const recovery = () => {
-    navigate("../recover");
+    navigate("../recovery");
   };
 
   const verify = () => {

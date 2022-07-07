@@ -26,7 +26,7 @@ export default function RecoverAccountPassword() {
   const [newPassErrorMessage,setNewPassErrorMessage]=useState("");
   const [confirmPassErrorMessage,setConfirmPassErrorMessage]=useState("");
   const dispatch=useDispatch();
-  const errorMsg =data =>{return `Missing or Wrong ${data}`};
+  const errorMsg =data =>{return `Missing ${data}`};
   useEffect(() => {
     getCookieValidationCurl().then(res=>{
       if (res.status===200){
@@ -83,7 +83,7 @@ export default function RecoverAccountPassword() {
   };
   const failConfirmPass = () => {
     setConfirmPassError(true);
-    setNewPassErrorMessage("Password has to match");
+    setConfirmPassErrorMessage("Password has to match");
     resetVerification();
     resetNewPass();
     resetEmail();
