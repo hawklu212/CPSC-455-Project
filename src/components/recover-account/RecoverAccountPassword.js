@@ -177,7 +177,7 @@ export default function RecoverAccountPassword() {
               return;
             }
             if (res["status"]===3){
-              failStrengthPass(res["userName"]);
+              failStrengthPass(res["error"]);
               return;
             }else{
               dispatch(loginState(res["accessToken"]));

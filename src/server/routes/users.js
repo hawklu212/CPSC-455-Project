@@ -66,7 +66,7 @@ function valCookie(req,res,next){
 }
 }
 
-/* GET users listing. First New Login/signup Verification MainContainer.js */ 
+/* GET users listing. First New Login/signup Verification MainContainer.js, setInitialCookieCurl */ 
 router.put('/cookie', function(req, res, next) {
   let curr=req.body[user];
   LoginModel.find({accessToken:curr}).then(arr=>{
@@ -84,7 +84,7 @@ router.put('/cookie', function(req, res, next) {
   });
 });
 
-/*persistent login verification*/
+/*persistent login verification, getCookieValidationCurl*/
 router.get('/cookie',valCookie ,function(req, res) {
   const {cookies}=req;
   LoginModel.find({accessToken:cookies.session_id}).then(ref=>{
@@ -99,7 +99,7 @@ router.get('/cookie',valCookie ,function(req, res) {
   })
 });
 
-/*logout verification*/
+/*logout verification logoutCurl*/
 router.put('/cookie/logout',valCookie , async function(req, res) {
     const {cookies}=req;
     try{
@@ -116,6 +116,10 @@ router.put('/cookie/logout',valCookie , async function(req, res) {
 
 function getReturnHelper(stat,payload,token){
     return {"status":stat,"userName":payload,"accessToken":token};
+}
+
+function getErrorHelper(stat,payload,token){
+    return {"status":stat,"error":payload,"accessToken":token};
 }
 
 /* PUT users listing. first new loginCurl login.js , error 1 is bad user, error 2 is bad password, error 3 is not verified*/
@@ -162,7 +166,7 @@ router.post('/', function(req, res, next) {
         if (arr.length==0){
             let passCheck=passSchema.validate(req.body[pass], { details: true });
                     if (passCheck.length!==0){
-                        res.send(getReturnHelper(3,passCheck[0]["message"],""));
+                        res.send(getErrorHelper(3,passCheck[0]["message"],""));
                         return;
                     }
             let uuid=uuidv4();
@@ -182,7 +186,7 @@ router.post('/', function(req, res, next) {
 });
 
 
-/* PUT users listing. first new verification , error 1 is bad user, error 2 is bad password, error 3 is not verified*/
+/* PUT users listing. account verification, verificationCurl, error 1 is bad user, error 2 is bad Verification*/
 router.put('/verify', function(req, res, next) {
     let ver=req.body[verificationCode];
     let mail=req.body[email];
@@ -210,7 +214,7 @@ router.put('/verify', function(req, res, next) {
       })
 
 
-/* PUT users listing. first new verification , error 1 is bad user, error 2 is bad password, error 3 is not verified*/
+/* POST users listing. Account recovery email send, recoverySendCodeCurl , error 1 is bad user, error 2 is bad password, error 3 is not verified*/
 router.post('/verify', function(req, res, next) {
     let mail=req.body[email];
     console.log(mail);
@@ -258,7 +262,7 @@ router.post('/verify', function(req, res, next) {
     res.send({"error":error})});
         return;
       })
-/*reset password. Error 1:email not found, Error 2:verification code wrong, Error 3:password too weak*/
+/*reset password, recoveryCurl , Error 1:email not found, Error 2:verification code wrong, Error 3:password too weak*/
 router.put('/recovery', function(req, res, next) {
         let ver=req.body[verificationCode];
         let mail=req.body[email];
@@ -268,7 +272,7 @@ router.put('/recovery', function(req, res, next) {
                 if (arr[0]["accessToken"]===ver){
                     let passCheck=passSchema.validate(password, { details: true });
                     if (passCheck.length!==0){
-                        res.send(getReturnHelper(3,passCheck[0]["message"],""));
+                        res.send(getErrorHelper(3,passCheck[0]["message"],""));
                         return;
                     }
                     LoginModel.findOneAndUpdate({email:mail},{[pass]:password},{new: true}).then((newStuff)=>{

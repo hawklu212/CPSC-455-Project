@@ -121,7 +121,7 @@ export default function CreateAccount() {
               setUserErrorMessage("Email already exist");
             }
             if(data["status"]===3){
-              failStrengthPass(data["userName"]);
+              failStrengthPass(data["error"]);
             }
              else if(data["status"]===0){
                dispatch(loginState(email));
