@@ -84,7 +84,7 @@ export default function RecoverAccountPassword() {
 
   const failStrengthPass = (data) => {
     setNewPassError(true);
-    setNewPassErrorMessage(errorMsg(data));
+    setNewPassErrorMessage((data));
     resetVerification();
     resetConfirmPass();
     resetEmail();
