@@ -59,6 +59,8 @@ export default function VerifyAccount() {
 
   const signUpFunc = () => {
     // TODO: create account in database
+    email = "";
+    verificationCode = "";
     navigate("/search");
   };
 

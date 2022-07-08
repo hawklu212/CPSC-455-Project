@@ -57,18 +57,26 @@ export default function Login() {
   const loginAttempt = () => {
     // TODO: add authentication (maybe following this? https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications)
     // if login attempt succeeds, then:
+    email="";
+    userPass="";
     navigate("../search");
   };
   const signUp = () => {
     // NTH: maybe carry over username if it is already entered
+    email="";
+    userPass="";
     navigate("../create-account");
   };
 
   const recovery = () => {
+    email="";
+    userPass="";
     navigate("../recovery");
   };
 
   const verify = () => {
+    email="";
+    userPass="";
     navigate("../verify");
   };
 
@@ -115,8 +123,8 @@ export default function Login() {
               setUserErrorMessage("Username/Email does not exist");
             }else if(data["status"]===2){
               setPassError(true);
-              setPassErrorMessage("Password is Incorrect");
-              setUserError(false);
+              setPassErrorMessage("Password or Username is Incorrect");
+              setUserError(true);
               setUserErrorMessage("");
             }else if(data["status"]===3){
               setPassError(false);

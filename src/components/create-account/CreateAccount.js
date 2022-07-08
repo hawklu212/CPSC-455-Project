@@ -54,6 +54,9 @@ export default function CreateAccount() {
 
   const verifyFunc = () => {
     // TODO: create account in database
+    email = "";
+    name = ""
+    userPass = "";
     navigate("/verify");
   };
 

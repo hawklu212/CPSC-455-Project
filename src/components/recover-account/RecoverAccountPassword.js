@@ -91,6 +91,10 @@ export default function RecoverAccountPassword() {
 
   const signUpFunc = () => {
     // TODO: create account in database
+    email = "";
+    verificationCode = "";
+    newPass="";
+    confirmPass="";
     navigate("/search");
   };
 
