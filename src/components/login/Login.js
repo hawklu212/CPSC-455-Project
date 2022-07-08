@@ -158,6 +158,7 @@ export default function Login() {
       <Button variant="outlined" onClick={recovery}>Recover Password</Button>
       <Button variant="outlined" onClick={verify}>Verify Account</Button>
       </span>
+      <br />
     </Grid>
     </>
   ):"";

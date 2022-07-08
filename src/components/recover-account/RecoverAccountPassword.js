@@ -81,6 +81,14 @@ export default function RecoverAccountPassword() {
     resetConfirmPass();
     resetEmail();
   };
+
+  const failStrengthPass = (data) => {
+    setNewPassError(true);
+    setNewPassErrorMessage(errorMsg(data));
+    resetVerification();
+    resetConfirmPass();
+    resetEmail();
+  };
   const failConfirmPass = () => {
     setConfirmPassError(true);
     setConfirmPassErrorMessage("Password has to match");
@@ -166,6 +174,10 @@ export default function RecoverAccountPassword() {
             }
             if (res["status"]===2){
               failVerification();
+              return;
+            }
+            if (res["status"]===3){
+              failStrengthPass(res["userName"]);
               return;
             }else{
               dispatch(loginState(res["accessToken"]));

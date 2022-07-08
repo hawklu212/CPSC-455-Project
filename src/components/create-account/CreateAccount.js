@@ -39,6 +39,13 @@ export default function CreateAccount() {
     setPassErrorMessage(errorMsg("Password"));
     setUserErrorMessage("");
   };
+
+  const failStrengthPass=(data)=>{
+    setPassError(true);
+    setUserError(false);
+    setPassErrorMessage(data);
+    setUserErrorMessage("");
+  };
   const failUser = () => {
     setUserError(true);
     setPassError(false);
@@ -112,6 +119,9 @@ export default function CreateAccount() {
               setPassErrorMessage("");
               setUserError(true);
               setUserErrorMessage("Email already exist");
+            }
+            if(data["status"]===3){
+              failStrengthPass(data["userName"]);
             }
              else if(data["status"]===0){
                dispatch(loginState(email));

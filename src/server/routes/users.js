@@ -2,8 +2,22 @@ var express = require("express");
 var router = express.Router();
 var mongoose = require('mongoose');
 var nodemailer = require('nodemailer');
+var passwordValidator = require('password-validator');
 var {validate} = require("email-validator");
 const { v4: uuidv4 } = require('uuid');
+
+/*password req*/
+// Create a schema
+var passSchema = new passwordValidator();
+
+// Add properties to it
+passSchema
+.is().min(12)                                    // Minimum length 8
+.is().max(100)                                  // Maximum length 100
+.has().uppercase()                              // Must have uppercase letters
+.has().lowercase()                              // Must have lowercase letters
+.has().digits(1)                                // Must have at least 1 digits
+  
 
 
 var transporter = nodemailer.createTransport({
@@ -136,7 +150,7 @@ router.put('/', function(req, res, next) {
         return;
       }) 
 
-/* initial signup.js signupCurl error 1:email aready exists, error 2:email is not valid*/
+/* initial signup.js signupCurl error 1:email aready exists, error 2:email is not valid, error 3: password too weak*/
 router.post('/', function(req, res, next) {
     let mail=req.body["email"];
     var LoginModel = mongoose.model('LoginModel', loginSchema );
@@ -146,6 +160,11 @@ router.post('/', function(req, res, next) {
             return;
         }
         if (arr.length==0){
+            let passCheck=passSchema.validate(req.body[pass], { details: true });
+                    if (passCheck.length!==0){
+                        res.send(getReturnHelper(3,passCheck[0]["message"],""));
+                        return;
+                    }
             let uuid=uuidv4();
             const test = new LoginModel({ email:mail,userName: req.body[user],userPass:req.body[pass],accessToken:`${uuid}`,verified:false});
             test.save().then(stuff=>{
@@ -239,7 +258,7 @@ router.post('/verify', function(req, res, next) {
     res.send({"error":error})});
         return;
       })
-
+/*reset password. Error 1:email not found, Error 2:verification code wrong, Error 3:password too weak*/
 router.put('/recovery', function(req, res, next) {
         let ver=req.body[verificationCode];
         let mail=req.body[email];
@@ -247,6 +266,11 @@ router.put('/recovery', function(req, res, next) {
         LoginModel.find({email:mail}).then((arr)=>{
             if (arr.length!==0){
                 if (arr[0]["accessToken"]===ver){
+                    let passCheck=passSchema.validate(password, { details: true });
+                    if (passCheck.length!==0){
+                        res.send(getReturnHelper(3,passCheck[0]["message"],""));
+                        return;
+                    }
                     LoginModel.findOneAndUpdate({email:mail},{[pass]:password},{new: true}).then((newStuff)=>{
                     res.cookie("session_id", `${newStuff["accessToken"]}`).send(getReturnHelper(0,mail,newStuff["accessToken"]));
                 }).catch((error)=>{
