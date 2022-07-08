@@ -3,15 +3,15 @@
 **Project Progress after Workshop 1 **
 First step: Brainstorm some ideas for the first lab. In Lab 1, we will finalise groups, and discuss project ideas. By Lab 2, you should have selected a project topic.
 
-Project Requirements: Must be completed with your group by Workshop 2. (Will be graded in Design Review.) 
+Project Requirements: Must be completed with your group by Workshop 2. (Will be graded in Design Review.)
 
 Let TAs know who your group members are (we will do some icebreaker exercises today)
 
-Must have a repo in github which all group members can access and send us the link on slack. (See instructions “How to hand in” below.) 
+Must have a repo in github which all group members can access and send us the link on slack. (See instructions “How to hand in” below.)
 
 In order to create a repo, you will need to decide on a project name
 
-Project Description: Write 3-5 sentences on your project topic. (try to address all points below) 
+Project Description: Write 3-5 sentences on your project topic. (try to address all points below)
 
 **Appname**
 
@@ -42,7 +42,8 @@ With pre-saved locations individuals will more rapidly be able to input start po
 **What is some additional functionality you can add/remove based on time constraints? **
 
 # Project Task Requirements
-● Project task requirements: 
+
+● Project task requirements:
 
 **3-5 minimal requirements (will definitely complete)**
 
@@ -58,7 +59,7 @@ With pre-saved locations individuals will more rapidly be able to input start po
 
 -Rank them by “difficulty”
 
-**3-7 "standard" requirements (will most likely complete)** 
+**3-7 "standard" requirements (will most likely complete)**
 
 -Give user an elevation/distance profile to view
 
@@ -68,7 +69,7 @@ With pre-saved locations individuals will more rapidly be able to input start po
 
 -ability to compare between routes side by side
 
-**2-3 stretch requirements (plan to complete at least 1!)** 
+**2-3 stretch requirements (plan to complete at least 1!)**
 
 -See about implementing a routing algorithm
 
@@ -82,7 +83,7 @@ With pre-saved locations individuals will more rapidly be able to input start po
 
 -Add “use my location”, both as a start/end point, but also when initialising the map view
 
--Pick 2 of your minimal requirements and break each of them down into ~2-5 smaller tasks! 
+-Pick 2 of your minimal requirements and break each of them down into ~2-5 smaller tasks!
 
 # Task Breakdown
 

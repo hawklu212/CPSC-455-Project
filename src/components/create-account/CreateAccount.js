@@ -2,47 +2,60 @@ import { Grid, Typography, Button, Divider } from "@mui/material";
 import "../../components-styling/colours.css";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState,useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { loginState } from "../../actions";
 import { signUpCurl } from "../../async-functions/async";
+import { getCookieValidationCurl } from "../../async-functions/async";
 
-var userName="";
-var userPass="";
+var userName = "";
+var userPass = "";
 export default function CreateAccount() {
   const navigate = useNavigate();
+  const loginUser=useSelector(state=>state.loginState);
   const [userError,setUserError]=useState(false);
   const [passError,setPassError]=useState(false);
   const [userErrorMessage,setUserErrorMessage]=useState("");
   const [passErrorMessage,setPassErrorMessage]=useState("");
   const dispatch=useDispatch();
   let errorMsg =data =>{return `Missing ${data}`};
+  useEffect(() => {
+    getCookieValidationCurl().then(res=>{
+      if (res.status===200){
+        dispatch(loginState(""));
+        navigate("../search");
+      }else{
+        dispatch(loginState("NoUser"));
+      }
+    }).catch((error)=>{
+      console.log(error);
+    });
+  },[]);
   const failPass=()=>{
     setPassError(true);
     setUserError(false);
     setPassErrorMessage(errorMsg("Password"));
-    setUserErrorMessage("");  
+    setUserErrorMessage("");
   };
-  const failUser=()=>{
+  const failUser = () => {
     setUserError(true);
-            setPassError(false);
-            setPassErrorMessage("");
-            setUserErrorMessage(errorMsg("Username"));
+    setPassError(false);
+    setPassErrorMessage("");
+    setUserErrorMessage(errorMsg("Username"));
   };
-  const failBoth=()=>{
+  const failBoth = () => {
     setUserError(true);
-            setPassError(true);
-            setPassErrorMessage(errorMsg("Password"));
-            setUserErrorMessage(errorMsg("Username"));
+    setPassError(true);
+    setPassErrorMessage(errorMsg("Password"));
+    setUserErrorMessage(errorMsg("Username"));
   };
 
-
-  const signUpFunc=()=>{
+  const signUpFunc = () => {
     // TODO: create account in database
     navigate("/search");
   };
 
-  return (
+  return loginUser!==""?(
     <>
     <Grid
       className="yellow-2"
@@ -86,10 +99,12 @@ export default function CreateAccount() {
                setUserErrorMessage("Username already exist");
              }
              else if(data["status"]===0){
-               dispatch(loginState(data["userName"]));
+               dispatch(loginState(data["accessToken"]));
                signUpFunc();
              }
-             });
+             }).catch((error)=>{
+              console.log(error);
+            });
            }
 
         }}>
@@ -98,5 +113,5 @@ export default function CreateAccount() {
       </span>
     </Grid>
     </>
-  );
+  ):"";
 }

@@ -4,41 +4,54 @@ import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Navigation from "../Navigation";
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { loginCurl } from "../../async-functions/async";
 import { loginState } from "../../actions";
-
+import { getCookieValidationCurl } from "../../async-functions/async";
 var userName="";
 var userPass="";
-
 export default function Login() {
   const dispatch=useDispatch();
+  const loginUser=useSelector(state=>state.loginState);
   const navigate = useNavigate();
-  const [userError,setUserError]=useState(false);
-  const [passError,setPassError]=useState(false);
-  const [userErrorMessage,setUserErrorMessage]=useState("");
-  const [passErrorMessage,setPassErrorMessage]=useState("");
-  let errorMsg =data =>{return `Missing ${data}`};
-  const failPass=()=>{
+  const [userError, setUserError] = useState(false);
+  const [passError, setPassError] = useState(false);
+  const [userErrorMessage, setUserErrorMessage] = useState("");
+  const [passErrorMessage, setPassErrorMessage] = useState("");
+  let errorMsg = (data) => {
+    return `Missing ${data}`;
+  };
+  const failPass = () => {
     setPassError(true);
     setUserError(false);
     setPassErrorMessage(errorMsg("Password"));
     setUserErrorMessage("");  
   }
-  
-  const failUser=()=>{
+  useEffect(() => {
+      getCookieValidationCurl().then(res=>{
+        if (res.status===200){
+          dispatch(loginState(""));
+          navigate("./search");
+        }else{
+          dispatch(loginState("NoUser"));
+        }
+      }).catch((error)=>{
+        console.log(error);
+      });
+    },[]);
+  const failUser = () => {
     setUserError(true);
-            setPassError(false);
-            setPassErrorMessage("");
-            setUserErrorMessage(errorMsg("Username"));
-  }
+    setPassError(false);
+    setPassErrorMessage("");
+    setUserErrorMessage(errorMsg("Username"));
+  };
 
-  const failBoth=()=>{
+  const failBoth = () => {
     setUserError(true);
-            setPassError(true);
-            setPassErrorMessage(errorMsg("Password"));
-            setUserErrorMessage(errorMsg("Username"));
-  }
+    setPassError(true);
+    setPassErrorMessage(errorMsg("Password"));
+    setUserErrorMessage(errorMsg("Username"));
+  };
 
   const loginAttempt = () => {
     //TODO: add authentication (maybe following this? https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications)
@@ -50,7 +63,7 @@ export default function Login() {
     navigate("../create-account");
   };
 
-  return (
+  return loginUser!==""?(
     <>
     <Grid
       className="yellow-2"
@@ -98,9 +111,11 @@ export default function Login() {
               setUserErrorMessage("");
             }
             else if(data["status"]===0){
-              dispatch(loginState(data["userName"]));
+              dispatch(loginState(data["accessToken"]));
               loginAttempt();
             }
+            }).catch((error)=>{
+              console.log(error);
             });
           }
           //loginAttempt();
@@ -115,5 +130,5 @@ export default function Login() {
       <Button variant="outlined" onClick={signUp}>Sign up</Button>
     </Grid>
     </>
-  );
+  ):"";
 }
