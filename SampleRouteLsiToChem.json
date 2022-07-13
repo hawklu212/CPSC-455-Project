@@ -1,0 +1,622 @@
+{
+	"routes": [
+		{
+			"bounds": {
+				"northeast": {
+					"lat": 49.26576300000001,
+					"lng": -123.2445244
+				},
+				"southwest": {
+					"lat": 49.26065999999999,
+					"lng": -123.2534552
+				}
+			},
+			"copyrights": "Map data ©2022 Google",
+			"legs": [
+				{
+					"distance": {
+						"text": "1.0 km",
+						"value": 1040
+					},
+					"duration": {
+						"text": "12 mins",
+						"value": 742
+					},
+					"end_address": "2036 Main Mall, Vancouver, BC V6T 1Z1, Canada",
+					"end_location": {
+						"lat": 49.26576300000001,
+						"lng": -123.2534552
+					},
+					"start_address": "2350 Health Sciences Mall, Vancouver, BC V6T 1Z3, Canada",
+					"start_location": {
+						"lat": 49.2623069,
+						"lng": -123.2445244
+					},
+					"steps": [
+						{
+							"distance": {
+								"text": "0.4 km",
+								"value": 376
+							},
+							"duration": {
+								"text": "5 mins",
+								"value": 273
+							},
+							"end_location": {
+								"lat": 49.26065999999999,
+								"lng": -123.2490415
+							},
+							"html_instructions": "Head <b>southwest</b> on <b>Agronomy Rd</b> toward <b>Health Sciences Mall</b>",
+							"polyline": {
+								"points": "mptkHfefoVBVNh@Nl@JZb@hBV^BHBf@F\\DRZnA^v@`A|DDP~@lDBF"
+							},
+							"start_location": {
+								"lat": 49.2623069,
+								"lng": -123.2445244
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "32 m",
+								"value": 32
+							},
+							"duration": {
+								"text": "1 min",
+								"value": 23
+							},
+							"end_location": {
+								"lat": 49.2607772,
+								"lng": -123.2493522
+							},
+							"html_instructions": "Turn <b>right</b> toward <b>Main Mall</b>",
+							"maneuver": "turn-right",
+							"polyline": {
+								"points": "cftkHnagoVIFCBA@?@?@Gj@"
+							},
+							"start_location": {
+								"lat": 49.26065999999999,
+								"lng": -123.2490415
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "0.5 km",
+								"value": 525
+							},
+							"duration": {
+								"text": "6 mins",
+								"value": 371
+							},
+							"end_location": {
+								"lat": 49.2649254,
+								"lng": -123.2527367
+							},
+							"html_instructions": "Turn <b>right</b> onto <b>Main Mall</b>",
+							"maneuver": "turn-right",
+							"polyline": {
+								"points": "{ftkHlcgoVoAdAMJ_@XaAp@cAt@}@t@WPUPKJa@`@KDGDyA`A]VOR_An@QJe@^k@d@UPg@^C?A?A?A?A?A?A@A?A@A@A@?@A?A@?@A@?@?@CF"
+							},
+							"start_location": {
+								"lat": 49.2607772,
+								"lng": -123.2493522
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "0.1 km",
+								"value": 107
+							},
+							"duration": {
+								"text": "1 min",
+								"value": 75
+							},
+							"end_location": {
+								"lat": 49.26576300000001,
+								"lng": -123.2534552
+							},
+							"html_instructions": "Slight <b>right</b> to stay on <b>Main Mall</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+							"maneuver": "turn-slight-right",
+							"polyline": {
+								"points": "y`ukHrxgoVe@^i@d@EBc@^k@d@"
+							},
+							"start_location": {
+								"lat": 49.2649254,
+								"lng": -123.2527367
+							},
+							"travel_mode": "WALKING"
+						}
+					],
+					"traffic_speed_entry": [],
+					"via_waypoint": []
+				}
+			],
+			"overview_polyline": {
+				"points": "mptkHfefoVR`AZhAb@hBV^Fp@Lp@ZnA^v@fAnEbAtDOL?BGj@oAdAm@d@eCfBwBdBm@f@aBfA]VORqAz@oCvBG?KBILCHoAdAuAhA"
+			},
+			"summary": "Agronomy Rd and Main Mall",
+			"warnings": [
+				"Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+			],
+			"waypoint_order": []
+		},
+		{
+			"bounds": {
+				"northeast": {
+					"lat": 49.26576300000001,
+					"lng": -123.2445244
+				},
+				"southwest": {
+					"lat": 49.2616875,
+					"lng": -123.2534552
+				}
+			},
+			"copyrights": "Map data ©2022 Google",
+			"legs": [
+				{
+					"distance": {
+						"text": "1.0 km",
+						"value": 1026
+					},
+					"duration": {
+						"text": "12 mins",
+						"value": 734
+					},
+					"end_address": "2036 Main Mall, Vancouver, BC V6T 1Z1, Canada",
+					"end_location": {
+						"lat": 49.26576300000001,
+						"lng": -123.2534552
+					},
+					"start_address": "2350 Health Sciences Mall, Vancouver, BC V6T 1Z3, Canada",
+					"start_location": {
+						"lat": 49.2623069,
+						"lng": -123.2445244
+					},
+					"steps": [
+						{
+							"distance": {
+								"text": "0.2 km",
+								"value": 150
+							},
+							"duration": {
+								"text": "2 mins",
+								"value": 110
+							},
+							"end_location": {
+								"lat": 49.2616875,
+								"lng": -123.2463061
+							},
+							"html_instructions": "Head <b>southwest</b> on <b>Agronomy Rd</b> toward <b>Health Sciences Mall</b>",
+							"polyline": {
+								"points": "mptkHfefoVBVNh@Nl@JZb@hBV^BHBf@F\\"
+							},
+							"start_location": {
+								"lat": 49.2623069,
+								"lng": -123.2445244
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "83 m",
+								"value": 83
+							},
+							"duration": {
+								"text": "1 min",
+								"value": 61
+							},
+							"end_location": {
+								"lat": 49.2622429,
+								"lng": -123.2468513
+							},
+							"html_instructions": "Turn <b>right</b> toward <b>E Mall N</b>",
+							"maneuver": "turn-right",
+							"polyline": {
+								"points": "qltkHlpfoVwAjA?AKVIH"
+							},
+							"start_location": {
+								"lat": 49.2616875,
+								"lng": -123.2463061
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "49 m",
+								"value": 49
+							},
+							"duration": {
+								"text": "1 min",
+								"value": 36
+							},
+							"end_location": {
+								"lat": 49.262072,
+								"lng": -123.2473389
+							},
+							"html_instructions": "Turn <b>left</b> toward <b>E Mall N</b>",
+							"maneuver": "turn-left",
+							"polyline": {
+								"points": "_ptkHxsfoVZpADN"
+							},
+							"start_location": {
+								"lat": 49.2622429,
+								"lng": -123.2468513
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "0.2 km",
+								"value": 218
+							},
+							"duration": {
+								"text": "2 mins",
+								"value": 149
+							},
+							"end_location": {
+								"lat": 49.2637042,
+								"lng": -123.2489552
+							},
+							"html_instructions": "Turn <b>right</b> onto <b>E Mall N</b>",
+							"maneuver": "turn-right",
+							"polyline": {
+								"points": "}ntkHzvfoV{@p@IFGBYTKT_BjA_@Z_BnAL`@"
+							},
+							"start_location": {
+								"lat": 49.262072,
+								"lng": -123.2473389
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "56 m",
+								"value": 56
+							},
+							"duration": {
+								"text": "1 min",
+								"value": 42
+							},
+							"end_location": {
+								"lat": 49.2635485,
+								"lng": -123.249575
+							},
+							"html_instructions": "Turn <b>left</b> at <b>Hospital Ln</b>",
+							"maneuver": "turn-left",
+							"polyline": {
+								"points": "cytkH~`goVF\\H\\Ll@BDEJ"
+							},
+							"start_location": {
+								"lat": 49.2637042,
+								"lng": -123.2489552
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "76 m",
+								"value": 76
+							},
+							"duration": {
+								"text": "1 min",
+								"value": 56
+							},
+							"end_location": {
+								"lat": 49.26377249999999,
+								"lng": -123.250363
+							},
+							"html_instructions": "Turn <b>right</b> toward <b>Main Mall</b>",
+							"maneuver": "turn-right",
+							"polyline": {
+								"points": "extkHzdgoVUNMRO`@Id@FTHX"
+							},
+							"start_location": {
+								"lat": 49.2635485,
+								"lng": -123.249575
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "92 m",
+								"value": 92
+							},
+							"duration": {
+								"text": "1 min",
+								"value": 72
+							},
+							"end_location": {
+								"lat": 49.2633974,
+								"lng": -123.2514755
+							},
+							"html_instructions": "Continue straight",
+							"maneuver": "straight",
+							"polyline": {
+								"points": "qytkHvigoV@Bj@bCZvA"
+							},
+							"start_location": {
+								"lat": 49.26377249999999,
+								"lng": -123.250363
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "0.2 km",
+								"value": 195
+							},
+							"duration": {
+								"text": "2 mins",
+								"value": 133
+							},
+							"end_location": {
+								"lat": 49.2649254,
+								"lng": -123.2527367
+							},
+							"html_instructions": "Turn <b>right</b> onto <b>Main Mall</b>",
+							"maneuver": "turn-right",
+							"polyline": {
+								"points": "gwtkHvpgoV]VOR_An@QJe@^k@d@UPg@^C?A?A?A?A?A?A@A?A@A@A@?@A?A@?@A@?@?@CF"
+							},
+							"start_location": {
+								"lat": 49.2633974,
+								"lng": -123.2514755
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "0.1 km",
+								"value": 107
+							},
+							"duration": {
+								"text": "1 min",
+								"value": 75
+							},
+							"end_location": {
+								"lat": 49.26576300000001,
+								"lng": -123.2534552
+							},
+							"html_instructions": "Slight <b>right</b> to stay on <b>Main Mall</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+							"maneuver": "turn-slight-right",
+							"polyline": {
+								"points": "y`ukHrxgoVe@^i@d@EBc@^k@d@"
+							},
+							"start_location": {
+								"lat": 49.2649254,
+								"lng": -123.2527367
+							},
+							"travel_mode": "WALKING"
+						}
+					],
+					"traffic_speed_entry": [],
+					"via_waypoint": []
+				}
+			],
+			"overview_polyline": {
+				"points": "mptkHfefoVR`AZhAb@hBV^Fp@F\\wAjAKTIHZpADN{@p@QJYTKT_CfB_BnAL`@Pz@Pr@EJUN]t@Id@FTJ\\fAzE]VORqAz@qAdA}@p@E?E?E@IJELyBhBk@d@"
+			},
+			"summary": "Main Mall",
+			"warnings": [
+				"Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+			],
+			"waypoint_order": []
+		},
+		{
+			"bounds": {
+				"northeast": {
+					"lat": 49.26576300000001,
+					"lng": -123.2445244
+				},
+				"southwest": {
+					"lat": 49.26065999999999,
+					"lng": -123.2534552
+				}
+			},
+			"copyrights": "Map data ©2022 Google",
+			"legs": [
+				{
+					"distance": {
+						"text": "1.1 km",
+						"value": 1059
+					},
+					"duration": {
+						"text": "13 mins",
+						"value": 755
+					},
+					"end_address": "2036 Main Mall, Vancouver, BC V6T 1Z1, Canada",
+					"end_location": {
+						"lat": 49.26576300000001,
+						"lng": -123.2534552
+					},
+					"start_address": "2350 Health Sciences Mall, Vancouver, BC V6T 1Z3, Canada",
+					"start_location": {
+						"lat": 49.2623069,
+						"lng": -123.2445244
+					},
+					"steps": [
+						{
+							"distance": {
+								"text": "0.4 km",
+								"value": 376
+							},
+							"duration": {
+								"text": "5 mins",
+								"value": 273
+							},
+							"end_location": {
+								"lat": 49.26065999999999,
+								"lng": -123.2490415
+							},
+							"html_instructions": "Head <b>southwest</b> on <b>Agronomy Rd</b> toward <b>Health Sciences Mall</b>",
+							"polyline": {
+								"points": "mptkHfefoVBVNh@Nl@JZb@hBV^BHBf@F\\DRZnA^v@`A|DDP~@lDBF"
+							},
+							"start_location": {
+								"lat": 49.2623069,
+								"lng": -123.2445244
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "32 m",
+								"value": 32
+							},
+							"duration": {
+								"text": "1 min",
+								"value": 23
+							},
+							"end_location": {
+								"lat": 49.2607772,
+								"lng": -123.2493522
+							},
+							"html_instructions": "Turn <b>right</b>",
+							"maneuver": "turn-right",
+							"polyline": {
+								"points": "cftkHnagoVIFCBA@?@?@Gj@"
+							},
+							"start_location": {
+								"lat": 49.26065999999999,
+								"lng": -123.2490415
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "26 m",
+								"value": 26
+							},
+							"duration": {
+								"text": "1 min",
+								"value": 19
+							},
+							"end_location": {
+								"lat": 49.2608301,
+								"lng": -123.2496971
+							},
+							"html_instructions": "Slight <b>left</b> at <b>Main Mall</b>",
+							"maneuver": "turn-slight-left",
+							"polyline": {
+								"points": "{ftkHlcgoVIdA"
+							},
+							"start_location": {
+								"lat": 49.2607772,
+								"lng": -123.2493522
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "0.4 km",
+								"value": 377
+							},
+							"duration": {
+								"text": "5 mins",
+								"value": 270
+							},
+							"end_location": {
+								"lat": 49.263815,
+								"lng": -123.2521456
+							},
+							"html_instructions": "Turn <b>right</b>",
+							"maneuver": "turn-right",
+							"polyline": {
+								"points": "egtkHregoVaAr@w@j@w@l@cAv@s@h@MLq@h@GF]VaBjASP[VKHg@`@"
+							},
+							"start_location": {
+								"lat": 49.2608301,
+								"lng": -123.2496971
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "27 m",
+								"value": 27
+							},
+							"duration": {
+								"text": "1 min",
+								"value": 18
+							},
+							"end_location": {
+								"lat": 49.2640416,
+								"lng": -123.2520026
+							},
+							"html_instructions": "Turn <b>right</b> toward <b>Main Mall</b>",
+							"maneuver": "turn-right",
+							"polyline": {
+								"points": "{ytkH|tgoVk@]"
+							},
+							"start_location": {
+								"lat": 49.263815,
+								"lng": -123.2521456
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "0.1 km",
+								"value": 114
+							},
+							"duration": {
+								"text": "1 min",
+								"value": 77
+							},
+							"end_location": {
+								"lat": 49.2649254,
+								"lng": -123.2527367
+							},
+							"html_instructions": "Turn <b>left</b> onto <b>Main Mall</b>",
+							"maneuver": "turn-left",
+							"polyline": {
+								"points": "g{tkH~sgoVe@^k@d@UPg@^C?A?A?A?A?A?A@A?A@A@A@?@A?A@?@A@?@?@CF"
+							},
+							"start_location": {
+								"lat": 49.2640416,
+								"lng": -123.2520026
+							},
+							"travel_mode": "WALKING"
+						},
+						{
+							"distance": {
+								"text": "0.1 km",
+								"value": 107
+							},
+							"duration": {
+								"text": "1 min",
+								"value": 75
+							},
+							"end_location": {
+								"lat": 49.26576300000001,
+								"lng": -123.2534552
+							},
+							"html_instructions": "Slight <b>right</b> to stay on <b>Main Mall</b><div style=\"font-size:0.9em\">Destination will be on the right</div>",
+							"maneuver": "turn-slight-right",
+							"polyline": {
+								"points": "y`ukHrxgoVe@^i@d@EBc@^k@d@"
+							},
+							"start_location": {
+								"lat": 49.2649254,
+								"lng": -123.2527367
+							},
+							"travel_mode": "WALKING"
+						}
+					],
+					"traffic_speed_entry": [],
+					"via_waypoint": []
+				}
+			],
+			"overview_polyline": {
+				"points": "mptkHfefoVR`AZhAb@hBV^Fp@Lp@ZnA^v@fAnEbAtDOLQtBuFdE{BhBoDlCs@j@k@]e@^aAv@g@^C?C?A?E@EBGLCFe@^o@h@oAdA"
+			},
+			"summary": "Agronomy Rd",
+			"warnings": [
+				"Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+			],
+			"waypoint_order": []
+		}
+	]
+}
