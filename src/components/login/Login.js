@@ -2,14 +2,15 @@ import { Grid, Typography, Button, Divider } from "@mui/material";
 import "../../components-styling/colours.css";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import Navigation from "../Navigation";
+// import Navigation from "../Navigation";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useEffect, useState } from "react";
 import { loginCurl } from "../../async-functions/async";
 import { loginState } from "../../actions";
 import { getCookieValidationCurl } from "../../async-functions/async";
-var userName="";
-var userPass="";
+import {validate} from "email-validator";
+let email="";
+let userPass="";
 export default function Login() {
   const dispatch=useDispatch();
   const loginUser=useSelector(state=>state.loginState);
@@ -18,8 +19,8 @@ export default function Login() {
   const [passError, setPassError] = useState(false);
   const [userErrorMessage, setUserErrorMessage] = useState("");
   const [passErrorMessage, setPassErrorMessage] = useState("");
-  let errorMsg = (data) => {
-    return `Missing ${data}`;
+  const errorMsg = (data) => {
+    return `Missing or Wrong ${data}`;
   };
   const failPass = () => {
     setPassError(true);
@@ -54,13 +55,29 @@ export default function Login() {
   };
 
   const loginAttempt = () => {
-    //TODO: add authentication (maybe following this? https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications)
+    // TODO: add authentication (maybe following this? https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications)
     // if login attempt succeeds, then:
+    email="";
+    userPass="";
     navigate("../search");
   };
   const signUp = () => {
-    //NTH: maybe carry over username if it is already entered
+    // NTH: maybe carry over username if it is already entered
+    email="";
+    userPass="";
     navigate("../create-account");
+  };
+
+  const recovery = () => {
+    email="";
+    userPass="";
+    navigate("../recovery");
+  };
+
+  const verify = () => {
+    email="";
+    userPass="";
+    navigate("../verify");
   };
 
   return loginUser!==""?(
@@ -79,8 +96,8 @@ export default function Login() {
       <br />
       <Typography variant="h4">Welcome Back!</Typography>
       <br />
-      <TextField error={userError} helperText={userErrorMessage} required variant="filled" label="Username" onChange={(event)=>
-      {userName=event.target.value;
+      <TextField error={userError} helperText={userErrorMessage} required variant="filled" label="Email" onChange={(event)=>
+      {email=event.target.value;
       }}></TextField>
       <br />
       <TextField error={passError} helperText={passErrorMessage} required label="Password" type="password" onChange={(event)=>
@@ -89,28 +106,34 @@ export default function Login() {
       <br />
       <span>
         <Button variant="outlined" onClick={()=>{
-          if (userPass==="" && userName===""){
+          if (userPass==="" && email===""){
            failBoth();          
           }
           else if (userPass===""){
             failPass(); 
           }
-          else if (userName===""){
+          else if (email==="" || !(validate(email))){
             failUser();
           }else{
-            loginCurl({"userName":userName,"userPass":userPass}).then(data=>{
+            loginCurl({email:email,"userPass":userPass}).then(data=>{
             if(data["status"]===1){
               setPassError(false);
               setPassErrorMessage("");
               setUserError(true);
-              setUserErrorMessage("Username does not exist");
+              setUserErrorMessage("Username/Email does not exist");
             }else if(data["status"]===2){
               setPassError(true);
-              setPassErrorMessage("Password is Incorrect");
-              setUserError(false);
+              setPassErrorMessage("Password or Username is Incorrect");
+              setUserError(true);
               setUserErrorMessage("");
+            }else if(data["status"]===3){
+              setPassError(false);
+              setPassErrorMessage("");
+              setUserError(true);
+              setUserErrorMessage("Username/Email not Verified");
             }
             else if(data["status"]===0){
+              console.log("in stat 0");
               dispatch(loginState(data["accessToken"]));
               loginAttempt();
             }
@@ -118,16 +141,24 @@ export default function Login() {
               console.log(error);
             });
           }
-          //loginAttempt();
+          // loginAttempt();
         }}>Sign in</Button>
       </span>
       <br />
       <br />
       <br />
       <Divider></Divider>
-      <Typography variant="h6">Don't have an account? Sign up here!</Typography>
+      <Typography variant="h6">Don&apos;t have an account? Sign up here!</Typography>
       <br />
       <Button variant="outlined" onClick={signUp}>Sign up</Button>
+      <br />
+      <Typography variant="h6">Forgot password or need to verify an account?</Typography>
+      <br />
+      <span>
+      <Button variant="outlined" onClick={recovery}>Recover Password</Button>
+      <Button variant="outlined" onClick={verify}>Verify Account</Button>
+      </span>
+      <br />
     </Grid>
     </>
   ):"";
