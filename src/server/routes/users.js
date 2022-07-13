@@ -262,13 +262,18 @@ router.post('/verify', function(req, res, next) {
     res.send({"error":error})});
         return;
       })
-/*reset password, recoveryCurl , Error 1:email not found, Error 2:verification code wrong, Error 3:password too weak*/
+/*reset password, recoveryCurl , Error 1:email not found, Error 2:verification code wrong, Error 3:password too weak
+Error 4: not verified yet*/
 router.put('/recovery', function(req, res, next) {
         let ver=req.body[verificationCode];
         let mail=req.body[email];
         let password=req.body[pass];
         LoginModel.find({email:mail}).then((arr)=>{
             if (arr.length!==0){
+                if (arr[0]["verified"]===false){
+                    res.send(getErrorHelper(4,"must verify account first",""));
+                    return;
+                }
                 if (arr[0]["accessToken"]===ver){
                     let passCheck=passSchema.validate(password, { details: true });
                     if (passCheck.length!==0){

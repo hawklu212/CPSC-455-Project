@@ -26,7 +26,7 @@ export default function RecoverAccountPassword() {
   const [newPassErrorMessage,setNewPassErrorMessage]=useState("");
   const [confirmPassErrorMessage,setConfirmPassErrorMessage]=useState("");
   const dispatch=useDispatch();
-  const errorMsg =data =>{return `Missing ${data}`};
+  const errorMsg =data =>{return `Missing or Wrong ${data}`};
   useEffect(() => {
     getCookieValidationCurl().then(res=>{
       if (res.status===200){
@@ -63,6 +63,13 @@ export default function RecoverAccountPassword() {
   const failVerification=()=>{
     setVerificationError(true);
     setVerificationErrorMessage(errorMsg("Code"));
+    resetEmail();
+    resetConfirmPass();
+    resetNewPass();
+  };
+  const failNotVerified=(data)=>{
+    setVerificationError(true);
+    setVerificationErrorMessage(data);
     resetEmail();
     resetConfirmPass();
     resetNewPass();
@@ -178,6 +185,10 @@ export default function RecoverAccountPassword() {
             }
             if (res["status"]===3){
               failStrengthPass(res["error"]);
+              return;
+            }
+            if (res["status"]===4){
+              failNotVerified(res["error"]);
               return;
             }else{
               dispatch(loginState(res["accessToken"]));
