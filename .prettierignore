@@ -25,3 +25,6 @@ yarn-error.log*
 /apiKey
 
 .github/workflows
+
+package-lock.json
+package.json
