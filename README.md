@@ -33,8 +33,6 @@ Favourite routes/locations
 
 User profiles
 
-Previously calculated routes for faster routing of novel routes
-
 **What will users be able to do with this data?**
 
 With pre-saved locations individuals will more rapidly be able to input start points and destinations, as well as quickly pull up past routes that they may use frequently
@@ -47,69 +45,73 @@ With pre-saved locations individuals will more rapidly be able to input start po
 
 **3-5 minimal requirements (will definitely complete)**
 
--User account setup
+- User account setup
 
--Basic, intuitive UI
+- Basic, intuitive UI
 
--Enter source/destination locations
+- Enter source/destination locations
 
--Store/save locations/routes
+- Store/save locations/routes
 
--Retrieve routes from a maps API (Google or OpenStreetMaps)
+- Retrieve routes from a maps API (Google or OpenStreetMaps)
 
--Rank them by “difficulty”
+- Rank them by “difficulty”
 
 **3-7 "standard" requirements (will most likely complete)**
 
--Give user an elevation/distance profile to view
+- Give user an elevation/distance profile to view
 
--A method for allowing users to compare routes at a glance
+- A method for allowing users to compare routes at a glance
 
--ability to update path in database should map change
+- ~~ability to update path in database should map change~~
 
--ability to compare between routes side by side
+- implement email verification recover password
+
+- add per-request authentication via cookie
+
+- ability to compare between routes side by side
 
 **2-3 stretch requirements (plan to complete at least 1!)**
 
--See about implementing a routing algorithm
+- ~~See about implementing a routing algorithm~~
 
--Users can report construction/obstacles along route, and the app can incorporate this information
+- ~~Users can report construction/obstacles along route, and the app can incorporate this information~~
 
--Turn by turn navigation?
+- ~~Turn by turn navigation~~
 
--ability to simulate the route
+- ~~ability to simulate the route~~
 
--Give users the option to rate things to prioritise for them (slope, elevation, distance) - save preferences to profile?
+- allow maps to display alternative routes by clicking cards
 
--Add “use my location”, both as a start/end point, but also when initialising the map view
+- Give users the option to rate things to prioritise for them (slope, elevation, distance) - save preferences to profile?
 
--Pick 2 of your minimal requirements and break each of them down into ~2-5 smaller tasks!
+- Add “use my location”, both as a start/end point, but also when initialising the map view
+
+- Pick 2 of your minimal requirements and break each of them down into ~2-5 smaller tasks!
 
 # Task Breakdown
 
 **User setup**
 
--Sign up with username and password
+- Sign up with username and password
 
--Log in based on the above following signup
+- Log in based on the above following signup
 
--Set up ability to change credentials, ie. password
-
--Store credentials in database
+- Store credentials in database
 
 **User Input/Output UI**
 
--Have search boxes for start/destination locations
+- Have search boxes for start/destination locations
 
--Smart fill?
+- Smart fill?
 
--Embed google maps into page
+- Embed google maps into page
 
--Display selected locations on map interface
+- Display selected locations on map interface
 
--Display route to user once calculated
+- Display route to user once calculated
 
--Store calculated route in database
+- Store calculated route in database
 
 Finally, draw 2-3 rough sketch prototypes of some key tasks of your app. Sketch these physically on paper and then scan and add to your repo.
 
