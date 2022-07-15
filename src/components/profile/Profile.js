@@ -85,7 +85,7 @@ export default function Login() {
     getCookieValidationCurl()
       .then((res) => {
         if (res.status === 200) {
-          dispatch(loginState("JustinJ"));
+          dispatch(loginState(""));
         } else {
           dispatch(loginState("NoUser"));
         }
@@ -121,7 +121,7 @@ export default function Login() {
         <Slider
           style={{ width: "25%" }}
           aria-label={"Max incline"}
-          defaultValue={5}
+          defaultValue={4}
           step={1}
           marks={marks}
           min={1}
