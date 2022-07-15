@@ -5,8 +5,8 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 import Inputs from "./InputDiv";
-import { Box, Button, Divider, Grid } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { Button, Divider, Grid } from "@mui/material";
+import { useDispatch } from "react-redux";
 import { addDirections } from "../../actions/addDirections";
 import { clearDirections } from "../../actions/clearDirections";
 import { APIKey } from "../../apiKey";
@@ -50,7 +50,7 @@ function MainMapComponent() {
   }, []);
 
   async function calculateRoute() {
-    let routeResults = await getRouteResults([
+    const routeResults = await getRouteResults([
       originRef.current.value,
       destRef.current.value,
     ]);
@@ -64,9 +64,10 @@ function MainMapComponent() {
       travelMode: google.maps.TravelMode.WALKING,
       provideRouteAlternatives: true,
     });
-    console.log(results.routes);
+
     const directionArray = [];
     for (let i = 0; i < results.routes.length; i++) {
+      // TODO: modify here to extract results from backend result
       const leg = results.routes[i];
       console.log(leg);
       directionArray.push({

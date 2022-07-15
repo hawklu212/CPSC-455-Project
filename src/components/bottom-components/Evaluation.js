@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 export default function Evaluations(props) {
   return (
     <span>
@@ -23,7 +24,7 @@ export default function Evaluations(props) {
   );
 }
 
-function auto_grow(referen) {
+function autoGrow(referen) {
   if (referen.current != null) {
     referen.current.style.height = "20px";
     referen.current.style.height = referen.current.scrollHeight + "px";

@@ -29,20 +29,20 @@ import { logoutCurl } from "../async-functions/async";
 
 export default function Navigation() {
   const navigate = useNavigate();
-  const logout=async ()=>{
-    try{
-    await logoutCurl();
-    }catch (e) {
+  const logout = async () => {
+    try {
+      await logoutCurl();
+    } catch (e) {
       console.error(e);
-  }
+    }
     navigate("../");
-  }
+  };
   const drawerState = useSelector((state) => state.drawerState);
-  //const [drawerState, setDrawerState] = useState(false);
+  // const [drawerState, setDrawerState] = useState(false);
   const loginState = useSelector((state) => state.loginState);
   const dispatch = useDispatch();
   const toggleDrawer = () => {
-    //setDrawerState(!drawerState);
+    // setDrawerState(!drawerState);
     dispatch(toggleDrawerState(drawerState));
   };
 
