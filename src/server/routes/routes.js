@@ -3,24 +3,25 @@ const {
   getElevationResults,
 } = require("../MapsClientService");
 const { calculateTotalElevation } = require("../RouteProcessingService");
-var express = require("express");
+const express = require("express");
 const {
   elevation,
 } = require("@googlemaps/google-maps-services-js/dist/elevation");
-var router = express.Router();
+// eslint-disable-next-line new-cap
+const router = express.Router();
 
 /* GET routes listing. */
 router.get("/", async function (req, res, next) {
-  let routeParams = req.query;
+  const routeParams = req.query;
 
-  let orig = routeParams.orig;
-  let dest = routeParams.dest;
+  const orig = routeParams.orig;
+  const dest = routeParams.dest;
   try {
-    let directions = await getDirectionsResults(orig, dest, []);
+    const directions = await getDirectionsResults(orig, dest, []);
 
-    let routeResultsArray = [];
+    const routeResultsArray = [];
     for (const route of directions.data.routes) {
-      let leg = route.legs[0];
+      const leg = route.legs[0];
 
       let routeSummary = {
         mapBoundsData: route.bounds, // need this for maps Viewport
@@ -35,7 +36,7 @@ router.get("/", async function (req, res, next) {
         rating: "neutral", // replace with "happy" or "sad" somehow
         ranking: 0,
       };
-      let elevationResults = await getElevationResults(route);
+      const elevationResults = await getElevationResults(route);
 
       calculateTotalElevation(routeSummary, elevationResults);
 
