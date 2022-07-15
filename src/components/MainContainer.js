@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 export default function MainContainer() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const loginUser = useSelector((state) => statte.loginState);
+  const loginUser = useSelector((state) => state.loginState);
   useEffect(() => {
     if (loginUser !== "") {
       setInitialCookieCurl({ userName: loginUser })
