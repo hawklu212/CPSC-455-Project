@@ -5,6 +5,7 @@ import Login from "./components/login/Login";
 import CreateAccount from "./components/create-account/CreateAccount";
 import VerifyAccount from "./components/verify-account/VerifyAccount";
 import RecoverAccountPassword from "./components/recover-account/RecoverAccountPassword";
+import Profile from "./components/profile/Profile";
 function App() {
   return (
     <Routes>
@@ -13,6 +14,7 @@ function App() {
       <Route path="/create-account" element={<CreateAccount />} />
       <Route path="/search" element={<MainContainer />} />
       <Route path="/recovery" element={<RecoverAccountPassword />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }
