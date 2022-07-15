@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 export default function Evaluations(props) {
   return (
     <span>
@@ -6,7 +7,7 @@ export default function Evaluations(props) {
         <textarea
           ref={props.ref1}
           onInput={() => {
-            auto_grow(props.ref1);
+            autoGrow(props.ref1);
           }}
         ></textarea>
       </h1>
@@ -15,7 +16,7 @@ export default function Evaluations(props) {
         <textarea
           ref={props.ref2}
           onInput={() => {
-            auto_grow(props.ref2);
+            autoGrow(props.ref2);
           }}
         ></textarea>
       </h1>
@@ -23,7 +24,7 @@ export default function Evaluations(props) {
   );
 }
 
-function auto_grow(referen) {
+function autoGrow(referen) {
   if (referen.current != null) {
     referen.current.style.height = "20px";
     referen.current.style.height = referen.current.scrollHeight + "px";

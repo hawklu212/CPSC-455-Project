@@ -36,9 +36,9 @@ export default function Details(props) {
   );
 }
 
-function auto_grow(referen) {
-  if (referen.current != null) {
-    referen.current.style.height = "20px";
-    referen.current.style.height = referen.current.scrollHeight + "px";
-  }
-}
+// function auto_grow(referen) {
+//   if (referen.current != null) {
+//     referen.current.style.height = "20px";
+//     referen.current.style.height = referen.current.scrollHeight + "px";
+//   }
+// }
