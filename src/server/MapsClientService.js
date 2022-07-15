@@ -21,6 +21,8 @@ const getDirectionsResults = async (orig, dest, waypoints) => {
 // Note: elevation API can consume multiple types. For now, let's either pass in
 // an address, or latitude and longitude
 const getElevationResults = async (route) => {
+  // TODO: change this after testing
+  const numberOfSamples = 10;
   // assuming we only have 1 leg for now, and we aren't using waypoints
   let legSteps = route.legs[0].steps;
 
@@ -30,13 +32,14 @@ const getElevationResults = async (route) => {
     let distanceOfStep = step.distance.value;
     // This would give a value in meters, not number of samples I believe?
     let suitableElevationSampleSize = distanceOfStep / 10; // to start, let's just do 1/10
+    let subSampleDistance = distanceOfStep
     let startLocation = [step.start_location.lat, step.start_location.lng];
     let endLocation = [step.end_location.lat, step.end_location.lng];
 
     let elevationRequest = {
       params: {
         path: [startLocation, endLocation],
-        samples: 10, // TODO: replace with ElevationSampleSize once done testing
+        samples: numberOfSamples, // TODO: replace with ElevationSampleSize once done testing
         key: APIKey.APIKey,
       },
       timeout: 1000,
