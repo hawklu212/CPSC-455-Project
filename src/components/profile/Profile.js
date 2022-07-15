@@ -43,7 +43,8 @@ const marks = [
   },
 ];
 
-export default function Login() {
+export default function Profile() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const loginUser = useSelector((state) => state.loginState);
   const [incline, setIncline] = useState(1);
@@ -87,7 +88,7 @@ export default function Login() {
         if (res.status === 200) {
           dispatch(loginState(res["userName"]));
         } else {
-          dispatch(loginState("NoUser"));
+          navigate("../");
         }
       })
       .catch((error) => {

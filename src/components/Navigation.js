@@ -37,6 +37,10 @@ export default function Navigation() {
     }
     navigate("../");
   };
+  const profileView = async () =>{
+    navigate("../profile");
+  };
+
   const drawerState = useSelector((state) => state.drawerState);
   // const [drawerState, setDrawerState] = useState(false);
   const loginState = useSelector((state) => state.loginState);
@@ -131,7 +135,7 @@ export default function Navigation() {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={profileView}>Profile</MenuItem>
           <MenuItem onClick={handleClose}>My Account</MenuItem>
           <MenuItem onClick={logout}>Logout</MenuItem>
         </Menu>
