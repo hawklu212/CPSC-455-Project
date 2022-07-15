@@ -32,7 +32,7 @@ const getElevationResults = async (route) => {
     let distanceOfStep = step.distance.value;
     // This would give a value in meters, not number of samples I believe?
     let suitableElevationSampleSize = distanceOfStep / 10; // to start, let's just do 1/10
-    let subSampleDistance = distanceOfStep
+    let subSampleDistance = distanceOfStep / numberOfSamples;
     let startLocation = [step.start_location.lat, step.start_location.lng];
     let endLocation = [step.end_location.lat, step.end_location.lng];
 
@@ -46,6 +46,8 @@ const getElevationResults = async (route) => {
     };
 
     let elevationData = await client.elevation(elevationRequest);
+
+    // TODO: call calculation for slope or for scoring here
     elevationData.data.results.forEach((coordinate) => {
       elevationDataArray.push(coordinate.elevation);
       console.log(elevationDataArray);
