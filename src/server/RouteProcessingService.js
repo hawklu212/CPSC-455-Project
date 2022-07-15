@@ -27,6 +27,7 @@ const calculateStepScore = async (elevationResults, elevationData, samplingDista
       inclineFactor = (userMass * samplingDistance * Math.tan(incline)) + (samplingDistance * rollingResistance);
     }
 
+    // We don't allow negatives for inclineFactor, so if negative set to zero
     if (inclineFactor < 0) {
       inclineFactor = 0;
     }

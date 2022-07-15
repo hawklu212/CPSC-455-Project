@@ -57,7 +57,6 @@ const getElevationResults = async (route) => {
     let emailAddress = "temp@gmail.com";
     let userProfile = ProfileModel.find(emailAddress);
 
-    // TODO: call calculation for slope or for scoring here
     // calculateStepScore - take in elevationResults, elevationData, subSampleDistance and userProfile
     // - return nothing, update score in elevationResults
     await calculateStepScore(elevationResults, elevationData, subSampleDistance, userProfile)
