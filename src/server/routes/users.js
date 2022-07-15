@@ -301,3 +301,5 @@ router.put('/recovery', function(req, res, next) {
           })
 
 module.exports = router;
+module.exports.valCookie=valCookie;
+module.exports.LoginModel=LoginModel;
