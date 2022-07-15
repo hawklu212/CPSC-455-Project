@@ -28,6 +28,7 @@ const getElevationResults = async (route) => {
 
   for (const step of legSteps) {
     let distanceOfStep = step.distance.value;
+    // This would give a value in meters, not number of samples I believe?
     let suitableElevationSampleSize = distanceOfStep / 10; // to start, let's just do 1/10
     let startLocation = [step.start_location.lat, step.start_location.lng];
     let endLocation = [step.end_location.lat, step.end_location.lng];
