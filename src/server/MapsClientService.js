@@ -54,7 +54,8 @@ const getElevationResults = async (route) => {
 
     let elevationData = await client.elevation(elevationRequest);
     // TODO: address how to find the individuals profile - email address?
-    let userProfile = ProfileModel.find();
+    let emailAddress = "temp@gmail.com";
+    let userProfile = ProfileModel.find(emailAddress);
 
     // TODO: call calculation for slope or for scoring here
     // calculateStepScore - take in elevationResults, elevationData, subSampleDistance and userProfile
