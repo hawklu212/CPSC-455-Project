@@ -85,7 +85,7 @@ export default function Login() {
     getCookieValidationCurl()
       .then((res) => {
         if (res.status === 200) {
-          dispatch(loginState(""));
+          dispatch(loginState(res["userName"]));
         } else {
           dispatch(loginState("NoUser"));
         }
