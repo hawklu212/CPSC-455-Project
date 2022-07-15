@@ -26,7 +26,12 @@ const getElevationResults = async (route) => {
   // assuming we only have 1 leg for now, and we aren't using waypoints
   let legSteps = route.legs[0].steps;
 
-  let elevationDataArray = [];
+  let elevationResults = {
+    elevationDataArray: [],
+    routeScore: 0,
+  }
+
+  //let elevationDataArray = [];
 
   for (const step of legSteps) {
     let distanceOfStep = step.distance.value;
@@ -49,12 +54,12 @@ const getElevationResults = async (route) => {
 
     // TODO: call calculation for slope or for scoring here
     elevationData.data.results.forEach((coordinate) => {
-      elevationDataArray.push(coordinate.elevation);
-      console.log(elevationDataArray);
+      elevationResults.elevationDataArray.push(coordinate.elevation);
+      console.log(elevationResults.elevationDataArray);
     });
   }
 
-  return elevationDataArray;
+  return elevationResults;
 };
 
 module.exports = { getDirectionsResults, getElevationResults };

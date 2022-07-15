@@ -38,7 +38,7 @@ router.get("/", async function (req, res, next) {
       };
       const elevationResults = await getElevationResults(route);
 
-      calculateTotalElevation(routeSummary, elevationResults);
+      calculateTotalElevation(routeSummary, elevationResults.elevationDataArray);
 
       // TODO: calculate steepest incline
       // TODO: assign rating
