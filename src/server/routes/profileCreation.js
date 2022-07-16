@@ -1,17 +1,17 @@
-var express = require("express");
-var router = express.Router();
-var mongoose = require('mongoose');
-var {valCookie} =require('./users');
-var {LoginModel} =require('./users');
+const express = require("express");
+const router = express.Router();
+const mongoose = require('mongoose');
+const {valCookie} =require('./users');
+const {LoginModel} =require('./users');
 
-var Schema = mongoose.Schema;
-var profileSchema = new Schema({
+const Schema = mongoose.Schema;
+const profileSchema = new Schema({
 email:String,
 maxIncline: Number,
 weight: Number,
 distancePreference: String
 });
-var ProfileModel = mongoose.model('ProfileModel', profileSchema );
+const ProfileModel = mongoose.model('ProfileModel', profileSchema );
 router.get('/',valCookie ,async function(req, res){
 let {cookies}=req;
 try{
@@ -38,9 +38,10 @@ router.put('/',valCookie ,async function(req, res){
     try{
     let individual= await LoginModel.find({accessToken:cookies.session_id});
     if (individual.length!==0){
+        console.log("found"+individual[0]);
         let findPref=await ProfileModel.find({email:individual[0]["email"]});
-        if (findPref.length==0){
-            newPref=new ProfileModel({email:individual[0]["email"],maxIncline:req.body["maxIncline"],weight:req.body["weight"],distancPreference:req.body["distancePreference"]});
+        if (findPref.length===0){
+            newPref=new ProfileModel({email:individual[0]["email"],maxIncline:req.body["maxIncline"],weight:req.body["weight"],distancePreference:req.body["distancePreference"]});
             await newPref.save();
             findPref=await ProfileModel.find({email:individual[0]["email"]});
             findPref=findPref[0]
@@ -58,4 +59,5 @@ router.put('/',valCookie ,async function(req, res){
         res.send({error:err});
     }
     })
-    
+
+module.exports = router;
