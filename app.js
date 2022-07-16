@@ -7,6 +7,7 @@ const cors = require("cors");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const routesRouter = require("./routes/routes");
+const profileCreationRouter = require("./routes/profileCreation");
 const mongoose = require("mongoose");
 
 const mongoDB = "mongodb://127.0.0.1/Test2";
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/routes", routesRouter);
+app.use("/profileCreation", profileCreationRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
