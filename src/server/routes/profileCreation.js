@@ -47,7 +47,7 @@ router.put('/',valCookie ,async function(req, res){
             findPref=findPref[0]
             res.send({email:findPref["email"],maxIncline:findPref["maxIncline"],weight:findPref["weight"],distancePreference:findPref["distancePreference"]})
         } else{
-            findPref=await ProfileModel.findOneAndUpdate({email:individual[0]["email"]},{maxIncline:req.body["maxIncline"],weight:req.body["weight"],distancPreference:req.body["distancePreference"]},{new:true});
+            findPref=await ProfileModel.findOneAndUpdate({email:individual[0]["email"]},{maxIncline:req.body["maxIncline"],weight:req.body["weight"],distancePreference:req.body["distancePreference"]},{new:true});
             res.send({email:findPref["email"],maxIncline:findPref["maxIncline"],weight:findPref["weight"],distancePreference:findPref["distancePreference"]})
         }
     } else{

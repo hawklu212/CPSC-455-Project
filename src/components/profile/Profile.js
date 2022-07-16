@@ -48,7 +48,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loginUser = useSelector((state) => state.loginState);
-  const [incline, setIncline] = useState(1);
+  const [incline, setIncline] = useState(4);
   const [weight, setWeight] = useState(0);
   const [priority, setPriority] = useState("");
   const [helperText, setHelperText] = useState("");
@@ -61,6 +61,7 @@ export default function Profile() {
   };
   const handlePriorityChange = (event) => {
     setPriority(event.target.value);
+    console.log(event.target.value);
     switch (event.target.value) {
       case "distance":
         setHelperText("I value shorter distances more.");
@@ -79,10 +80,9 @@ export default function Profile() {
       // email: loginUser? Not sure about this, @Hawk you might know more
       maxIncline: incline,
       weight: weight,
-      distancePreference: priority,
+      distancePreference: priority
     };
-    let ref= await putSetUserPreferenceCurl(profile);
-    
+    await putSetUserPreferenceCurl(profile);
   };
 
   useEffect(() => {
@@ -90,7 +90,6 @@ export default function Profile() {
       .then((res) => {
         if (res.status === 200) {
           res.json().then(jsonObj =>{
-            console.log(jsonObj);
             dispatch(loginState(jsonObj["userName"]));
             getUserPreferenceCurl();
           })
