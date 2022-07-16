@@ -35,6 +35,7 @@ router.get("/", async function (req, res, next) {
         steepestIncline: null,
         rating: "neutral", // replace with "happy" or "sad" somehow
         ranking: 0,
+        apiResult: directions.data,
       };
       const elevationResults = await getElevationResults(route);
 
