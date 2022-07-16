@@ -6,7 +6,11 @@ const calculateTotalElevation = (routeSummary, elevationResults) => {
 };
 
 const calculateStepScore = async (elevationResults, elevationData, samplingDistance, userProfile) => {
-  let userMass = userProfile.weight;
+  // set a default value for mass if not weight is indicated in user profile?
+  let userMass = 60;
+  if (!userProfile.weight) {
+    let userMass = userProfile.weight;
+  }
   // TODO: incorporate distancePref into the calculation
   let distancePref = userProfile.distancePreference;
   // TODO: use a better default rolling resistance
