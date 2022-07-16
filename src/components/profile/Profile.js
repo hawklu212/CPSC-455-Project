@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import Navigation from "../Navigation";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useEffect, useState } from "react";
-import { loginCurl } from "../../async-functions/async";
+import { getUserPreferenceCurl, loginCurl, putSetUserPreferenceCurl } from "../../async-functions/async";
 import { loginState } from "../../actions";
 import { getCookieValidationCurl } from "../../async-functions/async";
 import { validate } from "email-validator";
@@ -43,13 +43,14 @@ const marks = [
   },
 ];
 
+
 export default function Profile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loginUser = useSelector((state) => state.loginState);
-  const [incline, setIncline] = useState(1);
+  const [incline, setIncline] = useState(4);
   const [weight, setWeight] = useState(0);
-  const [priority, setPriority] = useState("");
+  const [priority, setPriority] = useState("distance");
   const [helperText, setHelperText] = useState("");
 
   const handleInclineChange = (event) => {
@@ -60,6 +61,7 @@ export default function Profile() {
   };
   const handlePriorityChange = (event) => {
     setPriority(event.target.value);
+    console.log(event.target.value);
     switch (event.target.value) {
       case "distance":
         setHelperText("I value shorter distances more.");
@@ -72,21 +74,25 @@ export default function Profile() {
     }
   };
 
-  const handleSave = () => {
+  const handleSave =async () => {
     // create preferences object
     const profile = {
       // email: loginUser? Not sure about this, @Hawk you might know more
-      incline: incline,
+      maxIncline: incline,
       weight: weight,
-      priority: priority,
+      distancePreference: priority
     };
+    await putSetUserPreferenceCurl(profile);
   };
 
   useEffect(() => {
     getCookieValidationCurl()
       .then((res) => {
         if (res.status === 200) {
-          dispatch(loginState(res["userName"]));
+          res.json().then(jsonObj =>{
+            dispatch(loginState(jsonObj["userName"]));
+            getUserPreferenceCurl();
+          })
         } else {
           navigate("../");
         }
@@ -137,6 +143,7 @@ export default function Profile() {
           // helperText={}
           variant="outlined"
           required
+          defaultValue={4}
           label="Weight (in kg)"
           type="number"
           onChange={handleWeightChange}
