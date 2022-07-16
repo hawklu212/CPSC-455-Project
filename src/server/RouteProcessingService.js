@@ -13,6 +13,7 @@ const calculateStepScore = async (elevationResults, elevationData, samplingDista
     userMass = userProfile.weight;
   }
   console.log("userMass is" + userMass);
+
   // TODO: incorporate distancePref into the calculation
   // let distancePref = userProfile.distancePreference;
   // TODO: use a better default rolling resistance
