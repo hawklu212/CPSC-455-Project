@@ -5,6 +5,7 @@ const nodemailer = require("nodemailer");
 const passwordValidator = require("password-validator");
 const { validate } = require("email-validator");
 const { v4: uuidv4 } = require("uuid");
+const { appPassword } = require("../appPassword");
 
 /* password req*/
 // Create a schema
@@ -28,7 +29,7 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "a11ymaps1@gmail.com",
-    pass: "apppassword",
+    pass: appPassword,
   },
 });
 
@@ -366,5 +367,5 @@ router.put("/recovery", function (req, res, next) {
 });
 
 module.exports = router;
-module.exports.valCookie=valCookie;
-module.exports.LoginModel=LoginModel;
+module.exports.valCookie = valCookie;
+module.exports.LoginModel = LoginModel;
