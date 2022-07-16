@@ -57,6 +57,7 @@ const getElevationResults = async (route) => {
     let elevationData = await client.elevation(elevationRequest);
 
     // TODO: address how to find the individuals profile - email address?
+
     let emailAddress = "temp@gmail.com";
     let userProfile = ProfileModel.find({email: emailAddress});
 
