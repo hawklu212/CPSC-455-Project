@@ -33,20 +33,30 @@ router.get("/", async function (req, res, next) {
         startLocation: leg.start_location,
         totalElevation: null,
         steepestIncline: null,
+        score: null,
         rating: "neutral", // replace with "happy" or "sad" somehow
         ranking: 0,
       };
+
+      // getElevationResults will return array of elevations, the route score, as well as the steepest incline
       const elevationResults = await getElevationResults(route);
 
-      calculateTotalElevation(routeSummary, elevationResults);
+      // Set the values in route summary from the elevation and incline calculations
+      routeSummary.steepestIncline = elevationResults.steepestIncline;
+      routeSummary.score = elevationResults.routeScore;
 
-      // TODO: calculate steepest incline
+      calculateTotalElevation(routeSummary, elevationResults.elevationDataArray);
+
       // TODO: assign rating
       // TODO: assign ranking somehow based on some criteria
       // TODO: assign sort route data list
 
       routeResultsArray.push(routeSummary);
     }
+
+    // set the ranks for the routes in routeResultsArray
+    // routeResultsArray.sort()
+
     res.send({ routes: routeResultsArray });
   } catch (e) {
     res.send({ error: e });
