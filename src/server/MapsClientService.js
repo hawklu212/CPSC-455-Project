@@ -1,6 +1,7 @@
 const { Client, TravelMode } = require("@googlemaps/google-maps-services-js");
 const APIKey = require("./apiKeyExpress");
 const {calculateStepScore} = require("./RouteProcessingService");
+const ProfileModel = require("./database/profileSchema")
 
 const client = new Client({});
 
@@ -54,16 +55,20 @@ const getElevationResults = async (route) => {
 
     let elevationData = await client.elevation(elevationRequest);
     // TODO: address how to find the individuals profile - email address?
+
     let emailAddress = "temp@gmail.com";
-    let userProfile = ProfileModel.find(emailAddress);
+    let userProfile = ProfileModel.find({email: emailAddress});
 
     // calculateStepScore - take in elevationResults, elevationData, subSampleDistance and userProfile
     // - return nothing, update score in elevationResults
-    await calculateStepScore(elevationResults, elevationData, subSampleDistance, userProfile)
+    console.log("before calculateStepScore line 64")
+    await calculateStepScore(elevationResults, elevationData.data.results, subSampleDistance, userProfile)
+    console.log(elevationResults);
+    console.log("after calculateStepScore line 66")
 
     elevationData.data.results.forEach((coordinate) => {
       elevationResults.elevationDataArray.push(coordinate.elevation);
-      console.log(elevationResults.elevationDataArray);
+      // console.log(elevationResults.elevationDataArray);
     });
   }
 

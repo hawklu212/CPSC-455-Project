@@ -53,6 +53,10 @@ router.get("/", async function (req, res, next) {
 
       routeResultsArray.push(routeSummary);
     }
+
+    // set the ranks for the routes in routeResultsArray
+    // routeResultsArray.sort()
+
     res.send({ routes: routeResultsArray });
   } catch (e) {
     res.send({ error: e });
