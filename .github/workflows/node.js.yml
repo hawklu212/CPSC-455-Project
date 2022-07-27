@@ -13,7 +13,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [18.x]
@@ -22,10 +21,29 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+        cache-dependency-path: ./initial/package-lock.json
+
+    # - run: npm install --prefix ./initial 
+    # - run: npm install --prefix ./server
+#     - run: npm run build --if-present
+    - name: Add remote origin
+    
+      run: |
+        git fetch --all --unshallow
+        git remote add allymaps-server https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_ALLYMAPS_SERVER }}.git
+        git remote add allymaps-client https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_ALLYMAPS_CLIENT }}.git
+    - name: Deploy to Heroku
+      run: |
+        git subtree split --prefix src/server -b serverTemp
+        git push -f origin serverTemp:allymaps-server
+        git branch -D serverTemp
+        git subtree split --prefix src -b clientTemp 
+        git push -f origin clientTemp:allymaps-client
+        git branch -D clientTemp
+       
+       # git pull && git subtree push --prefix server heroku-server main
+       # git pull && git subtree push --prefix initial heroku-client main
