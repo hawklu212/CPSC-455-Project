@@ -65,7 +65,7 @@ With pre-saved locations individuals will more rapidly be able to input start po
 
 - ~~ability to update path in database should map change~~
 
-- implement email verification recover password
+- [x] implement email verification recover password
 
 - add per-request authentication via cookie
 
