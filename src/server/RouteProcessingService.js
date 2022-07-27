@@ -12,15 +12,16 @@ const calculateStepScore = async (elevationResults, elevationData, samplingDista
   if (userProfile.weight != null) {
     userMass = userProfile.weight;
   }
-  console.log("userMass is" + userMass);
 
-
-  // TODO: incorporate distancePref into the calculation
+  // Individuals preference for what to weigh as more important in the score calculation. String value can be
+  // one of "distance", "gradient", or a default value for both to be weighed equally
   let distancePref = userProfile.distancePreference;
 
-  // TODO: use a better default rolling resistance
+  // In ideal world we would have an individual value for this, however in the absence of information on
+  // individuals wheelchairs we keep the value of 1.
   let rollingResistance = 1;
 
+  // loop through each subsection determining it's incline
   for (let i = 0; i < elevationData.length-2; i++) {
     let incline = calculateIncline(elevationData[i].elevation, elevationData[i+1].elevation, samplingDistance);
 
@@ -32,10 +33,29 @@ const calculateStepScore = async (elevationResults, elevationData, samplingDista
     // calculate the inclineFactor for this step
     let inclineFactor = null;
 
-    if (incline < 0) {
-      inclineFactor = (userMass * samplingDistance * Math.tan(incline)) - (samplingDistance * rollingResistance);
-    } else {
-      inclineFactor = (userMass * samplingDistance * Math.tan(incline)) + (samplingDistance * rollingResistance);
+    // TODO: this is where we add the userPreferences get incorporated
+    switch (distancePref) {
+      case "distance":
+        if (incline < 0) {
+          inclineFactor = (userMass * samplingDistance * Math.tan(incline)) - (samplingDistance * rollingResistance);
+        } else {
+          inclineFactor = (userMass * samplingDistance * Math.tan(incline)) + (samplingDistance * rollingResistance);
+        }
+        break;
+      case "gradient":
+        if (incline < 0) {
+          inclineFactor = (userMass * samplingDistance * Math.tan(incline)) - (samplingDistance * rollingResistance);
+        } else {
+          inclineFactor = (userMass * samplingDistance * Math.tan(incline)) + (samplingDistance * rollingResistance);
+        }
+        break;
+      default:
+        if (incline < 0) {
+          inclineFactor = (userMass * samplingDistance * Math.tan(incline)) - (samplingDistance * rollingResistance);
+        } else {
+          inclineFactor = (userMass * samplingDistance * Math.tan(incline)) + (samplingDistance * rollingResistance);
+        }
+        break;
     }
 
     // We don't allow negatives for inclineFactor, so if negative set to zero
@@ -43,8 +63,8 @@ const calculateStepScore = async (elevationResults, elevationData, samplingDista
       inclineFactor = 0;
     }
 
-    // Calculate this step's score and add it to the current score in elevationResults
     let stepScore = samplingDistance * inclineFactor;
+
     elevationResults.routeScore += stepScore;
   }
 
