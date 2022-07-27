@@ -10,8 +10,8 @@ const routesRouter = require("./routes/routes");
 const profileCreationRouter = require("./routes/profileCreation");
 const mongoose = require("mongoose");
 
-const mongoDB = "mongodb://127.0.0.1/Test2";
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+const mongoDB = process.env.mongoAtlasUrl || "mongodb://127.0.0.1/Test2";
+mongoose.connect( mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Get the default connection
 const db = mongoose.connection;
