@@ -25,7 +25,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: ./initial/package-lock.json
+#         cache-dependency-path: ./src/server/package-lock.json
 
     # - run: npm install --prefix ./initial 
     # - run: npm install --prefix ./server
