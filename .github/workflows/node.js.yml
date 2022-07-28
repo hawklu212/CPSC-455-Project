@@ -41,9 +41,9 @@ jobs:
         git subtree split --prefix src/server -b serverTemp
         git push -f origin serverTemp:allymaps-server
         git branch -D serverTemp
-        git subtree split --prefix src -b clientTemp 
-        git push -f origin clientTemp:allymaps-client
-        git branch -D clientTemp
+        #git subtree split --prefix  -b clientTemp 
+        git push -f origin main:allymaps-client
+        #git branch -D clientTemp
        
        # git pull && git subtree push --prefix server heroku-server main
        # git pull && git subtree push --prefix initial heroku-client main
