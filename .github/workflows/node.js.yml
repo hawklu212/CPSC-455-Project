@@ -42,7 +42,7 @@ jobs:
         git push -f origin serverTemp:allymaps-server
         git branch -D serverTemp
         #git subtree split --prefix  -b clientTemp 
-        git push -f origin main:allymaps-client
+        git push allymaps-client HEAD:main -f
         #git branch -D clientTemp
        
        # git pull && git subtree push --prefix server heroku-server main
