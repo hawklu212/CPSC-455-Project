@@ -9,9 +9,10 @@ import { Button, Divider, Grid } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { addDirections } from "../../actions/addDirections";
 import { clearDirections } from "../../actions/clearDirections";
-import { APIKey } from "../../apiKey";
+// import { APIKey } from "../../apiKey";
 import { getRouteResults } from "../../async-functions/async";
 
+let APIKey= process.env.APIKEY;
 const containerStyle = {
   display: "inline-flex",
   width: "100%",
