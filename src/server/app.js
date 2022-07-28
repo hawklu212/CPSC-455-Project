@@ -10,7 +10,8 @@ const routesRouter = require("./routes/routes");
 const profileCreationRouter = require("./routes/profileCreation");
 const mongoose = require("mongoose");
 
-const mongoDB = "mongodb://127.0.0.1/Test2";
+const mongoDB =
+  "mongodb+srv://testUser1:Abc123@cluster0.dauouon.mongodb.net/Test2";
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Get the default connection

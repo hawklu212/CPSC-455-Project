@@ -66,18 +66,18 @@ function MainMapComponent() {
     });
 
     const directionArray = [];
-    for (let i = 0; i < results.routes.length; i++) {
+    for (let i = 0; i < routeResults.routes.length; i++) {
       // TODO: modify here to extract results from backend result
-      const leg = results.routes[i];
+      const leg = routeResults.routes[i];
       console.log(leg);
       directionArray.push({
         // distance in kilometers
-        distance: (leg.legs[0].distance.value / 1000).toFixed(2),
+        distance: (leg.totalDistance / 1000).toFixed(2),
         // duration in minutes
-        duration: (leg.legs[0].duration.value / 60).toFixed(0),
+        duration: (leg.totalDuration / 60).toFixed(0),
         // addresses are strings
-        startAddress: leg.legs[0].start_address,
-        endAddress: leg.legs[0].end_address,
+        startAddress: leg.startAddress,
+        endAddress: leg.endAddress,
       });
     }
     dispatch(addDirections(directionArray));

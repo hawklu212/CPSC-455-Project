@@ -17,7 +17,7 @@ router.get("/", async function (req, res, next) {
   const orig = routeParams.orig;
   const dest = routeParams.dest;
   try {
-    const directions = await getDirectionsResults(orig, dest, []);
+    const directions = await getDirectionsResults(orig, dest);
 
     const routeResultsArray = [];
     for (const route of directions.data.routes) {
@@ -45,7 +45,10 @@ router.get("/", async function (req, res, next) {
       routeSummary.steepestIncline = elevationResults.steepestIncline;
       routeSummary.score = elevationResults.routeScore;
 
-      calculateTotalElevation(routeSummary, elevationResults.elevationDataArray);
+      calculateTotalElevation(
+        routeSummary,
+        elevationResults.elevationDataArray
+      );
 
       // TODO: assign rating
       // TODO: assign ranking somehow based on some criteria
