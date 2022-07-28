@@ -32,30 +32,26 @@ const calculateStepScore = async (elevationResults, elevationData, samplingDista
 
     // calculate the inclineFactor for this step
     let inclineFactor = null;
+    let preferenceMultiplier = 1;
 
-    // TODO: this is where we add the userPreferences get incorporated
     switch (distancePref) {
+      // Consider shorter distances as more important (weigh incline less)
       case "distance":
-        if (incline < 0) {
-          inclineFactor = (userMass * samplingDistance * Math.tan(incline)) - (samplingDistance * rollingResistance);
-        } else {
-          inclineFactor = (userMass * samplingDistance * Math.tan(incline)) + (samplingDistance * rollingResistance);
-        }
+        preferenceMultiplier = 0.5;
         break;
+      // Consider shallower grades more important (weigh incline more heavily)
       case "gradient":
-        if (incline < 0) {
-          inclineFactor = (userMass * samplingDistance * Math.tan(incline)) - (samplingDistance * rollingResistance);
-        } else {
-          inclineFactor = (userMass * samplingDistance * Math.tan(incline)) + (samplingDistance * rollingResistance);
-        }
+        preferenceMultiplier = 1.5;
         break;
       default:
-        if (incline < 0) {
-          inclineFactor = (userMass * samplingDistance * Math.tan(incline)) - (samplingDistance * rollingResistance);
-        } else {
-          inclineFactor = (userMass * samplingDistance * Math.tan(incline)) + (samplingDistance * rollingResistance);
-        }
         break;
+    }
+
+    // Calculate incline factor using user preference
+    if (incline < 0) {
+      inclineFactor = (userMass * samplingDistance * Math.tan(preferenceMultiplier * incline)) - (samplingDistance * rollingResistance);
+    } else {
+      inclineFactor = (userMass * samplingDistance * Math.tan(preferenceMultiplier * incline)) + (samplingDistance * rollingResistance);
     }
 
     // We don't allow negatives for inclineFactor, so if negative set to zero
