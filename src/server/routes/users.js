@@ -5,10 +5,9 @@ const nodemailer = require("nodemailer");
 const passwordValidator = require("password-validator");
 const { validate } = require("email-validator");
 const { v4: uuidv4 } = require("uuid");
-// const { appPassword } = require("../appPassword");
-const APIKey = process.env.APIKEY ||require("../apiKeyExpress");
+const APIKey = process.env.APIKEY ||require("../apiKeyExpress")["APIKey"];
 
-let appPassword=process.env.APPPASSWORD;
+let appPassword=process.env.APPPASSWORD ||require("../appPassword");["appPassword"];
 /* password req*/
 // Create a schema
 // eslint-disable-next-line new-cap
@@ -81,6 +80,7 @@ router.put("/cookie", function (req, res, next) {
         const test = arr[0][user];
         console.log(`first login ${arr[0]}`);
         res.cookie("session_id", `${curr}`);
+        res.cookie("map_id", APIKey);
         res.send(getReturnHelper(0, test, arr[0], "")).status(304);
       } else {
         res.send(getReturnHelper(1, "", "")).status(403);
@@ -102,6 +102,7 @@ router.get("/cookie", valCookie, function (req, res) {
       } else {
         res
           .cookie("session_id", "")
+          .cookie("map_id", "")
           .status(403)
           .send({ msg: "cookie not valid" });
       }
@@ -126,7 +127,9 @@ router.put("/cookie/logout", valCookie, async function (req, res) {
     return;
   }
   console.log("made it here");
-  res.cookie("session_id", "").send({});
+  res.cookie("session_id", "")
+  .cookie("map_id", "")
+  .send({});
 });
 
 function getReturnHelper(stat, payload, token) {
@@ -148,7 +151,6 @@ router.put("/", function (req, res, next) {
             res.send(getReturnHelper(3, "", ""));
             return;
           }
-          console.log("inside verified");
           const uuid = uuidv4();
           LoginModel.findOneAndUpdate(
             { email: email },
@@ -156,8 +158,10 @@ router.put("/", function (req, res, next) {
             { new: true }
           )
             .then((newStuff) => {
+              console.log( `${newStuff["accessToken"]}`)
               res
                 .cookie("session_id", `${newStuff["accessToken"]}`)
+                .cookie("map_id", APIKey)
                 .send(
                   getReturnHelper(0, newStuff[user], newStuff["accessToken"])
                 );
@@ -242,6 +246,7 @@ router.put("/verify", function (req, res, next) {
             .then((newStuff) => {
               res
                 .cookie("session_id", `${newStuff["accessToken"]}`)
+                .cookie("map_id", APIKey)
                 .send(getReturnHelper(0, mail, newStuff["accessToken"]));
             })
             .catch((error) => {
@@ -347,6 +352,7 @@ router.put("/recovery", function (req, res, next) {
             .then((newStuff) => {
               res
                 .cookie("session_id", `${newStuff["accessToken"]}`)
+                .cookie("map_id", APIKey)
                 .send(getReturnHelper(0, mail, newStuff["accessToken"]));
             })
             .catch((error) => {
@@ -369,25 +375,25 @@ router.put("/recovery", function (req, res, next) {
 });
 
 
-/*gets the map api key  getMapKeyCurl*/
-router.get("/map", valCookie, function (req, res) {
-  const { cookies } = req;
-  LoginModel.find({ accessToken: cookies.session_id })
-    .then((ref) => {
-      if (ref.length !== 0) {
-        res.send({APIKey:APIKey});
-      } else {
-        res
-          .cookie("session_id", "")
-          .status(403)
-          .send({ msg: "cookie not valid" });
-      }
-    })
-    .catch((error) => {
-      res.send({ error: error });
-      return;
-    });
-});
+// /*gets the map api key  getMapKeyCurl*/
+// router.get("/map", valCookie, function (req, res) {
+//   const { cookies } = req;
+//   LoginModel.find({ accessToken: cookies.session_id })
+//     .then((ref) => {
+//       if (ref.length !== 0) {
+//         res.send(APIKey);
+//       } else {
+//         res
+//           .cookie("session_id", "")
+//           .status(403)
+//           .send({ msg: "cookie not valid" });
+//       }
+//     })
+//     .catch((error) => {
+//       res.send({ error: error });
+//       return;
+//     });
+// });
 
 
 module.exports = router;
