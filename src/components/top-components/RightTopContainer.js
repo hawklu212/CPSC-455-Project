@@ -6,7 +6,7 @@ import {
 } from "@react-google-maps/api";
 import Inputs from "./InputDiv";
 import { Button, Divider, Grid } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addDirections } from "../../actions/addDirections";
 import { clearDirections } from "../../actions/clearDirections";
 import { APIKey } from "../../apiKey";
@@ -30,9 +30,11 @@ function MainMapComponent() {
     libraries: ["places"],
   });
 
-  const [routeIndex, setRouteIndex] = useState(0);
+  // const [currentRoute, setCurrentRoute] = React.useState(0);
   const [map, setMap] = React.useState(/** @type google.maps.Map */ (null));
   const [directions, setDirections] = React.useState(null);
+  const routeIndex = useSelector((state) => state.routeIndexReducer);
+
   const dispatch = useDispatch();
 
   /** @type React.MutableRefObject<HTMLInputElement> */
@@ -68,19 +70,19 @@ function MainMapComponent() {
 
     const directionArray = [];
     for (let i = 0; i < routeResults.routes.length; i++) {
-      // TODO: modify here to extract results from backend result
       const leg = routeResults.routes[i];
-      console.log(leg);
       directionArray.push({
-        // distance in kilometers
         distance: (leg.totalDistance / 1000).toFixed(2),
-        // duration in minutes
         duration: (leg.totalDuration / 60).toFixed(0),
-        // addresses are strings
         startAddress: leg.startAddress,
         endAddress: leg.endAddress,
+        routeIndex: leg.routeIndex,
       });
     }
+    const sortedDirectionsArray = directionArray.sort(
+      (a, b) => parseFloat(a.score) - parseFloat(b.score)
+    );
+
     dispatch(addDirections(directionArray));
     setDirections(results);
   }
@@ -113,7 +115,10 @@ function MainMapComponent() {
           <></>
           {/* this will render any directions on the map when received from the server */}
           {directions && (
-            <DirectionsRenderer directions={directions} routeIndex={routeIndex} />
+            <DirectionsRenderer
+              directions={directions}
+              routeIndex={routeIndex}
+            />
           )}
         </GoogleMap>
       </Grid>

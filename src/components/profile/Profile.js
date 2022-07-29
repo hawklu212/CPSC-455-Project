@@ -14,7 +14,11 @@ import { useNavigate } from "react-router-dom";
 import Navigation from "../Navigation";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useEffect, useState } from "react";
-import { getUserPreferenceCurl, loginCurl, putSetUserPreferenceCurl } from "../../async-functions/async";
+import {
+  getUserPreferenceCurl,
+  loginCurl,
+  putSetUserPreferenceCurl,
+} from "../../async-functions/async";
 import { loginState } from "../../actions";
 import { getCookieValidationCurl } from "../../async-functions/async";
 import { validate } from "email-validator";
@@ -42,7 +46,6 @@ const marks = [
     label: "5°",
   },
 ];
-
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -74,13 +77,13 @@ export default function Profile() {
     }
   };
 
-  const handleSave =async () => {
+  const handleSave = async () => {
     // create preferences object
     const profile = {
       // email: loginUser? Not sure about this, @Hawk you might know more
       maxIncline: incline,
       weight: weight,
-      distancePreference: priority
+      distancePreference: priority,
     };
     await putSetUserPreferenceCurl(profile);
   };
@@ -89,10 +92,10 @@ export default function Profile() {
     getCookieValidationCurl()
       .then((res) => {
         if (res.status === 200) {
-          res.json().then(jsonObj =>{
+          res.json().then((jsonObj) => {
             dispatch(loginState(jsonObj["userName"]));
             getUserPreferenceCurl();
-          })
+          });
         } else {
           navigate("../");
         }
@@ -110,8 +113,8 @@ export default function Profile() {
         container
         spacing={0}
         direction="column"
-        alignItems="center"
-        justifyContent="center"
+        // alignItems="center"
+        // justifyContent="center"
         style={{ minHeight: "100vh" }}
       >
         <Typography variant="h2">Profile</Typography>
