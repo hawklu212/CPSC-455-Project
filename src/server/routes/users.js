@@ -6,6 +6,7 @@ const passwordValidator = require("password-validator");
 const { validate } = require("email-validator");
 const { v4: uuidv4 } = require("uuid");
 // const { appPassword } = require("../appPassword");
+const APIKey = process.env.APIKEY ||require("../apiKeyExpress");
 
 let appPassword=process.env.APPPASSWORD;
 /* password req*/
@@ -366,6 +367,28 @@ router.put("/recovery", function (req, res, next) {
     });
   return;
 });
+
+
+/*gets the map api key  getMapKeyCurl*/
+router.get("/map", valCookie, function (req, res) {
+  const { cookies } = req;
+  LoginModel.find({ accessToken: cookies.session_id })
+    .then((ref) => {
+      if (ref.length !== 0) {
+        res.send({APIKey:APIKey});
+      } else {
+        res
+          .cookie("session_id", "")
+          .status(403)
+          .send({ msg: "cookie not valid" });
+      }
+    })
+    .catch((error) => {
+      res.send({ error: error });
+      return;
+    });
+});
+
 
 module.exports = router;
 module.exports.valCookie = valCookie;

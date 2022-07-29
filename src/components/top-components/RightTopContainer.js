@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { addDirections } from "../../actions/addDirections";
 import { clearDirections } from "../../actions/clearDirections";
 // import { APIKey } from "../../apiKey";
-import { getRouteResults } from "../../async-functions/async";
+import { getMapKeyCurl, getRouteResults } from "../../async-functions/async";
 
 let APIKey= process.env.APIKEY;
 const containerStyle = {
@@ -24,7 +24,8 @@ const center = {
   lng: -123.246,
 };
 
-function MainMapComponent() {
+async function MainMapComponent() {
+  const {APIKey}= await getMapKeyCurl();
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: APIKey,
