@@ -374,28 +374,6 @@ router.put("/recovery", function (req, res, next) {
   return;
 });
 
-
-// /*gets the map api key  getMapKeyCurl*/
-// router.get("/map", valCookie, function (req, res) {
-//   const { cookies } = req;
-//   LoginModel.find({ accessToken: cookies.session_id })
-//     .then((ref) => {
-//       if (ref.length !== 0) {
-//         res.send(APIKey);
-//       } else {
-//         res
-//           .cookie("session_id", "")
-//           .status(403)
-//           .send({ msg: "cookie not valid" });
-//       }
-//     })
-//     .catch((error) => {
-//       res.send({ error: error });
-//       return;
-//     });
-// });
-
-
 module.exports = router;
 module.exports.valCookie = valCookie;
 module.exports.LoginModel = LoginModel;
