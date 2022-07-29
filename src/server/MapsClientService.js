@@ -69,7 +69,6 @@ const getElevationResults = async (route) => {
 
     elevationData.data.results.forEach((coordinate) => {
       elevationResults.elevationDataArray.push(coordinate.elevation);
-      // console.log(elevationResults.elevationDataArray);
     });
   }
 
