@@ -1,4 +1,4 @@
-const endpoint = process.env.SERVERENDPOINT ||"http://localhost:3001/";
+const endpoint = process.env.SERVERENDPOINT;
 export async function loginCurl(data) {
   const response = await fetch(`${endpoint}users`, {
     method: "PUT", // *GET, POST, PUT, DELETE, etc.
