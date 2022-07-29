@@ -111,7 +111,9 @@ function MainMapComponent() {
           {/* Child components, such as markers, info windows, etc. */}
           <></>
           {/* this will render any directions on the map when received from the server */}
-          {directions && <DirectionsRenderer directions={directions} />}
+          {directions && (
+            <DirectionsRenderer directions={directions} routeIndex={2} />
+          )}
         </GoogleMap>
       </Grid>
     </Grid>
