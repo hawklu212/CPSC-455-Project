@@ -30,6 +30,7 @@ function MainMapComponent() {
     libraries: ["places"],
   });
 
+  const [routeIndex, setRouteIndex] = useState(0);
   const [map, setMap] = React.useState(/** @type google.maps.Map */ (null));
   const [directions, setDirections] = React.useState(null);
   const dispatch = useDispatch();
@@ -112,7 +113,7 @@ function MainMapComponent() {
           <></>
           {/* this will render any directions on the map when received from the server */}
           {directions && (
-            <DirectionsRenderer directions={directions} routeIndex={2} />
+            <DirectionsRenderer directions={directions} routeIndex={routeIndex} />
           )}
         </GoogleMap>
       </Grid>

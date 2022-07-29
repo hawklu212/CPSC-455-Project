@@ -20,7 +20,7 @@ router.get("/", async function (req, res, next) {
     const directions = await getDirectionsResults(orig, dest);
 
     const routeResultsArray = [];
-    for (const route of directions.data.routes) {
+    for (const [index, route] of directions.data.routes.entries()) {
       const leg = route.legs[0];
 
       let routeSummary = {
@@ -35,8 +35,8 @@ router.get("/", async function (req, res, next) {
         steepestIncline: null,
         score: null,
         rating: "neutral", // replace with "happy" or "sad" somehow
-        ranking: 0,
-        apiResult: directions.data,
+        routeIndex: index,
+        apiResult: route,
       };
 
       // getElevationResults will return array of elevations, the route score, as well as the steepest incline
