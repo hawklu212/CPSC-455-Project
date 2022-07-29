@@ -26,7 +26,6 @@ const center = {
 };
 
 function MainMapComponent() {
-  console.log(APIKey);
   const {isLoaded} = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: APIKey,
