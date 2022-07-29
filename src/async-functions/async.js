@@ -1,4 +1,4 @@
-const endpoint = "https://a11ymapsserver.herokuapp.com/";
+const endpoint = "http://localhost:3001/"||"https://a11ymapsserver.herokuapp.com/";
 export async function loginCurl(data) {
   const response = await fetch(`${endpoint}users`, {
     method: "PUT", // *GET, POST, PUT, DELETE, etc.
