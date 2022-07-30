@@ -11,6 +11,7 @@ import { addDirections } from "../../actions/addDirections";
 import { clearDirections } from "../../actions/clearDirections";
 import { APIKey } from "../../apiKey";
 import { getRouteResults } from "../../async-functions/async";
+import { changeRouteIndex } from "../../actions/changeRouteIndex";
 
 const containerStyle = {
   display: "inline-flex",
@@ -77,14 +78,14 @@ function MainMapComponent() {
         startAddress: leg.startAddress,
         endAddress: leg.endAddress,
         routeIndex: leg.routeIndex,
+        score: leg.score,
       });
     }
-    const sortedDirectionsArray = directionArray.sort(
-      (a, b) => parseFloat(a.score) - parseFloat(b.score)
-    );
+    directionArray.sort((a, b) => parseFloat(a.score) - parseFloat(b.score));
 
     dispatch(addDirections(directionArray));
     setDirections(results);
+    dispatch(changeRouteIndex(directionArray[0].routeIndex));
   }
 
   return isLoaded ? (

@@ -5,6 +5,7 @@ const defaultCards = [
     startAddress: "Vancouver, BC, Canada",
     endAddress: "855 12th Ave W #190, Vancouver, BC V5Z 1M9, Canada",
     routeIndex: 0,
+    score: 1,
   },
   {
     distance: "3.19",
@@ -12,6 +13,7 @@ const defaultCards = [
     startAddress: "Vancouver, BC, Canada",
     endAddress: "855 12th Ave W #190, Vancouver, BC V5Z 1M9, Canada",
     routeIndex: 1,
+    score: 2,
   },
   {
     distance: "3.69",
@@ -19,6 +21,7 @@ const defaultCards = [
     startAddress: "Vancouver, BC, Canada",
     endAddress: "855 12th Ave W #190, Vancouver, BC V5Z 1M9, Canada",
     routeIndex: 2,
+    score: 3,
   },
 ];
 const directionsReducer = (directionsArray = defaultCards, action) => {
