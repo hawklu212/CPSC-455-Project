@@ -37,7 +37,7 @@ export default function RecoverAccountPassword() {
       .then((res) => {
         if (res.status === 200) {
           dispatch(loginState(""));
-          navigate("../search");
+          navigate("../profile");
         } else {
           if (loginUser === "") {
             dispatch(loginState("NoUser"));
@@ -117,7 +117,7 @@ export default function RecoverAccountPassword() {
     verificationCode = "";
     newPass = "";
     confirmPass = "";
-    navigate("/search");
+    navigate("/profile");
   };
 
   return loginUser !== "" ? (

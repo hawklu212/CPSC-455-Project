@@ -24,18 +24,21 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleDrawerState } from "../actions";
+import { toggleDrawerState, loginState } from "../actions";
 import { logoutCurl } from "../async-functions/async";
+
 
 export default function Navigation() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const loginUser = useSelector((state) => state.loginState);
   const logout = async () => {
     try {
       await logoutCurl();
+      navigate("../");
     } catch (e) {
       console.error(e);
     }
-    navigate("../");
   };
   const profileView = async () =>{
     navigate("../profile");
@@ -43,8 +46,7 @@ export default function Navigation() {
 
   const drawerState = useSelector((state) => state.drawerState);
   // const [drawerState, setDrawerState] = useState(false);
-  const loginState = useSelector((state) => state.loginState);
-  const dispatch = useDispatch();
+  const loginRef = useSelector((state) => state.loginState);
   const toggleDrawer = () => {
     // setDrawerState(!drawerState);
     dispatch(toggleDrawerState(drawerState));
@@ -139,7 +141,7 @@ export default function Navigation() {
           <MenuItem onClick={handleClose}>My Account</MenuItem>
           <MenuItem onClick={logout}>Logout</MenuItem>
         </Menu>
-        {loginState}
+        {loginRef}
       </Toolbar>
     </AppBar>
   );

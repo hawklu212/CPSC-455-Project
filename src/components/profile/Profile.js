@@ -20,7 +20,7 @@ import {
   putSetUserPreferenceCurl,
 } from "../../async-functions/async";
 import { loginState } from "../../actions";
-import { getCookieValidationCurl } from "../../async-functions/async";
+import { setInitialCookieCurl, getCookieValidationCurl } from "../../async-functions/async";
 import { validate } from "email-validator";
 import { textAlign, width } from "@mui/system";
 
@@ -57,7 +57,6 @@ export default function Profile() {
   const [helperText, setHelperText] = useState("");
   const [saveText, setSaveText] = useState("");
   const [currPrefText, setcurrPrefText] = useState("");
-
   const handleInclineChange = (event) => {
     setIncline(event.target.value);
   };
@@ -111,20 +110,40 @@ export default function Profile() {
   };
 
   useEffect(() => {
-    getCookieValidationCurl()
-      .then((res) => {
-        if (res.status === 200) {
-          res.json().then((jsonObj) => {
-            dispatch(loginState(jsonObj["userName"]));
-            getUserPreferenceCurl();
-          });
-        } else {
-          navigate("../");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (loginUser !== "") {
+      setInitialCookieCurl({ userName: loginUser })
+        .then((res) => {
+          if (res["status"] !== 0) {
+            navigate("../");
+          } else {
+            dispatch(loginState(res["userName"]));
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      getCookieValidationCurl()
+        .then((res) => {
+          if (res.status !== 200) {
+            navigate("../");
+            return;
+          } else {
+            res
+              .json()
+              .then((ret) => {
+                console.log(ret);
+                dispatch(loginState(ret["userName"]));
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, []);
 
   return loginUser !== "" ? (
