@@ -1,15 +1,15 @@
 const { Client, TravelMode } = require("@googlemaps/google-maps-services-js");
 
-const APIKey = process.env.APIKEY ||require("./apiKeyExpress");
-const {calculateStepScore} = require("./RouteProcessingService");
-const ProfileModel = require("./database/profileSchema")
+const APIKey = process.env.APIKEY || require("./apiKeyExpress").APIKey;
+const { calculateStepScore } = require("./RouteProcessingService");
+const ProfileModel = require("./database/profileSchema");
 
 const client = new Client({});
 
 const getDirectionsResults = async (orig, dest) => {
   let directionsRequest = {
     params: {
-      key: APIKey.APIKey,
+      key: APIKey,
       origin: orig,
       destination: dest,
       mode: TravelMode.walking,
@@ -49,7 +49,7 @@ const getElevationResults = async (route) => {
       params: {
         path: [startLocation, endLocation],
         samples: numberOfSamples, // TODO: replace with ElevationSampleSize once done testing
-        key: APIKey.APIKey,
+        key: APIKey,
       },
       timeout: 1000,
     };
