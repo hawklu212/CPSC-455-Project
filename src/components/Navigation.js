@@ -30,6 +30,7 @@ import { loginState } from "../actions";
 
 export default function Navigation() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const loginUser = useSelector((state) => state.loginState);
   const logout = async () => {
     try {
@@ -48,7 +49,6 @@ export default function Navigation() {
   const drawerState = useSelector((state) => state.drawerState);
   // const [drawerState, setDrawerState] = useState(false);
   const loginState = useSelector((state) => state.loginState);
-  const dispatch = useDispatch();
   const toggleDrawer = () => {
     // setDrawerState(!drawerState);
     dispatch(toggleDrawerState(drawerState));
