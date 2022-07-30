@@ -150,7 +150,6 @@ export default function Login() {
                       setUserError(true);
                       setUserErrorMessage("Username/Email not Verified");
                     } else if (data["status"] === 0) {
-                      console.log("in stat 0");
                       dispatch(loginState(data["accessToken"]));
                       loginAttempt();
                     }
