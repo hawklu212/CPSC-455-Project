@@ -55,8 +55,8 @@ export default function MainContainer() {
       container
       spacing={0}
       direction="column"
-      // alignItems="center"
-      // justifyContent="center"
+      alignItems="center"
+      justifyContent="center"
       style={{ minHeight: "100vh" }}
     >
       <Navigation></Navigation>
