@@ -13,7 +13,7 @@ import { clearDirections } from "../../actions/clearDirections";
 // import { APIKey } from "../../apiKey";
 import { getRouteResults } from "../../async-functions/async";
 
-let APIKey=Cookies.getItem("map_id")
+let APIKey=Cookies.get("map_id")
 const containerStyle = {
   display: "inline-flex",
   width: "100%",
