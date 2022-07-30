@@ -28,7 +28,7 @@ export default function CreateAccount() {
       .then((res) => {
         if (res.status === 200) {
           dispatch(loginState(""));
-          navigate("../search");
+          navigate("../profile");
         } else {
           dispatch(loginState("NoUser"));
         }

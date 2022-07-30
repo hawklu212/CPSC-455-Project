@@ -33,7 +33,7 @@ export default function Login() {
       .then((res) => {
         if (res.status === 200) {
           dispatch(loginState(""));
-          navigate("./search");
+          navigate("./profile");
         } else {
           dispatch(loginState("NoUser"));
         }
@@ -61,7 +61,7 @@ export default function Login() {
     // if login attempt succeeds, then:
     email = "";
     userPass = "";
-    navigate("../search");
+    navigate("../profile");
   };
   const signUp = () => {
     // NTH: maybe carry over username if it is already entered
