@@ -36,7 +36,6 @@ router.get("/", async function (req, res, next) {
         score: null,
         rating: "neutral", // replace with "happy" or "sad" somehow
         routeIndex: index,
-        apiResult: route,
       };
 
       // getElevationResults will return array of elevations, the route score, as well as the steepest incline
