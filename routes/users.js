@@ -7,7 +7,7 @@ const { validate } = require("email-validator");
 const { v4: uuidv4 } = require("uuid");
 const APIKey = process.env.APIKEY ||require("../apiKeyExpress")["APIKey"];
 
-let appPassword=process.env.APPPASSWORD ||require("../appPassword");["appPassword"];
+let appPassword=process.env.APPPASSWORD ||require("../appPassword")["appPassword"];
 /* password req*/
 // Create a schema
 // eslint-disable-next-line new-cap
