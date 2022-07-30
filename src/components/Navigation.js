@@ -29,15 +29,18 @@ import { logoutCurl } from "../async-functions/async";
 
 export default function Navigation() {
   const navigate = useNavigate();
+  const loginUser = useSelector((state) => state.loginState);
   const logout = async () => {
     try {
       await logoutCurl();
+      dispatch(loginState(""));
+      navigate("../");
     } catch (e) {
       console.error(e);
     }
-    navigate("../");
   };
   const profileView = async () =>{
+    dispatch(loginState(""));
     navigate("../profile");
   };
 
