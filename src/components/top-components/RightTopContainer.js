@@ -25,10 +25,11 @@ const center = {
 };
 
 function MainMapComponent() {
-  let APIKey= document.cookie
-  .split('; ')
-  .find((row) => row.startsWith('map_id='))
-  ?.split('=')[1];
+  // let APIKey= document.cookie
+  // .split('; ')
+  // .find((row) => row.startsWith('map_id='))
+  // ?.split('=')[1];
+  let APIKey=Cookies.get("map_id");
   const {isLoaded} = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: APIKey,
