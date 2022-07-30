@@ -17,10 +17,10 @@ router.get("/", async function (req, res, next) {
   const orig = routeParams.orig;
   const dest = routeParams.dest;
   try {
-    const directions = await getDirectionsResults(orig, dest, []);
+    const directions = await getDirectionsResults(orig, dest);
 
     const routeResultsArray = [];
-    for (const route of directions.data.routes) {
+    for (const [index, route] of directions.data.routes.entries()) {
       const leg = route.legs[0];
 
       let routeSummary = {
@@ -35,7 +35,7 @@ router.get("/", async function (req, res, next) {
         steepestIncline: null,
         score: null,
         rating: "neutral", // replace with "happy" or "sad" somehow
-        ranking: 0,
+        routeIndex: index,
       };
 
       // getElevationResults will return array of elevations, the route score, as well as the steepest incline
@@ -45,7 +45,10 @@ router.get("/", async function (req, res, next) {
       routeSummary.steepestIncline = elevationResults.steepestIncline;
       routeSummary.score = elevationResults.routeScore;
 
-      calculateTotalElevation(routeSummary, elevationResults.elevationDataArray);
+      calculateTotalElevation(
+        routeSummary,
+        elevationResults.elevationDataArray
+      );
 
       // TODO: assign rating
       // TODO: assign ranking somehow based on some criteria
