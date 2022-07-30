@@ -24,9 +24,9 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleDrawerState } from "../actions";
+import { toggleDrawerState, loginState } from "../actions";
 import { logoutCurl } from "../async-functions/async";
-import { loginState } from "../actions";
+
 
 export default function Navigation() {
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ export default function Navigation() {
 
   const drawerState = useSelector((state) => state.drawerState);
   // const [drawerState, setDrawerState] = useState(false);
-  const loginState = useSelector((state) => state.loginState);
+  const loginRef = useSelector((state) => state.loginState);
   const toggleDrawer = () => {
     // setDrawerState(!drawerState);
     dispatch(toggleDrawerState(drawerState));
@@ -143,7 +143,7 @@ export default function Navigation() {
           <MenuItem onClick={handleClose}>My Account</MenuItem>
           <MenuItem onClick={logout}>Logout</MenuItem>
         </Menu>
-        {loginState}
+        {loginRef}
       </Toolbar>
     </AppBar>
   );
