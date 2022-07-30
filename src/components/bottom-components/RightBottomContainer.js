@@ -18,6 +18,7 @@ import HeightIcon from "@mui/icons-material/Height";
 import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
 import SentimentNeutralIcon from "@mui/icons-material/SentimentNeutral";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
+import { changeRouteIndex } from "../../actions/changeRouteIndex";
 
 export default function RightBottomContainer() {
   const directions = useSelector((state) => state.directionsReducer);
@@ -25,6 +26,10 @@ export default function RightBottomContainer() {
 
   const iconDimension = 30;
   const ratingIconDimension = 45;
+
+  const changeDisplayedRoute = (newIndex) => {
+    dispatch(changeRouteIndex(newIndex));
+  };
 
   const goodRating = (
     <Box sx={{ display: "flex", flexDirection: "column", bgcolor: green[50] }}>
@@ -67,9 +72,11 @@ export default function RightBottomContainer() {
       {directions.map((direction) => (
         // TODO: add unique ID here?
         <Card
+          className={"routeResult"}
           variant={"outlined"}
           sx={{ display: "flex", m: 1 }}
           key={direction.distance}
+          onClick={() => changeDisplayedRoute(direction.routeIndex)}
         >
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <CardContent sx={{ flex: "1 0 auto" }}>
