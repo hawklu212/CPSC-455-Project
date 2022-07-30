@@ -25,7 +25,10 @@ const center = {
 };
 
 function MainMapComponent() {
-  let APIKey=Cookies.get("map_id")
+  let APIKey= document.cookie
+  .split('; ')
+  .find((row) => row.startsWith('test2='))
+  ?.split('=')[1];
   const {isLoaded} = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: APIKey,
