@@ -26,9 +26,9 @@ const center = {
 
 function MainMapComponent() {
   let APIKey= document.cookie
-  .split('; ')
-  .find((row) => row.startsWith('test2='))
-  ?.split('=')[1];
+  // .split('; ')
+  // .find((row) => row.startsWith('map_id='))
+  // ?.split('=')[1];
   const {isLoaded} = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: APIKey,
