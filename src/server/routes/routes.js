@@ -47,15 +47,14 @@ router.get("/", async function (req, res, next) {
 
       calculateTotalElevation(routeSummary, elevationResults.elevationDataArray);
 
-      // TODO: assign rating
-      // TODO: assign ranking somehow based on some criteria
-      // TODO: assign sort route data list
-
       routeResultsArray.push(routeSummary);
     }
 
-    // set the ranks for the routes in routeResultsArray
-    // routeResultsArray.sort()
+/*    // Sort the array based on the routeSummary.score - This is the equivalent of ranking
+    routeResultsArray.sort((a, b) => parseFloat(a.score) - parseFloat(b.score));*/
+
+    // Assign ranking - done with 1-based indexing i.e. the best route will have ranking = 1
+    routeResultsArray.forEach((route, index) => route.ranking = index+1);
 
     res.send({ routes: routeResultsArray });
   } catch (e) {
