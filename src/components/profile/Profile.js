@@ -154,8 +154,8 @@ export default function Profile() {
         container
         spacing={0}
         direction="column"
-        // alignItems="center"
-        // justifyContent="center"
+        alignItems="center"
+        justifyContent="center"
         style={{ minHeight: "100vh" }}
       >
         <Typography variant="h2">Profile</Typography>
