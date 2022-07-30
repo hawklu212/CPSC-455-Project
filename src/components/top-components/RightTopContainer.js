@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import cookies from "js-cookies";
+import Cookies from "js-cookie";
 import {
   GoogleMap,
   useJsApiLoader,
@@ -13,7 +13,7 @@ import { clearDirections } from "../../actions/clearDirections";
 // import { APIKey } from "../../apiKey";
 import { getRouteResults } from "../../async-functions/async";
 
-const APIKey=cookies.getItem("map_id")
+let APIKey=Cookies.getItem("map_id")
 const containerStyle = {
   display: "inline-flex",
   width: "100%",
