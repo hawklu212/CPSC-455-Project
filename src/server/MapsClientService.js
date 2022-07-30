@@ -1,7 +1,8 @@
 const { Client, TravelMode } = require("@googlemaps/google-maps-services-js");
-const APIKey = require("./apiKeyExpress");
-const { calculateStepScore } = require("./RouteProcessingService");
-const ProfileModel = require("./database/profileSchema");
+
+const APIKey = process.env.APIKEY ||require("./apiKeyExpress");
+const {calculateStepScore} = require("./RouteProcessingService");
+const ProfileModel = require("./database/profileSchema")
 
 const client = new Client({});
 

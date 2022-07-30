@@ -10,9 +10,9 @@ const routesRouter = require("./routes/routes");
 const profileCreationRouter = require("./routes/profileCreation");
 const mongoose = require("mongoose");
 
-const mongoDB =
-  "mongodb+srv://testUser1:Abc123@cluster0.dauouon.mongodb.net/Test2";
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+
+const mongoDB = process.env.MONGOATLASURL || "mongodb://127.0.0.1/Test2";
+mongoose.connect( mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Get the default connection
 const db = mongoose.connection;
@@ -25,7 +25,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:3000"],
+    origin: ["http://localhost:3000", "https://a11ymapsclient.herokuapp.com", "http://www.a11ymaps.com"],
     credentials: true,
   })
 );

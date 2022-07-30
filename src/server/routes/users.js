@@ -5,8 +5,9 @@ const nodemailer = require("nodemailer");
 const passwordValidator = require("password-validator");
 const { validate } = require("email-validator");
 const { v4: uuidv4 } = require("uuid");
-const { appPassword } = require("../appPassword");
+// const { appPassword } = require("../appPassword");
 
+let appPassword=process.env.APPPASSWORD;
 /* password req*/
 // Create a schema
 // eslint-disable-next-line new-cap

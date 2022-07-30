@@ -55,6 +55,8 @@ export default function Profile() {
   const [weight, setWeight] = useState(0);
   const [priority, setPriority] = useState("distance");
   const [helperText, setHelperText] = useState("");
+  const [saveText, setSaveText] = useState("");
+  const [currPrefText, setcurrPrefText] = useState("");
 
   const handleInclineChange = (event) => {
     setIncline(event.target.value);
@@ -76,6 +78,20 @@ export default function Profile() {
         setHelperText("Distance and incline are equally important to me.");
     }
   };
+  const currentPreferences =async () => {
+    try{
+      const userPref= await getUserPreferenceCurl();
+      if (userPref["exists"]==1){
+      setcurrPrefText(`maxIncline:${userPref["maxIncline"]}, weight:${userPref["weight"]}, distancePreference:${userPref["distancePreference"]} `)
+      }
+      else{
+        setcurrPrefText("User preferences not set");
+      }
+    }
+      catch (error){
+        console.log(error);
+      }
+  };
 
   const handleSave = async () => {
     // create preferences object
@@ -85,7 +101,13 @@ export default function Profile() {
       weight: weight,
       distancePreference: priority,
     };
+    try{
     await putSetUserPreferenceCurl(profile);
+    setSaveText("Save Successful");
+    }
+    catch (error){
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -178,6 +200,11 @@ export default function Profile() {
         <Button variant="outlined" onClick={handleSave}>
           Save
         </Button>
+        {saveText}
+        <Button variant="outlined" onClick={currentPreferences}>
+          Get Current Preferences
+        </Button>
+        {currPrefText}
         <br />
         <br />
         <Typography variant="h8">
