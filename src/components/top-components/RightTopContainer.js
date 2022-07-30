@@ -13,7 +13,6 @@ import { clearDirections } from "../../actions/clearDirections";
 // import { APIKey } from "../../apiKey";
 import { getRouteResults } from "../../async-functions/async";
 
-let APIKey=Cookies.get("map_id")
 const containerStyle = {
   display: "inline-flex",
   width: "100%",
@@ -26,6 +25,7 @@ const center = {
 };
 
 function MainMapComponent() {
+  let APIKey=Cookies.get("map_id")
   const {isLoaded} = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: APIKey,
