@@ -1,17 +1,6 @@
 # CPSC-455-Project
 
-**Project Progress after Workshop 1 **
-First step: Brainstorm some ideas for the first lab. In Lab 1, we will finalise groups, and discuss project ideas. By Lab 2, you should have selected a project topic.
-
-Project Requirements: Must be completed with your group by Workshop 2. (Will be graded in Design Review.)
-
-Let TAs know who your group members are (we will do some icebreaker exercises today)
-
-Must have a repo in github which all group members can access and send us the link on slack. (See instructions “How to hand in” below.)
-
-In order to create a repo, you will need to decide on a project name
-
-Project Description: Write 3-5 sentences on your project topic. (try to address all points below)
+A11yMaps is an accessibility first web application that provides navigation services for users with diverse mobility needs. Using the Google Maps and Elevation APIs, we developed a proof of concept tool to assess and rank the difficulty of potential routes for a journey based on a user’s elevation profile preferences. Through this app, we sought to create an accessible navigation app with a user-friendly and Inclusive Design oriented approach.
 
 **Appname**
 
