@@ -35,14 +35,12 @@ export default function Navigation() {
   const logout = async () => {
     try {
       await logoutCurl();
-      dispatch(loginState(""));
       navigate("../");
     } catch (e) {
       console.error(e);
     }
   };
   const profileView = async () =>{
-    dispatch(loginState(""));
     navigate("../profile");
   };
 
