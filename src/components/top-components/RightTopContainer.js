@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import Cookies from "js-cookie";
 import {
   GoogleMap,
   useJsApiLoader,
@@ -12,7 +13,6 @@ import { clearDirections } from "../../actions/clearDirections";
 // import { APIKey } from "../../apiKey";
 import { getRouteResults } from "../../async-functions/async";
 
-let APIKey= process.env.APIKEY;
 const containerStyle = {
   display: "inline-flex",
   width: "100%",
@@ -25,12 +25,13 @@ const center = {
 };
 
 function MainMapComponent() {
-  const { isLoaded } = useJsApiLoader({
+  let APIKey=Cookies.get("map_id");
+  const {isLoaded} = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: APIKey,
     libraries: ["places"],
   });
-
+  
   const [map, setMap] = React.useState(/** @type google.maps.Map */ (null));
   const [directions, setDirections] = React.useState(null);
   const dispatch = useDispatch();

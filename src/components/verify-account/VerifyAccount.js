@@ -31,7 +31,7 @@ export default function VerifyAccount() {
       .then((res) => {
         if (res.status === 200) {
           dispatch(loginState(""));
-          navigate("../search");
+          navigate("../profile");
         } else {
           if (loginUser === "") {
             dispatch(loginState("NoUser"));
@@ -68,7 +68,7 @@ export default function VerifyAccount() {
     // TODO: create account in database
     email = "";
     verificationCode = "";
-    navigate("/search");
+    navigate("/profile");
   };
 
   return loginUser !== "" ? (
