@@ -9,12 +9,13 @@ import {
   getCookieValidationCurl,
 } from "../async-functions/async";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 export default function MainContainer() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loginUser = useSelector((state) => state.loginState);
   useEffect(() => {
-    if (loginUser !== "") {
+    if (loginUser !== ""&& Cookies.get("map_id")==="") {
       setInitialCookieCurl({ userName: loginUser })
         .then((res) => {
           if (res["status"] !== 0) {
