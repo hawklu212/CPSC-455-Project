@@ -23,6 +23,7 @@ import { loginState } from "../../actions";
 import { setInitialCookieCurl, getCookieValidationCurl } from "../../async-functions/async";
 import { validate } from "email-validator";
 import { textAlign, width } from "@mui/system";
+import Cookies from "js-cookie";
 
 const marks = [
   {
@@ -110,7 +111,7 @@ export default function Profile() {
   };
 
   useEffect(() => {
-    if (loginUser !== "") {
+    if (loginUser !== "" && Cookies.get("map_id")==="") {
       setInitialCookieCurl({ userName: loginUser })
         .then((res) => {
           if (res["status"] !== 0) {

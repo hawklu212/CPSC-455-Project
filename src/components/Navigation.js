@@ -144,7 +144,7 @@ export default function Navigation() {
           onClose={handleClose}
         >
           <MenuItem onClick={profileView}>Profile</MenuItem>
-          {/* <MenuItem onClick={routePage}>Route Page</MenuItem> */}
+          <MenuItem onClick={routePage}>Route Page</MenuItem>
           <MenuItem onClick={logout}>Logout</MenuItem>
         </Menu>
         {loginRef}
