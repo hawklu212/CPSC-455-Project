@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addDirections } from "../../actions/addDirections";
 import { clearDirections } from "../../actions/clearDirections";
 // import { APIKey } from "../../apiKey";
-import { getRouteResults } from "../../async-functions/async";
+import {getRouteResults, getUserPreferenceCurl} from "../../async-functions/async";
 import { changeRouteIndex } from "../../actions/changeRouteIndex";
 
 const containerStyle = {
@@ -54,10 +54,13 @@ function MainMapComponent() {
   }, []);
 
   async function calculateRoute() {
+    const userPref = await getUserPreferenceCurl();
     const routeResults = await getRouteResults([
       originRef.current.value,
       destRef.current.value,
-    ]);
+    ],
+        userPref,
+        );
     // eslint-disable-next-line no-undef
     const directionService = new google.maps.DirectionsService();
     // hand direction service the origin, destination and travel mode as well as options

@@ -131,10 +131,11 @@ export async function recoverySendCodeCurl(data) {
 }
 
 // JJ: at some point, may need to pass in user here as well
-export async function getRouteResults(locations) {
+export async function getRouteResults(locations, userPref) {
   const routeParams = new URLSearchParams({
     orig: locations[0],
     dest: locations[1],
+    userPref: userPref,
   });
   const response = await fetch(`${endpoint}routes/?` + routeParams, {
     method: "GET",

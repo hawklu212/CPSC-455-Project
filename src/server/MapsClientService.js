@@ -23,7 +23,7 @@ const getDirectionsResults = async (orig, dest) => {
 };
 // Note: elevation API can consume multiple types. For now, let's either pass in
 // an address, or latitude and longitude
-const getElevationResults = async (route) => {
+const getElevationResults = async (route, userPref) => {
   // TODO: change this after testing
   const numberOfSamples = 10;
   // assuming we only have 1 leg for now, and we aren't using waypoints
@@ -55,10 +55,8 @@ const getElevationResults = async (route) => {
     };
 
     let elevationData = await client.elevation(elevationRequest);
-    // TODO: address how to find the individuals profile - email address?
 
-    let emailAddress = "temp@gmail.com";
-    let userProfile = ProfileModel.find({ email: emailAddress });
+    let userProfile = userPref;
 
     // calculateStepScore - take in elevationResults, elevationData, subSampleDistance and userProfile
     // - return nothing, update score in elevationResults
