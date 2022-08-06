@@ -1,4 +1,5 @@
-const endpoint = "http://server.a11ymaps.com/";
+// TODO: remove this endpoint after testing
+const endpoint = "http://localhost:3001/" || "http://server.a11ymaps.com/";
 export async function loginCurl(data) {
   const response = await fetch(`${endpoint}users`, {
     method: "PUT", // *GET, POST, PUT, DELETE, etc.
@@ -130,7 +131,6 @@ export async function recoverySendCodeCurl(data) {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-// JJ: at some point, may need to pass in user here as well
 export async function getRouteResults(locations) {
   const routeParams = new URLSearchParams({
     orig: locations[0],
@@ -162,7 +162,7 @@ export async function getUserPreferenceCurl() {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-/*  Get user Preferences  */
+/*  Put user Preferences  */
 export async function putSetUserPreferenceCurl(data) {
   const response = await fetch(`${endpoint}profileCreation`, {
     method: "PUT", // *GET, POST, PUT, DELETE, etc.
@@ -178,4 +178,35 @@ export async function putSetUserPreferenceCurl(data) {
     body: JSON.stringify(data),
   });
   return response.json(); // parses JSON response into native JavaScript objects
+}
+
+/*  Get user Preferences  */
+export async function getSavedRoutes() {
+  const response = await fetch(`${endpoint}savedRoutes/`, {
+    method: "GET",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+  });
+  return response.json();
+}
+
+export async function deleteSavedRoutes() {
+  const response = await fetch(`${endpoint}savedRoutes/`, {
+    method: "DELETE",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+  });
+  return response.json();
+}
+
+export async function addSavedRoute() {
+  const response = await fetch(`${endpoint}savedRoutes/`, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+  });
+  return response.json();
 }

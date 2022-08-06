@@ -27,7 +27,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleDrawerState, loginState } from "../actions";
 import { logoutCurl } from "../async-functions/async";
 
-
 export default function Navigation() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -40,7 +39,7 @@ export default function Navigation() {
       console.error(e);
     }
   };
-  const profileView = async () =>{
+  const profileView = async () => {
     navigate("../profile");
   };
 
