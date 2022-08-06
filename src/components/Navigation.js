@@ -44,6 +44,10 @@ export default function Navigation() {
     navigate("../profile");
   };
 
+  const routePage = async () =>{
+    navigate("../search");
+  };
+
   const drawerState = useSelector((state) => state.drawerState);
   // const [drawerState, setDrawerState] = useState(false);
   const loginRef = useSelector((state) => state.loginState);
@@ -74,7 +78,9 @@ export default function Navigation() {
             <ListItemButton>
               <ListItemIcon>
                 {index % 2 === 0 ? (
-                  <LocationSearchingIcon />
+                  <LocationSearchingIcon onClick={()=>{
+                    routePage();
+                  }} />
                 ) : (
                   <SavedSearchIcon />
                 )}
@@ -138,7 +144,7 @@ export default function Navigation() {
           onClose={handleClose}
         >
           <MenuItem onClick={profileView}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My Account</MenuItem>
+          <MenuItem onClick={routePage}>Route Page</MenuItem>
           <MenuItem onClick={logout}>Logout</MenuItem>
         </Menu>
         {loginRef}
