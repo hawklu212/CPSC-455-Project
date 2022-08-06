@@ -19,7 +19,7 @@ const calculateStepScore = async (
   console.log("userMass is" + userMass);
   // TODO: incorporate distancePref into the calculation
   // let distancePref = userProfile.distancePreference;
-  // TODO: use a better default rolling resistance
+
   let rollingResistance = 1;
 
   for (let i = 0; i < elevationData.length - 2; i++) {
@@ -39,14 +39,29 @@ const calculateStepScore = async (
 
     // calculate the inclineFactor for this step
     let inclineFactor = null;
+    let preferenceMultiplier = 1;
 
+    switch (distancePref) {
+        // Consider shorter distances as more important (weigh incline less)
+      case "distance":
+        preferenceMultiplier = 0.5;
+        break;
+        // Consider shallower grades more important (weigh incline more heavily)
+      case "gradient":
+        preferenceMultiplier = 1.5;
+        break;
+      default:
+        break;
+    }
+
+    // Calculate incline factor using user preference
     if (incline < 0) {
       inclineFactor =
-        userMass * samplingDistance * Math.tan(incline) -
+        userMass * samplingDistance * Math.tan(preferenceMultiplier * incline) -
         samplingDistance * rollingResistance;
     } else {
       inclineFactor =
-        userMass * samplingDistance * Math.tan(incline) +
+        userMass * samplingDistance * Math.tan(preferenceMultiplier * incline) +
         samplingDistance * rollingResistance;
     }
 
@@ -58,8 +73,6 @@ const calculateStepScore = async (
     // Calculate this step's score and add it to the current score in elevationResults
     let stepScore = samplingDistance * inclineFactor;
     elevationResults.routeScore += stepScore;
-    console.log(stepScore);
-    console.log(elevationResults.routeScore);
   }
 };
 
