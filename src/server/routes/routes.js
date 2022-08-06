@@ -26,7 +26,7 @@ router.get("/", async function (req, res, next) {
       let routeSummary = {
         mapBoundsData: route.bounds, // need this for maps Viewport
         totalDistance: leg.distance.value,
-        totalDuration: leg.duration.value, //in seconds
+        totalDuration: leg.duration.value, // in seconds
         endAddress: leg.end_address,
         endLocation: leg.end_location,
         startAddress: leg.start_address,
