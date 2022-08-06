@@ -16,6 +16,8 @@ router.get("/", async function (req, res, next) {
 
   const orig = routeParams.orig;
   const dest = routeParams.dest;
+  const userPref = routeParams.userPref;
+
   try {
     const directions = await getDirectionsResults(orig, dest);
 
@@ -39,7 +41,7 @@ router.get("/", async function (req, res, next) {
       };
 
       // getElevationResults will return array of elevations, the route score, as well as the steepest incline
-      const elevationResults = await getElevationResults(route);
+      const elevationResults = await getElevationResults(route, userPref);
 
       // Set the values in route summary from the elevation and incline calculations
       routeSummary.steepestIncline = elevationResults.steepestIncline;
