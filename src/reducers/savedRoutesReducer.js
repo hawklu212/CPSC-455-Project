@@ -1,8 +1,9 @@
-const savedRoutesReducer = (savedRoutesArray = null, action) => {
+const savedRoutesReducer = (savedRoutesArray = [], action) => {
   switch (action.type) {
     case "SAVE_ROUTE":
-      savedRoutesArray = action.payload;
-      return savedRoutesArray;
+      let newRoutesArray = [...savedRoutesArray];
+      newRoutesArray.push(action.payload);
+      return newRoutesArray;
     case "CLEAR_ROUTES":
       savedRoutesArray = [];
       return savedRoutesArray;

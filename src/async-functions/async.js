@@ -215,11 +215,11 @@ export async function deleteSavedRoute(name) {
   return response.json();
 }
 
-export async function addSavedRoute(origin, destination, name) {
+export async function addSavedRoute(data) {
   const savedRoute = {
-    origin: origin,
-    destination: destination,
-    name: name,
+    origin: data.origin,
+    destination: data.destination,
+    name: data.name,
   };
   const response = await fetch(`${endpoint}savedRoutes`, {
     method: "POST",

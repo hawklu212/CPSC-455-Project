@@ -13,6 +13,7 @@ import { clearDirections } from "../../actions/clearDirections";
 // import { APIKey } from "../../apiKey";
 import { addSavedRoute, getRouteResults } from "../../async-functions/async";
 import { changeRouteIndex } from "../../actions/changeRouteIndex";
+import { saveRoute } from "../../actions/saveRoute";
 
 const containerStyle = {
   display: "inline-flex",
@@ -89,12 +90,14 @@ function MainMapComponent() {
     dispatch(changeRouteIndex(directionArray[0].routeIndex));
   }
 
-  async function saveRoute() {
-    await addSavedRoute(
-      originRef.current.value,
-      destRef.current.value,
-      routeLabel
-    );
+  async function saveNewRoute() {
+    const data = {
+      origin: originRef.current.value,
+      destination: destRef.current.value,
+      name: routeLabel,
+    };
+    await addSavedRoute(data);
+    dispatch(saveRoute(data));
   }
 
   return isLoaded ? (
@@ -117,7 +120,7 @@ function MainMapComponent() {
           type="text"
           onChange={(event) => setRouteLabel(event.target.value)}
         ></TextField>
-        <Button variant="contained" type="submit" onClick={saveRoute}>
+        <Button variant="contained" type="submit" onClick={saveNewRoute}>
           Save Route
         </Button>
       </Grid>

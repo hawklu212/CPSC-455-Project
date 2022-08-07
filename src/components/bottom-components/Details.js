@@ -12,8 +12,9 @@ import {
   MenuItem,
 } from "@mui/material";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { getSavedRoutes } from "../../async-functions/async";
 
 export default function Details(props) {
   const [currDisplayedPrevOrigin, setCurrDisplayedPrevOrigin] = useState("");
@@ -34,6 +35,14 @@ export default function Details(props) {
 
   const savedRoutes = useSelector((state) => state.savedRoutesReducer);
 
+  useEffect(() => {
+    async function loadSavedRoutes() {
+      const storedSavedRoutes = await getSavedRoutes();
+      setDropdown(storedSavedRoutes);
+    }
+    loadSavedRoutes();
+  }, [savedRoutes]);
+
   const handleDropdownChange = () => {};
 
   return (
@@ -53,8 +62,8 @@ export default function Details(props) {
               MenuProps={MenuProps}
             >
               {dropdown.map((route) => (
-                <MenuItem key={route} value={route}>
-                  {route}
+                <MenuItem key={route.name} value={route.name}>
+                  {route.name}
                 </MenuItem>
               ))}
             </Select>

@@ -1,6 +1,6 @@
-export const addDirections = (route) => {
+export const saveRoute = (route) => {
   return {
-    type: "ADD_ROUTE",
+    type: "SAVE_ROUTE",
     payload: route,
   };
 };
