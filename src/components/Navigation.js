@@ -43,7 +43,7 @@ export default function Navigation() {
     navigate("../profile");
   };
 
-  const routePage = async () =>{
+  const routePage = async () => {
     navigate("../search");
   };
 
@@ -77,9 +77,11 @@ export default function Navigation() {
             <ListItemButton>
               <ListItemIcon>
                 {index % 2 === 0 ? (
-                  <LocationSearchingIcon onClick={()=>{
-                    routePage();
-                  }} />
+                  <LocationSearchingIcon
+                    onClick={() => {
+                      routePage();
+                    }}
+                  />
                 ) : (
                   <SavedSearchIcon />
                 )}

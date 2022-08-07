@@ -180,33 +180,56 @@ export async function putSetUserPreferenceCurl(data) {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-/*  Get user Preferences  */
+/*  Get Saved Routes  */
 export async function getSavedRoutes() {
-  const response = await fetch(`${endpoint}savedRoutes/`, {
+  const response = await fetch(`${endpoint}savedRoutes`, {
     method: "GET",
     mode: "cors",
     cache: "no-cache",
-    credentials: "same-origin",
+    credentials: "include",
   });
   return response.json();
 }
 
-export async function deleteSavedRoutes() {
-  const response = await fetch(`${endpoint}savedRoutes/`, {
+export async function deleteAllSavedRoutes() {
+  const response = await fetch(`${endpoint}savedRoutes`, {
+    method: "PUT",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "include",
+  });
+  return response.json();
+}
+
+export async function deleteSavedRoute(name) {
+  const response = await fetch(`${endpoint}savedRoutes`, {
     method: "DELETE",
     mode: "cors",
     cache: "no-cache",
-    credentials: "same-origin",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name: name }),
   });
   return response.json();
 }
 
-export async function addSavedRoute() {
-  const response = await fetch(`${endpoint}savedRoutes/`, {
+export async function addSavedRoute(origin, destination, name) {
+  const savedRoute = {
+    origin: origin,
+    destination: destination,
+    name: name,
+  };
+  const response = await fetch(`${endpoint}savedRoutes`, {
     method: "POST",
     mode: "cors",
     cache: "no-cache",
-    credentials: "same-origin",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(savedRoute),
   });
   return response.json();
 }
