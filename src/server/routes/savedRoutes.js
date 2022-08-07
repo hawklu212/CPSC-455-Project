@@ -58,26 +58,19 @@ router.post("/", valCookie, async function (req, res) {
 });
 
 router.put("/", valCookie, async function (req, res) {
-  å;
   try {
     let { cookies } = req;
     let individual = await LoginModel.find({ accessToken: cookies.session_id });
-    let duplicateCheck = await savedRouteModel.find({
-      email: individual[0]["email"],
-      name: req.body["name"],
-    });
-    if (duplicateCheck.length !== 0) {
-      res.send({ exists: 1 });
-      return;
-    }
-    let newSavedRoutes = new savedRouteModel({
-      email: individual[0]["email"],
-      origin: req.body["origin"],
-      destination: req.body["destination"],
-      name: req.body["name"],
-    });
-    await newSavedRoutes.save();
-    let savedRoutes = await savedRouteModel.find({
+    // let duplicateCheck = await savedRouteModel.find({
+    //   email: individual[0]["email"],
+    //   name: req.body["name"],
+    // });
+    // if (duplicateCheck.length !== 0) {
+    //   res.send({ exists: 1 });
+    //   return;
+    // }
+
+    let savedRoutes = await savedRouteModel.deleteMany({
       email: individual[0]["email"],
     });
     let arr = [];

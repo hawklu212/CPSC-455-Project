@@ -10,11 +10,16 @@ import {
   Select,
   OutlinedInput,
   MenuItem,
+  Button,
 } from "@mui/material";
 
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { getSavedRoutes } from "../../async-functions/async";
+import { useDispatch, useSelector } from "react-redux";
+import { clearRoutes } from "../../actions/clearRoutes";
+import {
+  deleteAllSavedRoutes,
+  getSavedRoutes,
+} from "../../async-functions/async";
 
 export default function Details(props) {
   const [currDisplayedPrevOrigin, setCurrDisplayedPrevOrigin] = useState("");
@@ -33,6 +38,8 @@ export default function Details(props) {
     },
   };
 
+  const dispatch = useDispatch();
+
   const savedRoutes = useSelector((state) => state.savedRoutesReducer);
 
   useEffect(() => {
@@ -44,6 +51,11 @@ export default function Details(props) {
   }, [savedRoutes]);
 
   const handleDropdownChange = () => {};
+
+  const clearSavedRoutes = async () => {
+    await deleteAllSavedRoutes();
+    dispatch(clearRoutes());
+  };
 
   return (
     <Grid container space={1}>
@@ -81,6 +93,11 @@ export default function Details(props) {
       </Grid>
       <Grid item xs={6}>
         <Chip label={currDisplayedPrevDest}></Chip>
+      </Grid>
+      <Grid>
+        <Button variant="contained" type="submit" onClick={clearSavedRoutes}>
+          Clear Saved Routes
+        </Button>
       </Grid>
     </Grid>
   );
