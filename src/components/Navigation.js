@@ -27,7 +27,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleDrawerState, loginState } from "../actions";
 import { logoutCurl } from "../async-functions/async";
 
-
 export default function Navigation() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -40,8 +39,12 @@ export default function Navigation() {
       console.error(e);
     }
   };
-  const profileView = async () =>{
+  const profileView = async () => {
     navigate("../profile");
+  };
+
+  const routePage = async () => {
+    navigate("../search");
   };
 
   const drawerState = useSelector((state) => state.drawerState);
@@ -74,7 +77,11 @@ export default function Navigation() {
             <ListItemButton>
               <ListItemIcon>
                 {index % 2 === 0 ? (
-                  <LocationSearchingIcon />
+                  <LocationSearchingIcon
+                    onClick={() => {
+                      routePage();
+                    }}
+                  />
                 ) : (
                   <SavedSearchIcon />
                 )}
@@ -138,7 +145,7 @@ export default function Navigation() {
           onClose={handleClose}
         >
           <MenuItem onClick={profileView}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My Account</MenuItem>
+          <MenuItem onClick={routePage}>Route Page</MenuItem>
           <MenuItem onClick={logout}>Logout</MenuItem>
         </Menu>
         {loginRef}

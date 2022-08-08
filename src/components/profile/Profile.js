@@ -20,9 +20,13 @@ import {
   putSetUserPreferenceCurl,
 } from "../../async-functions/async";
 import { loginState } from "../../actions";
-import { setInitialCookieCurl, getCookieValidationCurl } from "../../async-functions/async";
+import {
+  setInitialCookieCurl,
+  getCookieValidationCurl,
+} from "../../async-functions/async";
 import { validate } from "email-validator";
 import { textAlign, width } from "@mui/system";
+import Cookies from "js-cookie";
 
 const marks = [
   {
@@ -65,7 +69,6 @@ export default function Profile() {
   };
   const handlePriorityChange = (event) => {
     setPriority(event.target.value);
-    console.log(event.target.value);
     switch (event.target.value) {
       case "distance":
         setHelperText("I value shorter distances more.");
@@ -77,19 +80,19 @@ export default function Profile() {
         setHelperText("Distance and incline are equally important to me.");
     }
   };
-  const currentPreferences =async () => {
-    try{
-      const userPref= await getUserPreferenceCurl();
-      if (userPref["exists"]==1){
-      setcurrPrefText(`maxIncline:${userPref["maxIncline"]}, weight:${userPref["weight"]}, distancePreference:${userPref["distancePreference"]} `)
-      }
-      else{
+  const currentPreferences = async () => {
+    try {
+      const userPref = await getUserPreferenceCurl();
+      if (userPref["exists"] == 1) {
+        setcurrPrefText(
+          `maxIncline:${userPref["maxIncline"]}, weight:${userPref["weight"]}, distancePreference:${userPref["distancePreference"]} `
+        );
+      } else {
         setcurrPrefText("User preferences not set");
       }
+    } catch (error) {
+      console.log(error);
     }
-      catch (error){
-        console.log(error);
-      }
   };
 
   const handleSave = async () => {
@@ -100,17 +103,16 @@ export default function Profile() {
       weight: weight,
       distancePreference: priority,
     };
-    try{
-    await putSetUserPreferenceCurl(profile);
-    setSaveText("Save Successful");
-    }
-    catch (error){
+    try {
+      await putSetUserPreferenceCurl(profile);
+      setSaveText("Save Successful");
+    } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    if (loginUser !== "") {
+    if (loginUser !== "" && Cookies.get("map_id")==="" || Cookies.get("map_id")===undefined) {
       setInitialCookieCurl({ userName: loginUser })
         .then((res) => {
           if (res["status"] !== 0) {
