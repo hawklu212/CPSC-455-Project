@@ -16,6 +16,8 @@ router.get("/", async function (req, res, next) {
 
   const orig = routeParams.orig;
   const dest = routeParams.dest;
+  const userPref = routeParams.userPref;
+
   try {
     const directions = await getDirectionsResults(orig, dest);
 
@@ -26,7 +28,7 @@ router.get("/", async function (req, res, next) {
       let routeSummary = {
         mapBoundsData: route.bounds, // need this for maps Viewport
         totalDistance: leg.distance.value,
-        totalDuration: leg.duration.value, //in seconds
+        totalDuration: leg.duration.value, // in seconds
         endAddress: leg.end_address,
         endLocation: leg.end_location,
         startAddress: leg.start_address,
@@ -39,7 +41,7 @@ router.get("/", async function (req, res, next) {
       };
 
       // getElevationResults will return array of elevations, the route score, as well as the steepest incline
-      const elevationResults = await getElevationResults(route);
+      const elevationResults = await getElevationResults(route, userPref);
 
       // Set the values in route summary from the elevation and incline calculations
       routeSummary.steepestIncline = elevationResults.steepestIncline;
@@ -50,15 +52,11 @@ router.get("/", async function (req, res, next) {
         elevationResults.elevationDataArray
       );
 
-      // TODO: assign rating
-      // TODO: assign ranking somehow based on some criteria
-      // TODO: assign sort route data list
-
       routeResultsArray.push(routeSummary);
     }
 
-    // set the ranks for the routes in routeResultsArray
-    // routeResultsArray.sort()
+    // Assign ranking - done with 1-based indexing i.e. the best route will have ranking = 1
+    routeResultsArray.forEach((route, index) => route.ranking = index+1);
 
     res.send({ routes: routeResultsArray });
   } catch (e) {

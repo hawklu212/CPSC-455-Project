@@ -24,4 +24,4 @@ yarn-debug.log*
 yarn-error.log*
 apiKey*
 
-/src/server/appPassword*
+/src/server/appPassword.js

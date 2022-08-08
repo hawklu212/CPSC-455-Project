@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addDirections } from "../../actions/addDirections";
 import { clearDirections } from "../../actions/clearDirections";
 // import { APIKey } from "../../apiKey";
-import { addSavedRoute, getRouteResults } from "../../async-functions/async";
+import { addSavedRoute, getRouteResults, getUserPreferenceCurl } from "../../async-functions/async";
 import { changeRouteIndex } from "../../actions/changeRouteIndex";
 import { saveRoute } from "../../actions/saveRoute";
 import { useEffect } from "react";
@@ -56,8 +56,8 @@ function MainMapComponent() {
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null);
   }, []);
-
-  useEffect(() => {
+  
+    useEffect(() => {
     async function updateDisplayedRoute() {
       await calculateRoute(displayRoute[0], displayRoute[1]);
     }
@@ -65,7 +65,9 @@ function MainMapComponent() {
   }, [displayRoute]);
 
   async function calculateRoute(origin, destination) {
-    const routeResults = await getRouteResults([origin, destination]);
+    const userPref = await getUserPreferenceCurl();
+    const routeResults = await getRouteResults([origin, destination], userPref);
+
     // eslint-disable-next-line no-undef
     const directionService = new google.maps.DirectionsService();
     // hand direction service the origin, destination and travel mode as well as options

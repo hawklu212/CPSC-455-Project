@@ -131,10 +131,13 @@ export async function recoverySendCodeCurl(data) {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-export async function getRouteResults(locations) {
+
+export async function getRouteResults(locations, userPref) {
+
   const routeParams = new URLSearchParams({
     orig: locations[0],
     dest: locations[1],
+    userPref: userPref,
   });
   const response = await fetch(`${endpoint}routes/?` + routeParams, {
     method: "GET",
