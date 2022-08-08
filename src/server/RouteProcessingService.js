@@ -79,7 +79,7 @@ const calculateStepScore = async (
 const calculateIncline = (startElevation, endElevation, distance) => {
   let riseOverRun = (endElevation - startElevation) / distance;
   let inclineRadians = Math.atan(riseOverRun);
-  let inclineDegrees = inclineRadians / 180;
+  let inclineDegrees = inclineRadians * (180 / 3.14159265);
   return inclineDegrees;
 };
 
