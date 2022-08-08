@@ -70,7 +70,6 @@ export default function RightBottomContainer() {
   return (
     <div className={"results"}>
       {directions.map((direction) => (
-        // TODO: add unique ID here?
         <Card
           className={"routeResult"}
           variant={"outlined"}
@@ -86,7 +85,7 @@ export default function RightBottomContainer() {
                     sx={{ height: iconDimension, width: iconDimension }}
                   />
                 </IconButton>
-                Total elevation: {(direction.distance * 1.5).toFixed(0)} meters
+                Total elevation: {(direction.totalElevation).toFixed(0)} meters
               </Typography>
               <Typography component="div" variant="">
                 <IconButton aria-label="distance">
@@ -94,7 +93,7 @@ export default function RightBottomContainer() {
                     sx={{ height: iconDimension, width: iconDimension }}
                   />
                 </IconButton>
-                Distance: {direction.distance} kilometers
+                Distance: {direction.totalDistance} kilometers
               </Typography>
               <Typography component="div" variant="">
                 <IconButton aria-label="duration">
@@ -102,7 +101,7 @@ export default function RightBottomContainer() {
                     sx={{ height: iconDimension, width: iconDimension }}
                   />
                 </IconButton>
-                Duration: {direction.duration} minutes
+                Duration: {direction.totalDuration} minutes
               </Typography>
             </CardContent>
           </Box>
@@ -114,7 +113,7 @@ export default function RightBottomContainer() {
                     sx={{ height: iconDimension, width: iconDimension }}
                   />
                 </IconButton>
-                Maximum incline: {(Math.random() * 15).toFixed(0)} degrees
+                Maximum incline: {(direction.steepestIncline)} degrees
               </Typography>
               <Typography component="div" variant="">
                 <IconButton aria-label="start" style={{ color: green[500] }}>
