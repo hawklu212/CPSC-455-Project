@@ -93,7 +93,7 @@ export default function RightBottomContainer() {
                     sx={{ height: iconDimension, width: iconDimension }}
                   />
                 </IconButton>
-                Distance: {direction.totalDistance} kilometers
+                Distance: {(direction.totalDistance / 1000).toFixed(2)} kilometers
               </Typography>
               <Typography component="div" variant="">
                 <IconButton aria-label="duration">
@@ -101,7 +101,7 @@ export default function RightBottomContainer() {
                     sx={{ height: iconDimension, width: iconDimension }}
                   />
                 </IconButton>
-                Duration: {direction.totalDuration} minutes
+                Duration: {(direction.totalDuration / 60).toFixed(0)} minutes
               </Typography>
             </CardContent>
           </Box>
