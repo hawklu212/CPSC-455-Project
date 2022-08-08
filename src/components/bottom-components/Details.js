@@ -12,9 +12,9 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearRoutes } from "../../actions/clearRoutes";
+import { displayRoute } from "../../actions/displayRoute";
 import {
   deleteAllSavedRoutes,
-  getRouteResults,
   getSavedRoutes,
 } from "../../async-functions/async";
 
@@ -63,8 +63,8 @@ export default function Details(props) {
     dispatch(clearRoutes());
   };
 
-  const viewSavedRoute = async () => {
-    await getRouteResults;
+  const viewSavedRoute = () => {
+    dispatch(displayRoute([currDisplayedPrevOrigin, currDisplayedPrevDest]));
   };
 
   return (

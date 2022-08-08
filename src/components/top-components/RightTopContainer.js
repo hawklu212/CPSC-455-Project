@@ -14,6 +14,7 @@ import { clearDirections } from "../../actions/clearDirections";
 import { addSavedRoute, getRouteResults } from "../../async-functions/async";
 import { changeRouteIndex } from "../../actions/changeRouteIndex";
 import { saveRoute } from "../../actions/saveRoute";
+import { useEffect } from "react";
 
 const containerStyle = {
   display: "inline-flex",
@@ -39,6 +40,7 @@ function MainMapComponent() {
   const [routeLabel, setRouteLabel] = React.useState("");
 
   const dispatch = useDispatch();
+  const displayRoute = useSelector((state) => state.displayRouteReducer);
 
   /** @type React.MutableRefObject<HTMLInputElement> */
   const originRef = useRef();
@@ -55,17 +57,21 @@ function MainMapComponent() {
     setMap(null);
   }, []);
 
-  async function calculateRoute() {
-    const routeResults = await getRouteResults([
-      originRef.current.value,
-      destRef.current.value,
-    ]);
+  useEffect(() => {
+    async function updateDisplayedRoute() {
+      await calculateRoute(displayRoute[0], displayRoute[1]);
+    }
+    updateDisplayedRoute();
+  }, [displayRoute]);
+
+  async function calculateRoute(origin, destination) {
+    const routeResults = await getRouteResults([origin, destination]);
     // eslint-disable-next-line no-undef
     const directionService = new google.maps.DirectionsService();
     // hand direction service the origin, destination and travel mode as well as options
     const results = await directionService.route({
-      origin: originRef.current.value,
-      destination: destRef.current.value,
+      origin: origin,
+      destination: destination,
       // eslint-disable-next-line no-undef
       travelMode: google.maps.TravelMode.WALKING,
       provideRouteAlternatives: true,
@@ -104,7 +110,13 @@ function MainMapComponent() {
     <Grid container spacing={2}>
       <Grid item xs={3}>
         <Inputs origin={originRef} destination={destRef} />
-        <Button variant="contained" type="submit" onClick={calculateRoute}>
+        <Button
+          variant="contained"
+          type="submit"
+          onClick={() =>
+            calculateRoute(originRef.current.value, destRef.current.value)
+          }
+        >
           Calculate Route
         </Button>
         <Divider variant="middle" />
