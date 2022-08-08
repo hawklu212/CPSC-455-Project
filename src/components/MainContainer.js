@@ -38,7 +38,6 @@ export default function MainContainer() {
             res
               .json()
               .then((ret) => {
-                console.log(ret);
                 dispatch(loginState(ret["userName"]));
               })
               .catch((error) => {
@@ -63,15 +62,15 @@ export default function MainContainer() {
     >
       <Navigation></Navigation>
 
+      <div>
+        <TopDiv />
+      </div>
       <div style={{
         backgroundImage: `url(${image})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat' 
         }}>
-        <TopDiv />
-      </div>
-      <div>
         <BottomDiv />
       </div>
     </div>

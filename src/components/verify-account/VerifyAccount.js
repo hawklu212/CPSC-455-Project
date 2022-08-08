@@ -92,15 +92,15 @@ export default function VerifyAccount() {
         <br />
         <br />
         <Typography variant="h4">
-          Hi there! Please enter the verification code sent to your email
+          Hi there! Please enter and send the verification code sent to your email
         </Typography>
         <br />
         <TextField
           defaultValue={loginUser}
           error={emailError}
           helperText={emailErrorMessage}
-          variant="filled"
           required
+          variant="filled"
           label="Email"
           onChange={(event) => {
             email = event.target.value;
@@ -121,6 +121,7 @@ export default function VerifyAccount() {
         <h3>{emailSendError}</h3>
         <span>
           <Button
+            style={{background:"linear-gradient(to left,purple, brown,purple)"}}
             variant="outlined"
             onClick={async () => {
               setEmailSendError("");
@@ -138,8 +139,10 @@ export default function VerifyAccount() {
           >
             Send Verification Code
           </Button>
-          <Button
+          <br/>
+          <center><Button
             variant="outlined"
+            style={{background:"linear-gradient(to left,purple, brown,purple)"}}
             onClick={async () => {
               setEmailSendError("");
               if (verificationCode === "" && email === "") {
@@ -171,8 +174,9 @@ export default function VerifyAccount() {
               }
             }}
           >
-            Verify
+            Verify Account
           </Button>
+          </center>
         </span>
       </Grid>
     </>

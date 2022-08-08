@@ -135,7 +135,6 @@ export default function Profile() {
             res
               .json()
               .then((ret) => {
-                console.log(ret);
                 dispatch(loginState(ret["userName"]));
               })
               .catch((error) => {

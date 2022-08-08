@@ -3,7 +3,7 @@ import "../../components-styling/colours.css";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import image from "./darkmountain.jpg"
+import image from "./field.jpg"
 import { useDispatch, useSelector } from "react-redux";
 import { loginState } from "../../actions";
 import { signUpCurl } from "../../async-functions/async";
@@ -126,6 +126,7 @@ export default function CreateAccount() {
         <span>
           <Button
             variant="outlined"
+            style={{background:"linear-gradient(to left,green, lightgreen ,green)"}}
             onClick={() => {
               if (userPass === "" && email === "") {
                 failBoth();

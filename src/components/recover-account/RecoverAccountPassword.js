@@ -3,7 +3,7 @@ import "../../components-styling/colours.css";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import image from "./nightbeach.jpg"
+import image from "./calmwater.jpg"
 import { useDispatch, useSelector } from "react-redux";
 import { loginState } from "../../actions";
 import {
