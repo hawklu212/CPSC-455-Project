@@ -23,7 +23,7 @@ const getDirectionsResults = async (orig, dest) => {
 };
 // Note: elevation API can consume multiple types. For now, let's either pass in
 // an address, or latitude and longitude
-const getElevationResults = async (route, userPref) => {
+const getElevationResults = async (route, userProfile) => {
   // TODO: change this after testing
   const numberOfSamples = 10;
   // assuming we only have 1 leg for now, and we aren't using waypoints
@@ -34,8 +34,6 @@ const getElevationResults = async (route, userPref) => {
     routeScore: 0,
     steepestIncline: null,
   };
-
-  //let elevationDataArray = [];
 
   for (const step of legSteps) {
     let distanceOfStep = step.distance.value;
@@ -48,15 +46,13 @@ const getElevationResults = async (route, userPref) => {
     let elevationRequest = {
       params: {
         path: [startLocation, endLocation],
-        samples: numberOfSamples, // TODO: replace with ElevationSampleSize once done testing
+        samples: numberOfSamples,
         key: APIKey,
       },
       timeout: 1000,
     };
 
     let elevationData = await client.elevation(elevationRequest);
-
-    let userProfile = userPref;
 
     // calculateStepScore - take in elevationResults, elevationData, subSampleDistance and userProfile
     // - return nothing, update score in elevationResults
