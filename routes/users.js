@@ -204,7 +204,7 @@ router.post("/", function (req, res, next) {
           return;
         }
         const uuid = uuidv4();
-        const test = new LoginModel({
+        let test = new LoginModel({
           email: mail,
           userName: req.body[user],
           userPass: req.body[pass],
