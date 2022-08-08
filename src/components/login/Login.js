@@ -84,9 +84,7 @@ export default function Login() {
   };
 
   return loginUser !== "" ? (
-    <div style={{ 
-      backgroundImage: `url(${image})` 
-    }}>
+    <>
       <Grid
         className="yellow-2"
         container
@@ -198,7 +196,7 @@ export default function Login() {
         </span>
         <br />
       </Grid>
-    </div>
+    </>
   ) : (
     ""
   );
