@@ -112,7 +112,7 @@ export default function Profile() {
   };
 
   useEffect(() => {
-    if (loginUser !== "" && Cookies.get("session_id")==="" || Cookies.get("session_id")===undefined) {
+    if (loginUser !== "" && Cookies.get("map_id")==="" || Cookies.get("map_id")===undefined) {
       setInitialCookieCurl({ userName: loginUser })
         .then((res) => {
           if (res["status"] !== 0) {
