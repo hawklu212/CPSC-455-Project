@@ -85,7 +85,7 @@ export default function Login() {
 
   return loginUser !== "" ? (
     <div style={{ 
-      backgroundImage: `url(./stock.png)` 
+      backgroundImage: `url(./stock.jpg)` 
     }}>
       <Grid
         className="yellow-2"
