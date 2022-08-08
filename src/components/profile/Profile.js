@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import Navigation from "../Navigation";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useEffect, useState } from "react";
+import image from "./light.jpg"
 import {
   getUserPreferenceCurl,
   loginCurl,
@@ -158,7 +159,11 @@ export default function Profile() {
         direction="column"
         alignItems="center"
         justifyContent="center"
-        style={{ minHeight: "100vh" }}
+        style={{ minHeight: "100vh",
+        backgroundImage: `url(${image})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'  }}
       >
         <Typography variant="h2">Profile</Typography>
         <Divider style={{ width: "50%" }}></Divider>

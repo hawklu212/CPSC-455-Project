@@ -3,6 +3,7 @@ import BottomDiv from "./bottom-components/BottomDiv";
 import Navigation from "./Navigation";
 import { useEffect } from "react";
 import { loginState } from "../actions";
+import image from "./path.jpg"
 import { useDispatch, useSelector } from "react-redux";
 import {
   setInitialCookieCurl,
@@ -58,11 +59,16 @@ export default function MainContainer() {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      style={{ minHeight: "100vh" }}
+      style={{ minHeight: "100vh", }}
     >
       <Navigation></Navigation>
 
-      <div>
+      <div style={{
+        backgroundImage: `url(${image})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat' 
+        }}>
         <TopDiv />
       </div>
       <div>

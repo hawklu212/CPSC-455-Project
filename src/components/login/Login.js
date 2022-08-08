@@ -84,9 +84,7 @@ export default function Login() {
   };
 
   return loginUser !== "" ? (
-    <div style={{ 
-      backgroundImage: `url(${image})` 
-    }}>
+    <>
       <Grid
         className="yellow-2"
         container
@@ -94,7 +92,12 @@ export default function Login() {
         direction="column"
         alignItems="center"
         justifyContent="center"
-        style={{ minHeight: "100vh" }}
+        style={{ minHeight: "100vh", 
+        backgroundImage: `url(${image})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat' 
+      }}
       >
         <Typography variant="h2">A11yMaps</Typography>
         <br />
@@ -193,7 +196,7 @@ export default function Login() {
         </span>
         <br />
       </Grid>
-    </div>
+    </>
   ) : (
     ""
   );

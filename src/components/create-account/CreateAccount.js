@@ -3,6 +3,7 @@ import "../../components-styling/colours.css";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import image from "./darkmountain.jpg"
 import { useDispatch, useSelector } from "react-redux";
 import { loginState } from "../../actions";
 import { signUpCurl } from "../../async-functions/async";
@@ -80,7 +81,11 @@ export default function CreateAccount() {
         direction="column"
         alignItems="center"
         justifyContent="center"
-        style={{ minHeight: "100vh" }}
+        style={{ minHeight: "100vh",
+        backgroundImage: `url(${image})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'  }}
       >
         <Typography variant="h2">A11yMaps</Typography>
         <br />
