@@ -17,12 +17,7 @@ const calculateStepScore = async (
     userMass = userProfile.weight;
   }
 
-  // Individuals preference for what to weigh as more important in the score calculation. String value can be
-  // one of "distance", "gradient", or a default value for both to be weighed equally
   let distancePref = userProfile.distancePreference;
-
-  // In ideal world we would have an individual value for this, however in the absence of information on
-  // individuals wheelchairs we keep the value of 1.
   let rollingResistance = 1;
 
   for (let i = 0; i < elevationData.length - 2; i++) {
