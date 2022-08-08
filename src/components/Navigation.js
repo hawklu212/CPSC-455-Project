@@ -27,7 +27,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleDrawerState, loginState } from "../actions";
 import { logoutCurl } from "../async-functions/async";
 
-
 export default function Navigation() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -40,11 +39,11 @@ export default function Navigation() {
       console.error(e);
     }
   };
-  const profileView = async () =>{
+  const profileView = async () => {
     navigate("../profile");
   };
 
-  const routePage = async () =>{
+  const routePage = async () => {
     navigate("../search");
   };
 
@@ -78,9 +77,11 @@ export default function Navigation() {
             <ListItemButton>
               <ListItemIcon>
                 {index % 2 === 0 ? (
-                  <LocationSearchingIcon onClick={()=>{
-                    routePage();
-                  }} />
+                  <LocationSearchingIcon
+                    onClick={() => {
+                      routePage();
+                    }}
+                  />
                 ) : (
                   <SavedSearchIcon />
                 )}

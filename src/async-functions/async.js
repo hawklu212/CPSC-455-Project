@@ -1,3 +1,4 @@
+// TODO: remove this endpoint after testing
 const endpoint = "http://server.a11ymaps.com/";
 export async function loginCurl(data) {
   const response = await fetch(`${endpoint}users`, {
@@ -130,7 +131,6 @@ export async function recoverySendCodeCurl(data) {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-// JJ: at some point, may need to pass in user here as well
 export async function getRouteResults(locations) {
   const routeParams = new URLSearchParams({
     orig: locations[0],
@@ -162,7 +162,7 @@ export async function getUserPreferenceCurl() {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-/*  Get user Preferences  */
+/*  Put user Preferences  */
 export async function putSetUserPreferenceCurl(data) {
   const response = await fetch(`${endpoint}profileCreation`, {
     method: "PUT", // *GET, POST, PUT, DELETE, etc.
@@ -178,4 +178,58 @@ export async function putSetUserPreferenceCurl(data) {
     body: JSON.stringify(data),
   });
   return response.json(); // parses JSON response into native JavaScript objects
+}
+
+/*  Get Saved Routes  */
+export async function getSavedRoutes() {
+  const response = await fetch(`${endpoint}savedRoutes`, {
+    method: "GET",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "include",
+  });
+  return response.json();
+}
+
+export async function deleteAllSavedRoutes() {
+  const response = await fetch(`${endpoint}savedRoutes`, {
+    method: "PUT",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "include",
+  });
+  return response.json();
+}
+
+export async function deleteSavedRoute(name) {
+  const response = await fetch(`${endpoint}savedRoutes`, {
+    method: "DELETE",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name: name }),
+  });
+  return response.json();
+}
+
+export async function addSavedRoute(data) {
+  const savedRoute = {
+    origin: data.origin,
+    destination: data.destination,
+    name: data.name,
+  };
+  const response = await fetch(`${endpoint}savedRoutes`, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(savedRoute),
+  });
+  return response.json();
 }
