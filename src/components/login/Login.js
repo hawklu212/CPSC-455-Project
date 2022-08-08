@@ -9,6 +9,7 @@ import { loginCurl } from "../../async-functions/async";
 import { loginState } from "../../actions";
 import { getCookieValidationCurl } from "../../async-functions/async";
 import { validate } from "email-validator";
+import image from "./stock.jpg"
 let email = "";
 let userPass = "";
 export default function Login() {
@@ -84,7 +85,7 @@ export default function Login() {
 
   return loginUser !== "" ? (
     <div style={{ 
-      backgroundImage: `url(./stock.jpg)` 
+      backgroundImage: `url(${image})` 
     }}>
       <Grid
         className="yellow-2"
