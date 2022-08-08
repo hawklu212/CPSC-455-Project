@@ -1,5 +1,5 @@
 // TODO: remove this endpoint after testing
-const endpoint = "http://localhost:3001/" || "http://server.a11ymaps.com/";
+const endpoint = "http://server.a11ymaps.com/";
 export async function loginCurl(data) {
   const response = await fetch(`${endpoint}users`, {
     method: "PUT", // *GET, POST, PUT, DELETE, etc.
