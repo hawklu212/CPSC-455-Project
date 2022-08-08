@@ -61,14 +61,6 @@ router.put("/", valCookie, async function (req, res) {
   try {
     let { cookies } = req;
     let individual = await LoginModel.find({ accessToken: cookies.session_id });
-    // let duplicateCheck = await savedRouteModel.find({
-    //   email: individual[0]["email"],
-    //   name: req.body["name"],
-    // });
-    // if (duplicateCheck.length !== 0) {
-    //   res.send({ exists: 1 });
-    //   return;
-    // }
 
     let savedRoutes = await savedRouteModel.deleteMany({
       email: individual[0]["email"],

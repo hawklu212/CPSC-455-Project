@@ -1,14 +1,10 @@
 import {
-  Box,
   Grid,
-  Slider,
-  TextField,
   Typography,
   Chip,
   FormControl,
   InputLabel,
   Select,
-  OutlinedInput,
   MenuItem,
   Button,
 } from "@mui/material";
@@ -18,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearRoutes } from "../../actions/clearRoutes";
 import {
   deleteAllSavedRoutes,
+  getRouteResults,
   getSavedRoutes,
 } from "../../async-functions/async";
 
@@ -25,6 +22,7 @@ export default function Details(props) {
   const [currDisplayedPrevOrigin, setCurrDisplayedPrevOrigin] = useState("");
   const [currDisplayedPrevDest, setCurrDisplayedPrevDest] = useState("");
   const [dropdown, setDropdown] = useState([]);
+  const [currDropdownVal, setCurrDropdownVal] = useState("");
 
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -50,11 +48,23 @@ export default function Details(props) {
     loadSavedRoutes();
   }, [savedRoutes]);
 
-  const handleDropdownChange = () => {};
+  const handleDropdownChange = (event) => {
+    setCurrDropdownVal(event.target.value);
+
+    let newRoute = dropdown.filter(
+      (route) => route.name == event.target.value
+    )[0];
+    setCurrDisplayedPrevOrigin(newRoute.origin);
+    setCurrDisplayedPrevDest(newRoute.destination);
+  };
 
   const clearSavedRoutes = async () => {
     await deleteAllSavedRoutes();
     dispatch(clearRoutes());
+  };
+
+  const viewSavedRoute = async () => {
+    await getRouteResults;
   };
 
   return (
@@ -63,14 +73,14 @@ export default function Details(props) {
         <Typography variant={"h5"}>Saved Queries</Typography>
         <div>
           <FormControl sx={{ m: 1, width: 300 }}>
-            <InputLabel id="demo-multiple-name-label">Route</InputLabel>
+            <InputLabel id="route-label">Route</InputLabel>
             <Select
-              labelId="demo-multiple-name-label"
-              id="demo-multiple-name"
-              multiple
-              value={dropdown}
+              labelId="route-label"
+              id="route"
+              value={currDropdownVal}
+              label="Route"
               onChange={handleDropdownChange}
-              input={<OutlinedInput label="Route" />}
+              // input={<OutlinedInput label="Route" />}
               MenuProps={MenuProps}
             >
               {dropdown.map((route) => (
@@ -97,6 +107,9 @@ export default function Details(props) {
       <Grid>
         <Button variant="contained" type="submit" onClick={clearSavedRoutes}>
           Clear Saved Routes
+        </Button>
+        <Button variant="contained" type="submit" onClick={viewSavedRoute}>
+          View Saved Route
         </Button>
       </Grid>
     </Grid>
