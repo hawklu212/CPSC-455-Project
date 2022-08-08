@@ -19,6 +19,7 @@ import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfi
 import SentimentNeutralIcon from "@mui/icons-material/SentimentNeutral";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import { changeRouteIndex } from "../../actions/changeRouteIndex";
+import {getUserPreferenceCurl} from "../../async-functions/async";
 
 export default function RightBottomContainer() {
   const directions = useSelector((state) => state.directionsReducer);
@@ -113,8 +114,8 @@ export default function RightBottomContainer() {
                     sx={{ height: iconDimension, width: iconDimension }}
                   />
                 </IconButton>
-                Maximum incline: {(direction.steepestIncline)} degrees
-              </Typography>
+                Maximum incline: {(direction.steepestIncline.toFixed(2))} degrees
+              </Typography>)
               <Typography component="div" variant="">
                 <IconButton aria-label="start" style={{ color: green[500] }}>
                   <FlagIcon
@@ -134,7 +135,7 @@ export default function RightBottomContainer() {
             </CardContent>
           </Box>
           <Divider orientation="vertical" flexItem />
-          {ratingArray[Math.floor(Math.random() * (2 + 1))]}
+          {ratingArray[direction.routeIndex - 1]}
         </Card>
       ))}
     </div>
