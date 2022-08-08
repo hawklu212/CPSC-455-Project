@@ -79,8 +79,8 @@ function MainMapComponent() {
       provideRouteAlternatives: true,
     });
 
-    const directionArray = [];
-    for (let i = 0; i < routeResults.routes.length; i++) {
+    const directionArray = routeResults.routes;
+/*    for (let i = 0; i < routeResults.routes.length; i++) {
       const leg = routeResults.routes[i];
       directionArray.push({
         distance: (leg.totalDistance / 1000).toFixed(2),
@@ -90,7 +90,7 @@ function MainMapComponent() {
         routeIndex: leg.routeIndex,
         score: leg.score,
       });
-    }
+    }*/
     directionArray.sort((a, b) => parseFloat(a.score) - parseFloat(b.score));
 
     dispatch(addDirections(directionArray));
