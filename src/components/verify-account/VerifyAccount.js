@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginState } from "../../actions";
+import image from "./mountainstock.jpg"
 import {
   verificationCurl,
   recoverySendCodeCurl,
@@ -80,7 +81,11 @@ export default function VerifyAccount() {
         direction="column"
         alignItems="center"
         justifyContent="center"
-        style={{ minHeight: "100vh" }}
+        style={{ minHeight: "100vh",
+        backgroundImage: `url(${image})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'  }}
       >
         <Typography variant="h2">A11yMaps</Typography>
         <br />
