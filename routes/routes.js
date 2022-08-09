@@ -45,7 +45,12 @@ router.get("/", async function (req, res, next) {
 
       // Set the values in route summary from the elevation and incline calculations
       routeSummary.steepestIncline = elevationResults.steepestIncline;
-      routeSummary.score = elevationResults.routeScore;
+
+      if (routeSummary.steepestIncline > userPref.maxIncline) {
+        routeSummary.score = Number.MAX_SAFE_INTEGER;
+      } else {
+        routeSummary.score = elevationResults.routeScore;
+      }
 
       calculateTotalElevation(
         routeSummary,
