@@ -72,7 +72,7 @@ export default function Details(props) {
       <Grid item xs={12}>
         <Typography variant={"h5"}>Saved Queries</Typography>
         <div>
-          <FormControl sx={{ m: 1, width: 300 }}>
+          <FormControl sx={{ m: 1, width: 1 }}>
             <InputLabel id="route-label">Route</InputLabel>
             <Select
               labelId="route-label"
@@ -91,16 +91,12 @@ export default function Details(props) {
           </FormControl>
         </div>
       </Grid>
-      <Grid item xs={5}>
+      <Grid item xs={12}>
         <Typography variant={"h6"}>Origin</Typography>
-      </Grid>
-      <Grid item xs={5}>
         <Chip label={currDisplayedPrevOrigin}></Chip>
       </Grid>
-      <Grid item xs={5}>
+      <Grid item xs={12}>
         <Typography variant={"h6"}>Destination</Typography>
-      </Grid>
-      <Grid item xs={5}>
         <Chip label={currDisplayedPrevDest}></Chip>
       </Grid>
       <Grid item xs={12}>

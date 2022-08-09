@@ -112,7 +112,7 @@ function MainMapComponent() {
     <Grid container spacing={2}>
       <Grid item xs={3}>
         <Inputs origin={originRef} destination={destRef} />
-        <ButtonGroup variant="contained">
+        <ButtonGroup variant="contained" fullWidth={true}>
           <Button
               type="submit"
               onClick={() =>
