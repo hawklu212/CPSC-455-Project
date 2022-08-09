@@ -36,7 +36,7 @@ const getElevationResults = async (route, userProfile) => {
 
   for (const step of legSteps) {
     let distanceOfStep = step.distance.value;
-    const numberOfSamples = (distanceOfStep/20).toFixed(0);
+    const numberOfSamples = Math.floor(distanceOfStep/20);
     let subSampleDistance = distanceOfStep / numberOfSamples;
     let startLocation = [step.start_location.lat, step.start_location.lng];
     let endLocation = [step.end_location.lat, step.end_location.lng];
