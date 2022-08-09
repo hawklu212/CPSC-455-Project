@@ -80,7 +80,6 @@ export default function Details(props) {
               value={currDropdownVal}
               label="Route"
               onChange={handleDropdownChange}
-              // input={<OutlinedInput label="Route" />}
               MenuProps={MenuProps}
             >
               {dropdown.map((route) => (
