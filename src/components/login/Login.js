@@ -1,6 +1,7 @@
 import { Grid, Typography, Button, Divider } from "@mui/material";
 import "../../components-styling/colours.css";
 import { TextField } from "@mui/material";
+import image from "./stock.jpg"
 import { useNavigate } from "react-router-dom";
 // import Navigation from "../Navigation";
 import { useDispatch, useSelector } from "react-redux/es/exports";
@@ -91,7 +92,13 @@ export default function Login() {
         direction="column"
         alignItems="center"
         justifyContent="center"
-        style={{ minHeight: "100vh" }}
+        style={{ 
+        minHeight: "100vh",
+        backgroundImage: `url(${image})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat' 
+           }}
       >
         <Typography variant="h2">A11yMaps</Typography>
         <br />
