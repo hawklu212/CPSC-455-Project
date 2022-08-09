@@ -222,6 +222,7 @@ export default function Profile() {
           Save
         </Button>
         {saveText}
+        <br />
         <Button variant="outlined" onClick={currentPreferences}>
           Get Current Preferences
         </Button>
