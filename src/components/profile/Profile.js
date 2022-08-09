@@ -6,7 +6,7 @@ import {
   Select,
   MenuItem,
   FormControl,
-  FormHelperText,
+  FormHelperText, ButtonGroup,
 } from "@mui/material";
 import "../../components-styling/colours.css";
 import { Slider, TextField } from "@mui/material";
@@ -217,14 +217,15 @@ export default function Profile() {
         <br />
         <Divider style={{ width: "50%" }}></Divider>
         <br />
-
-        <Button variant="outlined" onClick={handleSave}>
-          Save
-        </Button>
-        {saveText}
-        <Button variant="outlined" onClick={currentPreferences}>
-          Get Current Preferences
-        </Button>
+        <ButtonGroup variant="outlined">
+          <Button onClick={handleSave}>
+            Save
+          </Button>
+          {saveText}
+          <Button onClick={currentPreferences}>
+            Get Current Preferences
+          </Button>
+        </ButtonGroup>
         {currPrefText}
         <br />
         <br />
