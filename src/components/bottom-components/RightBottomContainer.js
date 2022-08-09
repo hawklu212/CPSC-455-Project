@@ -19,6 +19,7 @@ import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfi
 import SentimentNeutralIcon from "@mui/icons-material/SentimentNeutral";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import { changeRouteIndex } from "../../actions/changeRouteIndex";
+import {getUserPreferenceCurl} from "../../async-functions/async";
 
 export default function RightBottomContainer() {
   const directions = useSelector((state) => state.directionsReducer);
@@ -29,7 +30,7 @@ export default function RightBottomContainer() {
 
   const changeDisplayedRoute = (newIndex) => {
     dispatch(changeRouteIndex(newIndex));
-  };
+  }
 
   const goodRating = (
     <Box sx={{ display: "flex", flexDirection: "column", bgcolor: green[50] }}>
@@ -70,7 +71,6 @@ export default function RightBottomContainer() {
   return (
     <div className={"results"}>
       {directions.map((direction) => (
-        // TODO: add unique ID here?
         <Card
           className={"routeResult"}
           variant={"outlined"}
@@ -86,7 +86,7 @@ export default function RightBottomContainer() {
                     sx={{ height: iconDimension, width: iconDimension }}
                   />
                 </IconButton>
-                Total elevation: {(direction.distance * 1.5).toFixed(0)} meters
+                Total elevation: {(direction.totalElevation).toFixed(0)} meters
               </Typography>
               <Typography component="div" variant="">
                 <IconButton aria-label="distance">
@@ -94,7 +94,7 @@ export default function RightBottomContainer() {
                     sx={{ height: iconDimension, width: iconDimension }}
                   />
                 </IconButton>
-                Distance: {direction.distance} kilometers
+                Distance: {(direction.totalDistance / 1000).toFixed(2)} kilometers
               </Typography>
               <Typography component="div" variant="">
                 <IconButton aria-label="duration">
@@ -102,7 +102,7 @@ export default function RightBottomContainer() {
                     sx={{ height: iconDimension, width: iconDimension }}
                   />
                 </IconButton>
-                Duration: {direction.duration} minutes
+                Duration: {(direction.totalDuration / 60).toFixed(0)} minutes
               </Typography>
             </CardContent>
           </Box>
@@ -114,7 +114,7 @@ export default function RightBottomContainer() {
                     sx={{ height: iconDimension, width: iconDimension }}
                   />
                 </IconButton>
-                Maximum incline: {(Math.random() * 15).toFixed(0)} degrees
+                Maximum incline: {(direction.steepestIncline.toFixed(2))} degrees
               </Typography>
               <Typography component="div" variant="">
                 <IconButton aria-label="start" style={{ color: green[500] }}>
@@ -135,15 +135,9 @@ export default function RightBottomContainer() {
             </CardContent>
           </Box>
           <Divider orientation="vertical" flexItem />
-          {ratingArray[Math.floor(Math.random() * (2 + 1))]}
+            {ratingArray[direction.rating]}
         </Card>
       ))}
     </div>
-  );
-
-  return (
-    <span id="RIGHT_BOTTOM" style={{ display: "inline-block" }}>
-      <Evaluation />
-    </span>
   );
 }
