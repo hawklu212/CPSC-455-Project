@@ -135,15 +135,9 @@ export default function RightBottomContainer() {
             </CardContent>
           </Box>
           <Divider orientation="vertical" flexItem />
-          {ratingArray[direction.routeIndex - 1]}
+          {(direction.score === Number.MAX_SAFE_INTEGER)?  ratingArray[2] : ratingArray[direction.routeIndex - 1]}
         </Card>
       ))}
     </div>
-  );
-
-  return (
-    <span id="RIGHT_BOTTOM" style={{ display: "inline-block" }}>
-      <Evaluation />
-    </span>
   );
 }
