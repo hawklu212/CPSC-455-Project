@@ -16,7 +16,7 @@ router.get("/", async function (req, res, next) {
 
   const orig = routeParams.orig;
   const dest = routeParams.dest;
-  const userPref = routeParams.userPref;
+  const userPref = JSON.parse(routeParams.userPref);
 
   try {
     const directions = await getDirectionsResults(orig, dest);

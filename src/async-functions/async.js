@@ -137,7 +137,7 @@ export async function getRouteResults(locations, userPref) {
   const routeParams = new URLSearchParams({
     orig: locations[0],
     dest: locations[1],
-    userPref: userPref,
+    userPref: JSON.stringify(userPref),
   });
   const response = await fetch(`${endpoint}routes/?` + routeParams, {
     method: "GET",
