@@ -30,7 +30,7 @@ export default function RightBottomContainer() {
 
   const changeDisplayedRoute = (newIndex) => {
     dispatch(changeRouteIndex(newIndex));
-  };
+  }
 
   const goodRating = (
     <Box sx={{ display: "flex", flexDirection: "column", bgcolor: green[50] }}>
@@ -135,8 +135,7 @@ export default function RightBottomContainer() {
             </CardContent>
           </Box>
           <Divider orientation="vertical" flexItem />
-          {ratingArray[2]}
-          {/* {(direction.score === Number.MAX_SAFE_INTEGER) ? ratingArray[2] : ratingArray[direction.routeIndex - 1]} */}
+            {ratingArray[direction.routeScore]}
         </Card>
       ))}
     </div>

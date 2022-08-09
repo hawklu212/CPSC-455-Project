@@ -36,7 +36,7 @@ router.get("/", async function (req, res, next) {
         totalElevation: null,
         steepestIncline: null,
         score: null,
-        rating: "neutral", // replace with "happy" or "sad" somehow
+        rating: 0,
         routeIndex: index,
       };
 
@@ -46,10 +46,15 @@ router.get("/", async function (req, res, next) {
       // Set the values in route summary from the elevation and incline calculations
       routeSummary.steepestIncline = elevationResults.steepestIncline;
 
-      if (routeSummary.steepestIncline > userPref.maxIncline) {
+      if (routeSummary.steepestIncline > (userPref.maxIncline + 1)) {
         routeSummary.score = Number.MAX_SAFE_INTEGER;
+        routeSummary.rating = 2;
+      } else if (routeSummary.steepestIncline > userPref.maxIncline) {
+        routeSummary.score = elevationResults.routeScore;
+        routeSummary.rating = 1;
       } else {
         routeSummary.score = elevationResults.routeScore;
+        routeSummary.rating = 0;
       }
 
       calculateTotalElevation(
