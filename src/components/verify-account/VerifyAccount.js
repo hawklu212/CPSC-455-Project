@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginState } from "../../actions";
-import image from "./mountainstock.jpg"
 import {
   verificationCurl,
   recoverySendCodeCurl,
@@ -81,11 +80,7 @@ export default function VerifyAccount() {
         direction="column"
         alignItems="center"
         justifyContent="center"
-        style={{ minHeight: "100vh",
-        backgroundImage: `url(${image})`,
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat'  }}
+        style={{ minHeight: "100vh" }}
       >
         <Typography variant="h2">A11yMaps</Typography>
         <br />
@@ -121,7 +116,6 @@ export default function VerifyAccount() {
         <h3>{emailSendError}</h3>
         <span>
           <Button
-            style={{background:"linear-gradient(to left,purple, brown,purple)"}}
             variant="outlined"
             onClick={async () => {
               setEmailSendError("");
@@ -142,7 +136,6 @@ export default function VerifyAccount() {
           <br/>
           <center><Button
             variant="outlined"
-            style={{background:"linear-gradient(to left,purple, brown,purple)"}}
             onClick={async () => {
               setEmailSendError("");
               if (verificationCode === "" && email === "") {
