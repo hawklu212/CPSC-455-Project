@@ -6,7 +6,7 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 import Inputs from "./InputDiv";
-import { Button, Divider, Grid, Input, TextField } from "@mui/material";
+import {Button, ButtonGroup, Divider, Grid, Input, TextField} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { addDirections } from "../../actions/addDirections";
 import { clearDirections } from "../../actions/clearDirections";
@@ -112,20 +112,19 @@ function MainMapComponent() {
     <Grid container spacing={2}>
       <Grid item xs={3}>
         <Inputs origin={originRef} destination={destRef} />
-        <Button
-          variant="contained"
-          type="submit"
-          onClick={() =>
-            calculateRoute(originRef.current.value, destRef.current.value)
-          }
-        >
-          Calculate Route
-        </Button>
-        <Divider variant="middle" />
-        <Button variant="contained" onClick={() => dispatch(clearDirections())}>
-          Clear Results
-        </Button>
-        <Divider variant="middle" />
+        <ButtonGroup variant="contained">
+          <Button
+              type="submit"
+              onClick={() =>
+                  calculateRoute(originRef.current.value, destRef.current.value)
+              }
+          >
+            Calculate Route
+          </Button>
+          <Button onClick={() => dispatch(clearDirections())}>
+            Clear Results
+          </Button>
+        </ButtonGroup>
 
         <TextField
           variant="filled"
