@@ -112,6 +112,9 @@ export default function Login() {
           required
           variant="filled"
           label="Email"
+          style ={{
+            background: "white",
+            opacity: 0.8}}
           onChange={(event) => {
             email = event.target.value;
           }}
@@ -123,6 +126,9 @@ export default function Login() {
           required
           label="Password"
           type="password"
+          style ={{
+            background: "white",
+            opacity: 0.8}}
           onChange={(event) => {
             userPass = event.target.value;
           }}
@@ -130,6 +136,9 @@ export default function Login() {
         <br />
         <span>
           <Button
+            style ={{
+            background: "white",
+            opacity: 0.8}}
             variant="outlined"
             onClick={() => {
               if (userPass === "" && email === "") {
@@ -179,7 +188,10 @@ export default function Login() {
           Don&apos;t have an account? Sign up here!
         </Typography>
         <br />
-        <Button variant="outlined" onClick={signUp}>
+        <Button variant="outlined" onClick={signUp} 
+        style ={{
+            background: "white",
+            opacity: 0.8}}>
           Sign up
         </Button>
         <br />
@@ -188,10 +200,16 @@ export default function Login() {
         </Typography>
         <br />
         <span>
-          <Button variant="outlined" onClick={recovery}>
+          <Button variant="outlined" onClick={recovery}
+          style ={{
+            background: "white",
+            opacity: 0.8}}>
             Recover Password
           </Button>
-          <Button variant="outlined" onClick={verify}>
+          <Button variant="outlined" onClick={verify}
+          style ={{
+            background: "white",
+            opacity: 0.8}}>
             Verify Account
           </Button>
         </span>
