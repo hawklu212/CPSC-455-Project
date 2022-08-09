@@ -110,7 +110,7 @@ function MainMapComponent() {
 
   return isLoaded ? (
     <Grid container spacing={2}>
-      <Grid item xs={3}>
+      <Grid item xs={4}>
         <Inputs origin={originRef} destination={destRef} />
         <ButtonGroup variant="contained" fullWidth={true}>
           <Button
@@ -138,7 +138,7 @@ function MainMapComponent() {
           Save Route
         </Button>
       </Grid>
-      <Grid item xs={9}>
+      <Grid item xs={8}>
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
