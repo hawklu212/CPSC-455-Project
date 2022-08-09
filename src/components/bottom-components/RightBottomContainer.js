@@ -115,7 +115,7 @@ export default function RightBottomContainer() {
                   />
                 </IconButton>
                 Maximum incline: {(direction.steepestIncline.toFixed(2))} degrees
-              </Typography>)
+              </Typography>
               <Typography component="div" variant="">
                 <IconButton aria-label="start" style={{ color: green[500] }}>
                   <FlagIcon
