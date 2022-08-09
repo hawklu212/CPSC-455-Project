@@ -135,7 +135,7 @@ export default function RightBottomContainer() {
             </CardContent>
           </Box>
           <Divider orientation="vertical" flexItem />
-            {ratingArray[direction.routeScore]}
+            {ratingArray[direction.rating]}
         </Card>
       ))}
     </div>
