@@ -25,7 +25,6 @@ router.get("/", valCookie, async function (req, res) {
         });
       }
     } else {
-      console.log("user not logged in");
       res.send({ error: "user not logged in" });
     }
   } catch (err) {
@@ -39,7 +38,6 @@ router.put("/", valCookie, async function (req, res) {
   try {
     let individual = await LoginModel.find({ accessToken: cookies.session_id });
     if (individual.length !== 0) {
-      console.log("found" + individual[0]);
       let findPref = await ProfileModel.find({ email: individual[0]["email"] });
       if (findPref.length === 0) {
         newPref = new ProfileModel({
@@ -75,7 +73,6 @@ router.put("/", valCookie, async function (req, res) {
         });
       }
     } else {
-      console.log("user not logged in");
       res.send({ error: "user not logged in" });
     }
   } catch (err) {

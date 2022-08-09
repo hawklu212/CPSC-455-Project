@@ -59,7 +59,6 @@ const verificationCode = "verificationCode";
 function valCookie(req, res, next) {
   const { cookies } = req;
   if ("session_id" in cookies) {
-    console.log("session_id exists");
     if (cookies.session_id === "") {
       res.status(403).send({ msg: "no session present" });
       return;
@@ -78,7 +77,6 @@ router.put("/cookie", function (req, res, next) {
     .then((arr) => {
       if (arr.length !== 0) {
         const test = arr[0][user];
-        console.log(`first login ${arr[0]}`);
         res.cookie("session_id", `${curr}`);
         res.cookie("map_id", APIKey,{httpOnly: false, domain: '.a11ymaps.com'});
         res.send(getReturnHelper(0, test, arr[0], "")).status(304);
@@ -126,7 +124,6 @@ router.put("/cookie/logout", valCookie, async function (req, res) {
     res.send({ error: error });
     return;
   }
-  console.log("made it here");
   res.cookie("session_id", "")
   .cookie("map_id", "",{httpOnly: false, domain: '.a11ymaps.com'})
   .send({});
@@ -158,7 +155,6 @@ router.put("/", function (req, res, next) {
             { new: true }
           )
             .then((newStuff) => {
-              console.log( `${newStuff["accessToken"]}`)
               res
                 .cookie("session_id", `${newStuff["accessToken"]}`)
                 .cookie("map_id", APIKey,{httpOnly: false, domain: '.a11ymaps.com'})
@@ -271,10 +267,8 @@ router.put("/verify", function (req, res, next) {
 /* POST users listing. Account recovery email send, recoverySendCodeCurl , error 1 is bad user, error 2 is bad password, error 3 is not verified*/
 router.post("/verify", function (req, res, next) {
   const mail = req.body[email];
-  console.log(mail);
   LoginModel.find({ email: mail })
     .then((arr) => {
-      console.log(arr[0]["accessToken"]);
       if (arr.length !== 0) {
         if (arr[0]["accessToken"] === "") {
           const newUuid = uuidv4();
@@ -286,14 +280,12 @@ router.post("/verify", function (req, res, next) {
             .then((newStuff) => {
               mailOptions["to"] = newStuff["email"];
               mailOptions["text"] = newStuff["accessToken"];
-              console.log(mailOptions["to"]);
               transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
                   res.send({ error: error });
                   console.log(error);
                 } else {
                   res.send(getReturnHelper(0, mail, ""));
-                  console.log("Email sent: " + info.response);
                 }
               });
             })
@@ -304,14 +296,12 @@ router.post("/verify", function (req, res, next) {
         } else {
           mailOptions["to"] = arr[0]["email"];
           mailOptions["text"] = arr[0]["accessToken"];
-          console.log(mailOptions["to"]);
           transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
               res.send({ error: error });
               console.log(error);
             } else {
               res.send(getReturnHelper(0, mail, ""));
-              console.log("Email sent: " + info.response);
             }
           });
         }

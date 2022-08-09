@@ -64,7 +64,6 @@ const getElevationResults = async (route, userProfile) => {
 
     elevationData.data.results.forEach((coordinate) => {
       elevationResults.elevationDataArray.push(coordinate.elevation);
-      // console.log(elevationResults.elevationDataArray);
     });
   }
 
@@ -73,6 +72,4 @@ const getElevationResults = async (route, userProfile) => {
 
 module.exports = { getDirectionsResults, getElevationResults };
 
-//   .catch((e) => {
-//     console.log(e.response.data.error_message);
-//   });
+
