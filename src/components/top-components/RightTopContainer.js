@@ -132,6 +132,7 @@ function MainMapComponent() {
           label="Label Route"
           type="text"
           onChange={(event) => setRouteLabel(event.target.value)}
+          fullWidth={true}
         ></TextField>
         <Button variant="contained" type="submit" onClick={saveNewRoute}>
           Save Route
