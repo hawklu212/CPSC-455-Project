@@ -6,10 +6,10 @@ export default function Inputs(props) {
   return (
     <Box>
       <Autocomplete>
-        <input type="text" placeholder="Origin" ref={props.origin} />
+        <input type="text" placeholder="Origin" style={{width: '250px', fontSize: '14px'}} ref={props.origin} />
       </Autocomplete>
       <Autocomplete>
-        <input type="text" placeholder="Destination" ref={props.destination} />
+        <input type="text" placeholder="Destination" style={{width: '250px', fontSize: '14px'}} ref={props.destination} />
       </Autocomplete>
     </Box>
   );
