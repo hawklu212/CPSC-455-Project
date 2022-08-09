@@ -217,15 +217,14 @@ export default function Profile() {
         <br />
         <Divider style={{ width: "50%" }}></Divider>
         <br />
-        <ButtonGroup variant="outlined">
-          <Button onClick={handleSave}>
-            Save
-          </Button>
-          {saveText}
-          <Button onClick={currentPreferences}>
-            Get Current Preferences
-          </Button>
-        </ButtonGroup>
+        <Button variant="outlined" onClick={handleSave}>
+          Save
+        </Button>
+        {saveText}
+        <br />
+        <Button variant="outlined" onClick={currentPreferences}>
+          Get Current Preferences
+        </Button>
         {currPrefText}
         <br />
         <br />
