@@ -36,13 +36,13 @@ With this main goal in mind, our task requirements were the following:
 
 - :white_check_mark: **Add Per-Request Authentication via Cookies** - add authentication using cookies for every request to secure our application. This required figuring out how to use the `js-cookie` 3rd party library to safely transmit session ids.
 
-- :white_check_mark: **Allow Users to Visually Compare Routes** - allow users to switch the map display depending on which route they want to view. This required a lot of coordination on the React-Redux state, in addition to properly liasing with the payloads from the backend.
+- :white_check_mark: **Allow Users to Visually Compare Routes** - allow users to switch the map display depending on which route they want to view. This required a lot of coordination on the React-Redux state, in addition to properly liaising with the payloads from the backend.
 
 - :x: **Store Saved Routes Locally (To Improve Latency) and Update Route As Necessary** - This would require figuring out a representation for the routes to be saved in the database, and implementing watchers for changes.
   
 - :x: **Implementing a Custom Routing Algorithm** - implement a custom routing algorithm. Doing this would allow us to sample elevation from points and come up with our own routes independent of Google's results.
 
-- :x: **Allow Users to Self-Report Obstructions Along Route and Accomodate Paths or Recommendations Accordingly** - this requires the previous stretch goals to be accomplished.
+- :x: **Allow Users to Self-Report Obstructions Along Route and Accommodate Paths or Recommendations Accordingly** - this requires the previous stretch goals to be accomplished.
 
 - :x: **Turn by Turn Navigation** - this would provide users with detailed instructions for turn by turn navigation.
 
@@ -56,9 +56,9 @@ With this main goal in mind, our task requirements were the following:
 
 - **Unit 1 - HTML, CSS, JS** - These 3 technologies were heavily utilized indirectly throughout the project, through the realization of all the other technologies. For the UI, manipulation and interfacing with HTML was used through the virtual DOM of React to quickly create components, while CSS was utilized to add custom styling to components. And Javascript was the primary development language utilized to write both frontend (React+Redux) and backend (Node+MongoDB) code.
 - **Unit 2 - React/Redux** - The user interface was designed with the React Framework and the MaterialUI component library to quickly build the structure of our application using standardized components. Redux was also incorporated to allow us to easily manage state across the various components we created as our frontend grew in complexity.
-- **Unit 3 - Node/Express** - The Node.js framework was used to write the backend code, allowing us write queries to the Google Maps API services, code the processing of the route result data, and manage cookies. Express was used as our web server, to setup APIs that allowed our backend code to interface and serve responses to frontend requests.
+- **Unit 3 - Node/Express** - The Node.js framework was used to write the backend code, allowing us to write queries to the Google Maps API services, code the processing of the route result data, and manage cookies. Express was used as our web server, to set up APIs that allowed our backend code to interface and serve responses to frontend requests.
 - **MongoDB** - MongoDB was used as our primary persistent data storage. User Preferences, access tokens, validation status, and saved routes were stored in a MongoDB server, with the information being associated with the user's email address. The utilization of MongoDB allowed us to rapidly prototype and work with databases with its flexible schema, compared to a SQL database.
-- **Heroku** - Heroku was utilized to deploy our full-stack application. The frontend react web app and the Express+MongoDB backend server were deployed as two separate dynos respectively, with ents setup to track any GitHub changes.
+- **Heroku** - Heroku was utilized to deploy our full-stack application. The frontend react web app and the Express+MongoDB backend server were deployed as two separate dynos respectively, with automated deployments setup to track any GitHub changes.
 
 ## Above and Beyond Functionality
 
@@ -72,7 +72,7 @@ Through the integration of the Google Maps APIs, we incorporated a fully functio
 
 By integrating `nodemailer` for email verification and password recovery, and `js-cookies` for session id cookie management, we improved the overall security of our application.
 
-We integrated the nodeMailer library into the Express server and setup a custom email which is used to send email messages. The custom email's security credentials are stored as Environmental Variables in the server, which are not accessible to users. In addition, we setup Js-cookies to be used for login credentials and login verification. When a user logs in or signs up, a unique uuid is generated for the user on the server end and sent over as a cookie to the client. The Google maps API credentials required for rendering google maps is also sent over as a cookie, ensuring that the maps API can't be accessed without logging in. A custom domain name was used for our client, and server as herokuapp itself prevents cookie transfer due to it being listed on the public suffix list.  The domain target for the cookie was specified, and the CORS policy was set up to allow for the cookie transfering between server and client. When a user logs out, the server wipes the cookie values on the client and server side, removing the persistent login and the map id until the user logs in again.
+We integrated the nodeMailer library into the Express server and set up a custom email which is used to send email messages. The custom email's security credentials are stored as Environmental Variables in the server, which are not accessible to users. In addition, we setup Js-cookies to be used for login credentials and login verification. When a user logs in or signs up, a unique uuid is generated for the user on the server end and sent over as a cookie to the client. The Google Maps API credentials required for rendering Google Maps is also sent over as a cookie, ensuring that the maps API can't be accessed without logging in. A custom domain name was used for our client, and server as Herokuapp itself prevents cookie transfer due to it being listed on the public suffix list.  The domain target for the cookie was specified, and the CORS policy was set up to allow for the cookie transferring between server and client. When a user logs out, the server wipes the cookie values on the client and server side, removing the persistent login and the map id until the user logs in again.
 
 ## Next Steps
 
@@ -101,7 +101,7 @@ Potential future directions for development could involve continuing to improve 
 ### Hawk
 
 - Created the cookie login and email verification system for persistent user login and the error messaging for login and password validation.
-- Set up the git action and heroku repositories for integrating and deploying pulls and merges to the main branch for both server and client.
+- Set up the git action and Heroku repositories for integrating and deploying pulls and merges to the main branch for both server and client.
 - Created the server routes and functions for user and route preferences and the mongoDb models for user and route preferences.
 
 ## Prototype Sketches
