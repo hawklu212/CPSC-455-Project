@@ -8,12 +8,10 @@ const { v4: uuidv4 } = require("uuid");
 const APIKey = process.env.APIKEY ||require("../apiKeyExpress")["APIKey"];
 
 let appPassword=process.env.APPPASSWORD ||require("../appPassword")["appPassword"];
-/* password req*/
-// Create a schema
+
 // eslint-disable-next-line new-cap
 const passSchema = new passwordValidator();
 
-// Add properties to it
 passSchema
   .is()
   .min(12) // Minimum length 8

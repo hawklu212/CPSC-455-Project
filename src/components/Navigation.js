@@ -1,36 +1,20 @@
 import {
-  Grid,
   Typography,
-  Button,
-  Divider,
   AppBar,
   Toolbar,
   IconButton,
-  Drawer,
-  Box,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemButton,
-  ListItemText,
   MenuItem,
   Menu,
 } from "@mui/material";
 import "../components-styling/colours.css";
 import { useNavigate } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
-import SavedSearchIcon from "@mui/icons-material/SavedSearch";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleDrawerState, loginState } from "../actions";
+import { useSelector } from "react-redux";
 import { logoutCurl } from "../async-functions/async";
 
 export default function Navigation() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const loginUser = useSelector((state) => state.loginState);
   const logout = async () => {
     try {
       await logoutCurl();
@@ -47,13 +31,7 @@ export default function Navigation() {
     navigate("../search");
   };
 
-  const drawerState = useSelector((state) => state.drawerState);
-  // const [drawerState, setDrawerState] = useState(false);
   const loginRef = useSelector((state) => state.loginState);
-  const toggleDrawer = () => {
-    // setDrawerState(!drawerState);
-    dispatch(toggleDrawerState(drawerState));
-  };
 
   const [anchorEl, setAnchorEl] = useState(null);
   const handleMenu = (event) => {
@@ -63,37 +41,6 @@ export default function Navigation() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const list = () => (
-    <Box
-      sx={{ width: 250 }}
-      role="presentation"
-      onClick={toggleDrawer}
-      onKeyDown={toggleDrawer}
-    >
-      <List>
-        {["Maps", "Saved Routes"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? (
-                  <LocationSearchingIcon
-                    onClick={() => {
-                      routePage();
-                    }}
-                  />
-                ) : (
-                  <SavedSearchIcon />
-                )}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-    </Box>
-  );
 
   return (
     <AppBar position="sticky">

@@ -10,7 +10,6 @@ import {Button, ButtonGroup, Divider, Grid, Input, TextField} from "@mui/materia
 import { useDispatch, useSelector } from "react-redux";
 import { addDirections } from "../../actions/addDirections";
 import { clearDirections } from "../../actions/clearDirections";
-// import { APIKey } from "../../apiKey";
 import { addSavedRoute, getRouteResults, getUserPreferenceCurl } from "../../async-functions/async";
 import { changeRouteIndex } from "../../actions/changeRouteIndex";
 import { saveRoute } from "../../actions/saveRoute";
@@ -70,7 +69,6 @@ function MainMapComponent() {
 
     // eslint-disable-next-line no-undef
     const directionService = new google.maps.DirectionsService();
-    // hand direction service the origin, destination and travel mode as well as options
     const results = await directionService.route({
       origin: origin,
       destination: destination,
@@ -80,17 +78,6 @@ function MainMapComponent() {
     });
 
     const directionArray = routeResults.routes;
-/*    for (let i = 0; i < routeResults.routes.length; i++) {
-      const leg = routeResults.routes[i];
-      directionArray.push({
-        distance: (leg.totalDistance / 1000).toFixed(2),
-        duration: (leg.totalDuration / 60).toFixed(0),
-        startAddress: leg.startAddress,
-        endAddress: leg.endAddress,
-        routeIndex: leg.routeIndex,
-        score: leg.score,
-      });
-    }*/
     directionArray.sort((a, b) => parseFloat(a.score) - parseFloat(b.score));
 
     dispatch(addDirections(directionArray));
@@ -150,7 +137,6 @@ function MainMapComponent() {
             fullscreenControl: false,
           }}
         >
-          {/* Child components, such as markers, info windows, etc. */}
           <></>
           {/* this will render any directions on the map when received from the server */}
           {directions && (
