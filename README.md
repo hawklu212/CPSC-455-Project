@@ -1,107 +1,121 @@
-# CPSC-455-Project
+# A11yMaps
 
-A11yMaps is an accessibility first web application that provides navigation services for users with diverse mobility needs. Using the Google Maps and Elevation APIs, we developed a proof of concept tool to assess and rank the difficulty of potential routes for a journey based on a user’s elevation profile preferences. Through this app, we sought to create an accessible navigation app with a user-friendly and Inclusive Design oriented approach.
+A11yMaps (Accessibility Maps) is an accessibility focused web application that provides walking navigation services for users with diverse mobility needs. Using the Google Maps and Elevation APIs, we developed a proof of concept tool to assess and rank the difficulty of potential routes for a journey based on a user’s specified elevation profile preferences. Through this app, we sought to provide a more inclusive navigation experience that allows users to tailor their journeys by finding the most suitable route to get to their destination.
 
-**Appname**
+## Project Description & Goals
 
-**A11yMaps**
+--------------------------------------------------------------------------------------------------
 
-# Project Description
+The main goals of this project were to design a tool to allow individuals who may not be able to travel routes with steeper inclines to plan their journeys, as well as utilize the tool to conveniently store these ranked routes for easy referencing.
 
-**Who is it for?**
+With this main goal in mind, our task requirements were the following:
 
-Individuals with impaired mobility/those constrained to utilising a wheelchair
+### Minimal requirements
 
-**What will it do? (What "human activity" will it support?) **
+- :white_check_mark: **User Account Setup** - allow users to create accounts to persist their data, and allow login and logout functionality.
 
-Will support better routing data to individuals with mobility impairments, giving them better/more information for choosing routes
+- :white_check_mark: **Create Elevation Preference Profile** - allow users to specify elevation criteria preferences that can be tied to their profile, and used in route ranking calculations.
 
-**What type of data will it store?**
+- :white_check_mark: **Query For Routes** - provide users with an intuitive UI to get route results for a journey by inputting an origin and destination location
 
-Favourite routes/locations
+- :white_check_mark: **Retrieve Route & Elevation Data from Google Maps API** - retrieve route data from the Google Maps Directions API using the locations provided by the user, and tie this with Elevation Data from the Google Elevation API.
 
-User profiles
+- :white_check_mark: **Rank Routes by “Difficulty”** - rank and re-order routes by how difficult they are in terms of how steep the elevation/incline is.
 
-**What will users be able to do with this data?**
+### Standard Requirements
 
-With pre-saved locations individuals will more rapidly be able to input start points and destinations, as well as quickly pull up past routes that they may use frequently
+- :white_check_mark: **Incorporate User Preferences into Route Calculations** -  use the user profile settings for weight, max incline, and preference for distance or incline to calculate a total score for each route. This required figuring out how to adapt calculations from https://doi.org/10.1179/000870406X93517.
 
-**What is some additional functionality you can add/remove based on time constraints? **
+- :white_check_mark: **Display Elevation/Distance Profile of Each Route** - provide a detailed display of information about each route, including elevation, distance, rating, etc. to allow users to gauge which routes they may prefer.
 
-# Project Task Requirements
+- :white_check_mark: **Saved Locations/Routes** - allow users to label and save routes so that they can easily pull up past searched routes for reference.
 
-● Project task requirements:
+- :white_check_mark: **Email Verification For Recovering Password** - allow users to recover a forgotten password via email verification. This required figuring out how to use `nodemailer`.
 
-**3-5 minimal requirements (will definitely complete)**
+### Stretch Requirements
 
-- User account setup
+- :white_check_mark: **Add Per-Request Authentication via Cookies** - add authentication using cookies for every request to secure our application. This required figuring out how to use the `js-cookie` 3rd party library to safely transmit session ids.
 
-- Basic, intuitive UI
+- :white_check_mark: **Allow Users to Visually Compare Routes** - allow users to switch the map display depending on which route they want to view. This required a lot of coordination on the React-Redux state, in addition to properly liasing with the payloads from the backend.
 
-- Enter source/destination locations
+- :x: **Store Saved Routes Locally (To Improve Latency) and Update Route As Necessary** - This would require figuring out a representation for the routes to be saved in the database, and implementing watchers for changes.
+  
+- :x: **Implementing a Custom Routing Algorithm** - implement a custom routing algorithm. Doing this would allow us to sample elevation from points and come up with our own routes independent of Google's results.
 
-- Store/save locations/routes
+- :x: **Allow Users to Self-Report Obstructions Along Route and Accomodate Paths or Recommendations Accordingly** - this requires the previous stretch goals to be accomplished.
 
-- Retrieve routes from a maps API (Google or OpenStreetMaps)
+- :x: **Turn by Turn Navigation** - this would provide users with detailed instructions for turn by turn navigation.
 
-- Rank them by “difficulty”
+- :x: **Ability to Simulate the Route** - this would allow users to view the route, like in Google Maps Street Views.
 
-**3-7 "standard" requirements (will most likely complete)**
+- :x: **Add “Use My Location" as an Origin/Destination and for Map Initialization** - this would be a quality of life improvement.
 
-- Give user an elevation/distance profile to view
+## Tech
 
-- A method for allowing users to compare routes at a glance
+--------------------------------------------------------------------------------------------------
 
-- ~~ability to update path in database should map change~~
+- **Unit 1 - HTML, CSS, JS** - These 3 technologies were heavily utilized indirectly throughout the project, through the realization of all the other technologies. For the UI, manipulation and interfacing with HTML was used through the virtual DOM of React to quickly create components, while CSS was utilized to add custom styling to components. And Javascript was the primary development language utilized to write both frontend (React+Redux) and backend (Node+MongoDB) code.
+- **Unit 2 - React/Redux** - The user interface was designed with the React Framework and the MaterialUI component library to quickly build the structure of our application using standardized components. Redux was also incorporated to allow us to easily manage state across the various components we created as our frontend grew in complexity.
+- **Unit 3 - Node/Express** - The Node.js framework was used to write the backend code, allowing us write queries to the Google Maps API services, code the processing of the route result data, and manage cookies. Express was used as our web server, to setup APIs that allowed our backend code to interface and serve responses to frontend requests.
+- **MongoDB** - MongoDB was used as our primary persistent data storage. User Preferences, access tokens, validation status, and saved routes were stored in a MongoDB server, with the information being associated with the user's email address. The utilization of MongoDB allowed us to rapidly prototype and work with databases with its flexible schema, compared to a SQL database.
+- **Heroku** - Heroku was utilized to deploy our full-stack application. The frontend react web app and the Express+MongoDB backend server were deployed as two separate dynos respectively, with ents setup to track any GitHub changes.
 
-- [x] implement email verification recover password
+## Above and Beyond Functionality
 
-- add per-request authentication via cookie
+------------------------------------------------------------------------------------------------
 
-- ability to compare between routes side by side
+**High Interactivity And Data Processing**
 
-**2-3 stretch requirements (plan to complete at least 1!)**
+Through the integration of the Google Maps APIs, we incorporated a fully functional location service, as well as made use of various external APIs to extract route directions and elevation data. After obtaining this data, utilizing an algorithm adapted from the academic literature that incorporates the user preferences, the routes were rated and scored for difficulty.
 
-- ~~See about implementing a routing algorithm~~
+**Improved Security**
 
-- ~~Users can report construction/obstacles along route, and the app can incorporate this information~~
+By integrating `nodemailer` for email verification and password recovery, and `js-cookies` for session id cookie management.
 
-- ~~Turn by turn navigation~~
+We integrated the nodeMailer library into the Express server and setup a custom email which is used to send email messages. The custom email's security credentials are stored as Environmental Variables in the server, which are not accessible to users. In addition, we setup Js-cookies to be used for login credentials and login verification. When a user logs in or signs up, a unique uuid is generated for the user on the server end and sent over as a cookie to the client. The Google maps API credentials required for rendering google maps is also sent over as a cookie, ensuring that the maps API can't be accessed without logging in. A custom domain name was used for our client, and server as herokuapp itself prevents cookie transfer due to it being listed on the public suffix list.  The domain target for the cookie was specified, and the CORS policy was set up to allow for the cookie transfering between server and client. When a user logs out, the server wipes the cookie values on the client and server side, removing the persistent login and the map id until the user logs in again.
 
-- ~~ability to simulate the route~~
+## Next Steps
 
-- allow maps to display alternative routes by clicking cards
+------------------------------------------------------------------------------------------------
 
-- Give users the option to rate things to prioritise for them (slope, elevation, distance) - save preferences to profile?
+Potential future directions for development could involve continuing to improve the usability and accuracy of our application through 3 main areas of work:
 
-- Add “use my location”, both as a start/end point, but also when initialising the map view
+- Make the application more accessible through the full integration of ARIA standards such as tagging all components with aria-tags, or the utilization of the React-Aria library.
+- Incorporate road surface and curb/step information (through interfacing with other external APIs) and self-reported (or crowd-sourced) user data on route obstacles, to more accurately model the score for a given route, as well as steer users clear of those obstacles.
+- Due to the nature of the application and the likelihood of being used on the go, we would ideally seek to make improvements to support a more mobile-friendly experience (possibly through React Native).
 
-- Pick 2 of your minimal requirements and break each of them down into ~2-5 smaller tasks!
+## Task Breakdown
 
-# Task Breakdown
+### Justin
 
-**User setup**
+- Setup main infrastructure for the frontend, including React, React Router, an MaterialUI, custom styling, and base layouts for the various components we used.
+- Did research into how to use the backend Google Maps Client, and implemented the actual API query calls from the frontend to the backend, and to the Google Maps APIs on the backend.
+- Properly hooked up the backend payloads to the frontend, and implemented the functionality for utilizing the payload to interactively display the route results after querying, and loading saved routes.
 
-- Sign up with username and password
+### Fraser
 
-- Log in based on the above following signup
+- Performed literature search for papers relating to wheelchair navigation and routing algorithms. Adapted that information into the rating algorithm used in the application and implemented it.
+- Performed the initial setup of the frontend portions of the app that made use of the Google Maps API, such as the map and autocomplete.
+- Utilized Google Maps APIs to query the routes as well as break them down and query points along the route in order to feed that information into the rating algorithm.
 
-- Store credentials in database
+### Hawk
 
-**User Input/Output UI**
+- Created the cookie login and email verification system for persistent user login and the error messaging for login and password validation.
+- Set up the git action and heroku repositories for integrating and deploying pulls and merges to the main branch for both server and client.
+- Created the server routes and functions for user and route preferences and the mongoDb models for user and route preferences.
 
-- Have search boxes for start/destination locations
+## Prototype Sketches
 
-- Smart fill?
+### Wireframe Sketches
 
-- Embed google maps into page
+#### Login Page
+![Login Page](Prototype_Sketches/Login_Page.png)
 
-- Display selected locations on map interface
+#### Input Page
+![Input Page](Prototype_Sketches/Input_Page.png)
 
-- Display route to user once calculated
+#### Output Page
+![Output Page](Prototype_Sketches/Output_Page.png)
+#### Request-Response Flow with Google Maps API
 
-- Store calculated route in database
-
-Finally, draw 2-3 rough sketch prototypes of some key tasks of your app. Sketch these physically on paper and then scan and add to your repo.
-
-How to hand in: Put all of the writing (Project Description, Project Task requirements, task breakdown), as well as your prototypes into the README of your project repo. Send the repo link to your lab TAs in a slack channel along with your group members. ALSO, for each team member, go on slack and edit your profile. In the “What I do” space, put your team name!
+![Sample Request Response Flow](Prototype_GMA_Request_Response_Flow.png)
