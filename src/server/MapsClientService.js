@@ -47,7 +47,6 @@ const getElevationResults = async (route, userProfile) => {
 
     let elevationData = await client.elevation(elevationRequest);
 
-
     // update score in elevationResults
     await calculateStepScore(
       elevationResults,
