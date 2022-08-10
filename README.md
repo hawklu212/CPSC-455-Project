@@ -1,32 +1,29 @@
-# CPSC-455-Project
+# A11yMaps
 
-A11yMaps is an accessibility first web application that provides navigation services for users with diverse mobility needs. Using the Google Maps and Elevation APIs, we developed a proof of concept tool to assess and rank the difficulty of potential routes for a journey based on a user’s elevation profile preferences. Through this app, we sought to create an accessible navigation app with a user-friendly and Inclusive Design oriented approach.
-
-**Appname**
-
-**A11yMaps**
+A11yMaps (Accessibility Maps) is an accessibility focused web application that provides walking navigation services for users with diverse mobility needs. Using the Google Maps and Elevation APIs, we developed a proof of concept tool to assess and rank the difficulty of potential routes for a journey based on a user’s specified elevation profile preferences. Through this app, we sought to provide a more inclusive navigation experience that allows users to tailor their journeys by finding the most suitable route to get to their destination.
 
 # Project Description
 
 **Who is it for?**
 
-Individuals with impaired mobility/those constrained to utilising a wheelchair
+Individuals with impaired mobility/those constrained to utilising a wheelchair, who may not be able to easily navigate routes with steeper inclines.
 
 **What will it do? (What "human activity" will it support?) **
 
-Will support better routing data to individuals with mobility impairments, giving them better/more information for choosing routes
+The application will provide an interface to allow users to look up potential routes for specified origin and destinations. The routes will be displayed to users, along with detailed information about each route, and a rating, to allow users to gauge which routes they may prefer to take for their journey.
+
+
 
 **What type of data will it store?**
 
-Favourite routes/locations
+Saved routes/locations, so that they can easily look it up again.
 
-User profiles
+User profiles containing their elevation ranking preferences.
 
 **What will users be able to do with this data?**
 
-With pre-saved locations individuals will more rapidly be able to input start points and destinations, as well as quickly pull up past routes that they may use frequently
+With pre-saved locations individuals will more rapidly be able to input start points and destinations, as well as quickly pull up past routes that they may use frequently.
 
-**What is some additional functionality you can add/remove based on time constraints? **
 
 # Project Task Requirements
 
