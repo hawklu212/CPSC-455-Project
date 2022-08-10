@@ -56,7 +56,7 @@ export default function Profile() {
   const dispatch = useDispatch();
   const loginUser = useSelector((state) => state.loginState);
   const [incline, setIncline] = useState(4);
-  const [weight, setWeight] = useState(4);
+  const [weight, setWeight] = useState(40);
   const [priority, setPriority] = useState("distance");
   const [helperText, setHelperText] = useState("");
   const [saveText, setSaveText] = useState("");
@@ -189,7 +189,7 @@ export default function Profile() {
           // helperText={}
           variant="outlined"
           required
-          defaultValue={4}
+          defaultValue={40}
           label="Weight (in kg)"
           type="number"
           onChange={handleWeightChange}
