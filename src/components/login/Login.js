@@ -3,7 +3,6 @@ import "../../components-styling/colours.css";
 import { TextField } from "@mui/material";
 import image from "./stock.jpg"
 import { useNavigate } from "react-router-dom";
-// import Navigation from "../Navigation";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useEffect, useState } from "react";
 import { loginCurl } from "../../async-functions/async";
@@ -58,14 +57,11 @@ export default function Login() {
   };
 
   const loginAttempt = () => {
-    // TODO: add authentication (maybe following this? https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications)
-    // if login attempt succeeds, then:
     email = "";
     userPass = "";
     navigate("../profile");
   };
   const signUp = () => {
-    // NTH: maybe carry over username if it is already entered
     email = "";
     userPass = "";
     navigate("../create-account");
@@ -178,8 +174,8 @@ export default function Login() {
                     console.log(error);
                   });
               }
-              // loginAttempt();
-            }}
+            }
+          }
           >
             Sign in
           </Button>
