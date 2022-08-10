@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginState } from "../../actions";
 import { signUpCurl } from "../../async-functions/async";
 import { getCookieValidationCurl } from "../../async-functions/async";
-import { validate } from "email-validator";
 
 let email = "";
 let name = "";
@@ -64,7 +63,6 @@ export default function CreateAccount() {
   };
 
   const verifyFunc = () => {
-    // TODO: create account in database
     email = "";
     name = "";
     userPass = "";
