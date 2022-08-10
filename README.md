@@ -65,9 +65,11 @@ With this main goal in mind, our task requirements were the following:
 ------------------------------------------------------------------------------------------------
 
 **High Interactivity And Data Processing**
+
 Through the integration of the Google Maps APIs, we incorporated a fully functional location service, as well as made use of various external APIs to extract route directions and elevation data. After obtaining this data, utilizing an algorithm adapted from the academic literature that incorporates the user preferences, the routes were rated and scored for difficulty.
 
 **Improved Security**
+
 By integrating `nodemailer` for email verification and password recovery, and `js-cookies` for session id cookie management.
 
 We integrated the nodeMailer library into the Express server and setup a custom email which is used to send email messages. The custom email's security credentials are stored as Environmental Variables in the server, which are not accessible to users. In addition, we setup Js-cookies to be used for login credentials and login verification. When a user logs in or signs up, a unique uuid is generated for the user on the server end and sent over as a cookie to the client. The Google maps API credentials required for rendering google maps is also sent over as a cookie, ensuring that the maps API can't be accessed without logging in. A custom domain name was used for our client, and server as herokuapp itself prevents cookie transfer due to it being listed on the public suffix list.  The domain target for the cookie was specified, and the CORS policy was set up to allow for the cookie transfering between server and client. When a user logs out, the server wipes the cookie values on the client and server side, removing the persistent login and the map id until the user logs in again.
