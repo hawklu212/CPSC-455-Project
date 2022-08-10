@@ -6,7 +6,7 @@ import {
   Select,
   MenuItem,
   FormControl,
-  FormHelperText, ButtonGroup,
+  FormHelperText,
 } from "@mui/material";
 import "../../components-styling/colours.css";
 import { Slider, TextField } from "@mui/material";
@@ -16,7 +16,6 @@ import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useEffect, useState } from "react";
 import {
   getUserPreferenceCurl,
-  loginCurl,
   putSetUserPreferenceCurl,
 } from "../../async-functions/async";
 import { loginState } from "../../actions";
@@ -24,8 +23,6 @@ import {
   setInitialCookieCurl,
   getCookieValidationCurl,
 } from "../../async-functions/async";
-import { validate } from "email-validator";
-import { textAlign, width } from "@mui/system";
 import Cookies from "js-cookie";
 
 const marks = [
@@ -96,9 +93,7 @@ export default function Profile() {
   };
 
   const handleSave = async () => {
-    // create preferences object
     const profile = {
-      // email: loginUser? Not sure about this, @Hawk you might know more
       maxIncline: incline,
       weight: weight,
       distancePreference: priority,
@@ -185,8 +180,6 @@ export default function Profile() {
         <br />
         <br />
         <TextField
-          // error={}
-          // helperText={}
           variant="outlined"
           required
           defaultValue={40}
