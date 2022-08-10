@@ -104,7 +104,10 @@ export default function Login() {
         <br />
         <br />
         <br />
-        <Typography variant="h4">Welcome Back!</Typography>
+        <Typography variant="h4"style = {{
+          textShadow: '1px 1px #808080',
+        }}
+        >Welcome Back!</Typography>
         <br />
         <TextField
           error={userError}
@@ -114,7 +117,8 @@ export default function Login() {
           label="Email"
           style ={{
             background: "white",
-            opacity: 0.8}}
+            opacity: 0.8,
+        }}
           onChange={(event) => {
             email = event.target.value;
           }}
@@ -184,7 +188,9 @@ export default function Login() {
         <br />
         <br />
         <Divider></Divider>
-        <Typography variant="h6">
+        <Typography variant="h6"style = {{
+          textShadow: '1px 1px #808080',
+        }}>
           Don&apos;t have an account? Sign up here!
         </Typography>
         <br />
@@ -195,7 +201,10 @@ export default function Login() {
           Sign up
         </Button>
         <br />
-        <Typography variant="h6">
+        <Typography variant="h6"
+        style = {{
+          textShadow: '1px 1px #808080',
+        }}>
           Forgot password or need to verify an account?
         </Typography>
         <br />

@@ -98,18 +98,6 @@ export default function Navigation() {
   return (
     <AppBar position="sticky">
       <Toolbar variant="dense">
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-          onClick={toggleDrawer}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Drawer anchor="left" open={drawerState} onClose={toggleDrawer}>
-          {list()}
-        </Drawer>
         <Typography
           variant="h6"
           color="inherit"
