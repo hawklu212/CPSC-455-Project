@@ -1,134 +1,127 @@
-// TODO: remove this endpoint after testing
 const endpoint = "http://server.a11ymaps.com/";
 export async function loginCurl(data) {
   const response = await fetch(`${endpoint}users`, {
-    method: "PUT", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "same-origin", // include, *same-origin, omit
+    method: "PUT",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    redirect: "follow", // manual, *follow, error
-    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
     body: JSON.stringify(data),
   });
-  return response.json(); // parses JSON response into native JavaScript objects
+  return response.json();
 }
 
 export async function signUpCurl(data) {
   const response = await fetch(`${endpoint}users`, {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "same-origin", // include, *same-origin, omit
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    redirect: "follow", // manual, *follow, error
-    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
     body: JSON.stringify(data),
   });
-  return response.json(); // parses JSON response into native JavaScript objects
+  return response.json();
 }
 
 export async function setInitialCookieCurl(data) {
   const response = await fetch(`${endpoint}users/cookie`, {
-    method: "PUT", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "include", // include, *same-origin, omit
+    method: "PUT",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
-    redirect: "follow", // manual, *follow, error
-    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
     body: JSON.stringify(data),
   });
-  return response.json(); // parses JSON response into native JavaScript objects
+  return response.json();
 }
 
 export async function getCookieValidationCurl() {
   const response = await fetch(`${endpoint}users/cookie`, {
-    method: "GET", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "include", // include, *same-origin, omit
+    method: "GET",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    redirect: "follow", // manual, *follow, error
-    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
   });
-  return response; // parses JSON response into native JavaScript objects
+  return response;
 }
 
 export async function logoutCurl() {
   const response = await fetch(`${endpoint}users/cookie/logout`, {
-    method: "PUT", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "include", // include, *same-origin, omit
+    method: "PUT",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
-    redirect: "follow", // manual, *follow, error
-    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
   });
-  return response; // parses JSON response into native JavaScript objects
+  return response;
 }
 
 export async function verificationCurl(data) {
   const response = await fetch(`${endpoint}users/verify`, {
-    method: "PUT", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "include", // include, *same-origin, omit
+    method: "PUT",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    redirect: "follow", // manual, *follow, error
-    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
     body: JSON.stringify(data),
   });
-  return response.json(); // parses JSON response into native JavaScript objects
+  return response.json();
 }
 export async function recoveryCurl(data) {
   const response = await fetch(`${endpoint}users/recovery`, {
-    method: "PUT", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "include", // include, *same-origin, omit
+    method: "PUT",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    redirect: "follow", // manual, *follow, error
-    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
     body: JSON.stringify(data),
   });
-  return response.json(); // parses JSON response into native JavaScript objects
+  return response.json();
 }
 
 export async function recoverySendCodeCurl(data) {
   const response = await fetch(`${endpoint}users/verify`, {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "include", // include, *same-origin, omit
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    redirect: "follow", // manual, *follow, error
-    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
     body: JSON.stringify(data),
   });
-  return response.json(); // parses JSON response into native JavaScript objects
+  return response.json();
 }
 
 
@@ -151,39 +144,36 @@ export async function getRouteResults(locations, userPref) {
 /*  Get user Preferences  */
 export async function getUserPreferenceCurl() {
   const response = await fetch(`${endpoint}profileCreation`, {
-    method: "GET", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "include", // include, *same-origin, omit
+    method: "GET",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    redirect: "follow", // manual, *follow, error
-    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
   });
-  return response.json(); // parses JSON response into native JavaScript objects
+  return response.json();
 }
 
 /*  Put user Preferences  */
 export async function putSetUserPreferenceCurl(data) {
   const response = await fetch(`${endpoint}profileCreation`, {
-    method: "PUT", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "include", // include, *same-origin, omit
+    method: "PUT",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    redirect: "follow", // manual, *follow, error
-    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
     body: JSON.stringify(data),
   });
-  return response.json(); // parses JSON response into native JavaScript objects
+  return response.json();
 }
 
-/*  Get Saved Routes  */
 export async function getSavedRoutes() {
   const response = await fetch(`${endpoint}savedRoutes`, {
     method: "GET",
