@@ -1,5 +1,3 @@
-// this file can hold functions for processing individual routes
-// and filling in details of routeSummary
 const calculateTotalElevation = (routeSummary, elevationResults) => {
   routeSummary.totalElevation =
     Math.max(...elevationResults) - Math.min(...elevationResults);
@@ -11,7 +9,7 @@ const calculateStepScore = async (
   samplingDistance,
   userProfile
 ) => {
-  // set a default value for mass if not weight is indicated in user profile?
+
   let userMass = 60;
   if (userProfile.weight != null) {
     userMass = userProfile.weight;
@@ -27,7 +25,6 @@ const calculateStepScore = async (
       samplingDistance
     );
 
-    // Set max incline if null, and update if slope is greater than the current steepestIncline
     if (
       elevationResults.steepestIncline === undefined ||
       elevationResults.steepestIncline < incline
@@ -35,7 +32,6 @@ const calculateStepScore = async (
       elevationResults.steepestIncline = incline;
     }
 
-    // calculate the inclineFactor for this step
     let inclineFactor = null;
     let preferenceMultiplier = 1;
 
@@ -53,7 +49,6 @@ const calculateStepScore = async (
         break;
     }
 
-    // Calculate incline factor using user preference
     if (incline < 0) {
       inclineFactor =
         userMass * samplingDistance * Math.tan(preferenceMultiplier * incline) -
@@ -69,13 +64,11 @@ const calculateStepScore = async (
       inclineFactor = 0;
     }
 
-    // Calculate this step's score and add it to the current score in elevationResults
     let stepScore = samplingDistance * inclineFactor;
     elevationResults.routeScore += stepScore;
   }
 };
 
-// return incline in degrees
 const calculateIncline = (startElevation, endElevation, distance) => {
   let riseOverRun = (endElevation - startElevation) / distance;
   let inclineRadians = Math.atan(riseOverRun);
