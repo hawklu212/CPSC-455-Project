@@ -24,19 +24,19 @@ With this main goal in mind, our task requirements were the following:
 
 ### Standard Requirements
 
-- :white_check_mark: **Incorporate User Preferences into Route Calculations** -  use the user profile settings for weight, max incline, and preference for distance or incline to calculate a total score for each route. This would require figuring out how to adapt calculations from https://doi.org/10.1179/000870406X93517.
+- :white_check_mark: **Incorporate User Preferences into Route Calculations** -  use the user profile settings for weight, max incline, and preference for distance or incline to calculate a total score for each route. This required figuring out how to adapt calculations from https://doi.org/10.1179/000870406X93517.
 
 - :white_check_mark: **Display Elevation/Distance Profile of Each Route** - provide a detailed display of information about each route, including elevation, distance, rating, etc. to allow users to gauge which routes they may prefer.
 
 - :white_check_mark: **Saved Locations/Routes** - allow users to label and save routes so that they can easily pull up past searched routes for reference.
 
-- :white_check_mark: **Email Verification For Recovering Password** - allow users to recover a forgotten password via email verification. This requires figuring out how to use `nodemailer`.
+- :white_check_mark: **Email Verification For Recovering Password** - allow users to recover a forgotten password via email verification. This required figuring out how to use `nodemailer`.
 
 ### Stretch Requirements
 
-- :white_check_mark: **Add Per-Request Authentication via Cookies** - add authentication using cookies for every request to secure our application. This would require figuring out how to use the `js-cookie` 3rd party library to safely transmit session ids.
+- :white_check_mark: **Add Per-Request Authentication via Cookies** - add authentication using cookies for every request to secure our application. This required figuring out how to use the `js-cookie` 3rd party library to safely transmit session ids.
 
-- :white_check_mark: **Allow Users to Visually Compare Routes** - allow users to switch the map display depending on which route they want to view. This would require a lot of coordination on the React-Redux state, in addition to properly liasing with the payloads from the backend.
+- :white_check_mark: **Allow Users to Visually Compare Routes** - allow users to switch the map display depending on which route they want to view. This required a lot of coordination on the React-Redux state, in addition to properly liasing with the payloads from the backend.
 
 - :x: **Store Saved Routes Locally (To Improve Latency) and Update Route As Necessary** - This would require figuring out a representation for the routes to be saved in the database, and implementing watchers for changes.
   
@@ -55,7 +55,7 @@ With this main goal in mind, our task requirements were the following:
 --------------------------------------------------------------------------------------------------
 
 - **Unit 1 - HTML, CSS, JS** - These 3 technologies were heavily utilized indirectly throughout the project, through the realization of all the other technologies. For the UI, manipulation and interfacing with HTML was used through the virtual DOM of React to quickly create components, while CSS was utilized to add custom styling to components. And Javascript was the primary development language utilized to write both frontend (React+Redux) and backend (Node+MongoDB) code.
-- **Unit 2 - React/Redux** - The user interface was designed with the React Framework and leveraging the MaterialUI component library to quickly build the structure of our application using standardized components. Redux was also incorporated to allow us to easily manage state across the various components we created as our frontend grew in complexity.
+- **Unit 2 - React/Redux** - The user interface was designed with the React Framework and the MaterialUI component library to quickly build the structure of our application using standardized components. Redux was also incorporated to allow us to easily manage state across the various components we created as our frontend grew in complexity.
 - **Unit 3 - Node/Express** - The Node.js framework was used to write the backend code, allowing us write queries to the Google Maps API services, code the processing of the route result data, and manage cookies. Express was used as our web server, to setup APIs that allowed our backend code to interface and serve responses to frontend requests.
 - **MongoDB** - MongoDB was used as our primary persistent data storage. User Preferences, access tokens, validation status, and saved routes were stored in a MongoDB server, with the information being associated with the user's email address. The utilization of MongoDB allowed us to rapidly prototype and work with databases with its flexible schema, compared to a SQL database.
 - **Heroku** - Heroku was utilized to deploy our full-stack application. The frontend react web app and the Express+MongoDB backend server were deployed as two separate dynos respectively, with ents setup to track any GitHub changes.
@@ -64,22 +64,24 @@ With this main goal in mind, our task requirements were the following:
 
 ------------------------------------------------------------------------------------------------
 
-High Interactivity
+**High Interactivity And Data Processing**
+Through the integration of the Google Maps APIs, we incorporated a fully functional location service, as well as made use of various external APIs to extract route directions and elevation data. After obtaining this data, utilizing an algorithm adapted from the academic literature that incorporates the user preferences, the routes were rated and scored for difficulty.
 
 **Improved Security**
+By integrating `nodemailer` for email verification and password recovery, and `js-cookies` for session id cookie management.
 
 We integrated the nodeMailer library into the Express server and setup a custom email which is used to send email messages. The custom email's security credentials are stored as Environmental Variables in the server, which are not accessible to users. In addition we setup Js-cookies to be used for login credentials and login verification. When a user logs in or signs up, a unique uuid is generated for the user on the server end and sent over as a cookie to the client. The Google maps API credentials required for rendering google maps is also sent over as a cookie, ensuring that the maps API can't be accessed without logging in. Js-cookies when used with heroku require a custom domain name, as herokuapp itself prevents cookie transfer do to it being listed on the public suffix list. As such, we used a custom domain name for both client and server, specified
 the domain name for the cookie, and set up the CORS policy to allow for the cookie transfering. When a user logs out, the server wipes the cookie values on the client side, removing the persistent login and the map id until the user logs in again.
-
-
-- viewing of laternative routes
 
 ## Next Steps
 
 ------------------------------------------------------------------------------------------------
 
-Potential future directions for development could involve continuing to improve the usability and accuracy of our application through 3 main areas of work: 
-- Make application more accessible through the full integration of ARIA standards such as tagging all components with aria-tags, or the utilization of React-Aria library; by incorporating road surface and curb/step information we will be able to more accurately model the score for a given route, as well as steer users clear of those obstacles; and finally to allow self-reporting of obstacles or impediments on routes which would be incorporated into the route rating, this would require storing the entire path object to a database which would also have to be implemented. Finally, due to the nature of the application and the likelihood of being used on the go we would furthermore like to support a mobile-friendly experience.
+Potential future directions for development could involve continuing to improve the usability and accuracy of our application through 3 main areas of work:
+
+- Make the application more accessible through the full integration of ARIA standards such as tagging all components with aria-tags, or the utilization of the React-Aria library.
+- Incorporate road surface and curb/step information (through interfacing with other external APIs) and self-reported (or crowd-sourced) user data on route obstacles, to more accurately model the score for a given route, as well as steer users clear of those obstacles.
+- Due to the nature of the application and the likelihood of being used on the go, we would ideally seek to make improvements to support a more mobile-friendly experience (possibly through React Native).
 
 ## Task Breakdown
 
