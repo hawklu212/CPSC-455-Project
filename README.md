@@ -42,21 +42,23 @@ With this main goal in mind, our task requirements were the following:
   
 - :x: **Implementing a Custom Routing Algorithm** - implement a custom routing algorithm. Doing this would allow us to sample elevation from points and come up with our own routes independent of Google's results.
 
-- :x: **Allow users to Self-Report Obstructions Along route, and the app can incorporate this information**
+- :x: **Allow Users to Self-Report Obstructions Along Route and Accomodate Paths or Recommendations Accordingly** - this requires the previous stretch goals to be accomplished.
 
-- :x: **~~Turn by turn navigation~~**
+- :x: **Turn by Turn Navigation** - this would provide users with detailed instructions for turn by turn navigation.
 
-- :x: **ability to simulate the route**
+- :x: **Ability to Simulate the Route** - this would allow users to view the route, like in Google Maps Street Views.
 
-- :x: **Add “use my location”, both as a start/end point, but also when initialising the map view**
+- :x: **Add “Use My Location" as an Origin/Destination and for Map Initialization** - this would be a quality of life improvement.
 
 ## Tech
 
 --------------------------------------------------------------------------------------------------
 
-- **HTML, CSS, JS** - 
-- **React/Redux** - the user inteface was designed in React while using Redux to manage state across the front-end of the application.
-- **Express** - was used to convey cookies, query information, and processed data between the front and back-ends.
+- **Unit 1 - HTML, CSS, JS** - These 3 technologies were heavily utilized indirectly throughout the project, through the realization of all the other technologies. For the UI, manipulation and interfacing with HTML was used through the virtual DOM of React to quickly create components, while CSS was utilized to add custom styling to components. And Javascript was the primary development language utilized to write both frontend (React+Redux) and backend (Node+MongoDB) code.
+- **Unit 2 - React/Redux** - The user interface was designed with the React Framework and leveraging the MaterialUI component library to quickly build the structure of our application using standardized components. Redux was also incorporated to allow us to easily manage state across the various components we created as our frontend grew in complexity.
+- **Unit 3 - Node/Express** - The Node.js framework was used to write the backend code, allowing us program queries to the Google Maps API services, and to code the processing of this route data. 
+- 
+-  was used to convey cookies, query information, and processed data between the front and back-ends.
 - **Node.js** - the backend was coded in Node.js and was responsible for all calculations as well as queries to the Google Maps services such as directions and elevation.
 - **MongoDB** - UserPreferences, access tokens, validation status, and saved routes were stored in a MongoDB server, with the information being associated with the user's email address.
 - **Heroku** - deployment was handled by Heroku, with two separate apps being set up track the front and back-ends, respectively, with automated deployments.
@@ -66,6 +68,8 @@ With this main goal in mind, our task requirements were the following:
 
 ------------------------------------------------------------------------------------------------
 
+Cookies?
+
 ## Next Steps
 
 ------------------------------------------------------------------------------------------------
@@ -73,9 +77,13 @@ With this main goal in mind, our task requirements were the following:
 In the future our goals are to continue improving the usability and accuracy of our application, this would be done in three main area: by making the application more accessible through the full integration of ARIA standards such as tagging all components with aria-tags, or the utilization of React-Aria library; by incorporating road surface and curb/step information we will be able to more accurately model the score for a given route, as well as steer users clear of those obstacles; and finally to allow self-reporting of obstacles or impediments on routes which would be incorporated into the route rating, this would require storing the entire path object to a database which would also have to be implemented. Finally, due to the nature of the application and the likelihood of being used on the go we would furthermore like to support a mobile-friendly experience.
 
 # Task Breakdown
-##Justin##
-##Fraser##
-##Hawk##
+## Justin ##
+-  
+## Fraser ##
+- research, backend calculations, initial maps setup
+- challenge: managing passing of data between the front and back ends - overcome through 
+## Hawk ##
+- 
 
 ## Prototype Sketches
 
