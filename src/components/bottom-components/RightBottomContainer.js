@@ -1,4 +1,3 @@
-import Evaluation from "./Evaluation";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "@mui/material/Card";
 import {
@@ -7,8 +6,7 @@ import {
   Divider,
   IconButton,
   Typography,
-} from "@mui/material";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+} from "@mui/material"
 import StraightenIcon from "@mui/icons-material/Straighten";
 import TimerIcon from "@mui/icons-material/Timer";
 import FlagIcon from "@mui/icons-material/Flag";
@@ -19,7 +17,6 @@ import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfi
 import SentimentNeutralIcon from "@mui/icons-material/SentimentNeutral";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import { changeRouteIndex } from "../../actions/changeRouteIndex";
-import {getUserPreferenceCurl} from "../../async-functions/async";
 
 export default function RightBottomContainer() {
   const directions = useSelector((state) => state.directionsReducer);
