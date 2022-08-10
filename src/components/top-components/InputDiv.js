@@ -14,10 +14,3 @@ export default function Inputs(props) {
     </Box>
   );
 }
-
-// function auto_grow(referen) {
-//   if (referen.current != null) {
-//     referen.current.style.height = "20px";
-//     referen.current.style.height = referen.current.scrollHeight + "px";
-//   }
-// }
