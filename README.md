@@ -98,9 +98,9 @@ Potential future directions for development could involve continuing to improve 
 
 ### Hawk
 
-- Created the cookie login and email verification system for persistent user login and the error messaging.
+- Created the cookie login and email verification system for persistent user login and the error messaging for login and password validation.
 - Set up the git action and heroku repositories for integrating and deploying pulls and merges to the main branch for both server and client.
-- Created the server routes for user and route preferences and the mongoDb models for user and route preferences.
+- Created the server routes and functions for user and route preferences and the mongoDb models for user and route preferences.
 
 ## Prototype Sketches
 
