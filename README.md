@@ -56,34 +56,46 @@ With this main goal in mind, our task requirements were the following:
 
 - **Unit 1 - HTML, CSS, JS** - These 3 technologies were heavily utilized indirectly throughout the project, through the realization of all the other technologies. For the UI, manipulation and interfacing with HTML was used through the virtual DOM of React to quickly create components, while CSS was utilized to add custom styling to components. And Javascript was the primary development language utilized to write both frontend (React+Redux) and backend (Node+MongoDB) code.
 - **Unit 2 - React/Redux** - The user interface was designed with the React Framework and leveraging the MaterialUI component library to quickly build the structure of our application using standardized components. Redux was also incorporated to allow us to easily manage state across the various components we created as our frontend grew in complexity.
-- **Unit 3 - Node/Express** - The Node.js framework was used to write the backend code, allowing us program queries to the Google Maps API services, and to code the processing of this route data. 
-- 
--  was used to convey cookies, query information, and processed data between the front and back-ends.
-- **Node.js** - the backend was coded in Node.js and was responsible for all calculations as well as queries to the Google Maps services such as directions and elevation.
-- **MongoDB** - UserPreferences, access tokens, validation status, and saved routes were stored in a MongoDB server, with the information being associated with the user's email address.
-- **Heroku** - deployment was handled by Heroku, with two separate apps being set up track the front and back-ends, respectively, with automated deployments.
-
+- **Unit 3 - Node/Express** - The Node.js framework was used to write the backend code, allowing us write queries to the Google Maps API services, code the processing of the route result data, and manage cookies. Express was used as our web server, to setup APIs that allowed our backend code to interface and serve responses to frontend requests.
+- **MongoDB** - MongoDB was used as our primary persistent data storage. User Preferences, access tokens, validation status, and saved routes were stored in a MongoDB server, with the information being associated with the user's email address. The utilization of MongoDB allowed us to rapidly prototype and work with databases with its flexible schema, compared to a SQL database.
+- **Heroku** - Heroku was utilized to deploy our full-stack application. The frontend react web app and the Express+MongoDB backend server were deployed as two separate dynos respectively, with ents setup to track any GitHub changes.
 
 ## Above and Beyond Functionality
 
 ------------------------------------------------------------------------------------------------
 
-Cookies?
+High Interactivity
+
+**Improved Security**
+
+We integrated the nodeMailer library into the Express server and setup a custom email which is used to send email messages. The custom email's security credentials are stored as Environmental Variables in the server, which are not accessible to users. In addition we setup Js-cookies to be used for login credentials and login verification. When a user logs in or signs up, a unique uuid is generated for the user on the server end and sent over as a cookie to the client. The Google maps API credentials required for rendering google maps is also sent over as a cookie, ensuring that the maps API can't be accessed without logging in. Js-cookies when used with heroku require a custom domain name, as herokuapp itself prevents cookie transfer do to it being listed on the public suffix list. As such, we used a custom domain name for both client and server, specified
+the domain name for the cookie, and set up the CORS policy to allow for the cookie transfering. When a user logs out, the server wipes the cookie values on the client side, removing the persistent login and the map id until the user logs in again.
+
+
+- viewing of laternative routes
 
 ## Next Steps
 
 ------------------------------------------------------------------------------------------------
 
-In the future our goals are to continue improving the usability and accuracy of our application, this would be done in three main area: by making the application more accessible through the full integration of ARIA standards such as tagging all components with aria-tags, or the utilization of React-Aria library; by incorporating road surface and curb/step information we will be able to more accurately model the score for a given route, as well as steer users clear of those obstacles; and finally to allow self-reporting of obstacles or impediments on routes which would be incorporated into the route rating, this would require storing the entire path object to a database which would also have to be implemented. Finally, due to the nature of the application and the likelihood of being used on the go we would furthermore like to support a mobile-friendly experience.
+Potential future directions for development could involve continuing to improve the usability and accuracy of our application through 3 main areas of work: 
+- Make application more accessible through the full integration of ARIA standards such as tagging all components with aria-tags, or the utilization of React-Aria library; by incorporating road surface and curb/step information we will be able to more accurately model the score for a given route, as well as steer users clear of those obstacles; and finally to allow self-reporting of obstacles or impediments on routes which would be incorporated into the route rating, this would require storing the entire path object to a database which would also have to be implemented. Finally, due to the nature of the application and the likelihood of being used on the go we would furthermore like to support a mobile-friendly experience.
 
-# Task Breakdown
-## Justin ##
+## Task Breakdown
+
+### Justin
+
 -  
-## Fraser ##
+### Fraser
+
 - research, backend calculations, initial maps setup
 - challenge: managing passing of data between the front and back ends - overcome through 
-## Hawk ##
 - 
+### Hawk
+
+- Created the cookie login and email verification system for persistent user login and the error messaging.
+- Set up the git action and heroku repositories for integrating and deploying pulls and merges to the main branch for both server and client.
+- Created the server routes for user and route preferences and the mongoDb models for user and route preferences.
 
 ## Prototype Sketches
 
