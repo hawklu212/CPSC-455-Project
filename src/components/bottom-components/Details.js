@@ -6,7 +6,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Button,
+  Button, ButtonGroup,
 } from "@mui/material";
 
 import { useEffect, useState } from "react";
@@ -68,11 +68,11 @@ export default function Details(props) {
   };
 
   return (
-    <Grid container space={1}>
+    <Grid container space={2}>
       <Grid item xs={12}>
         <Typography variant={"h5"}>Saved Queries</Typography>
         <div>
-          <FormControl sx={{ m: 1, width: 300 }}>
+          <FormControl sx={{ m: 1, width: 1 }}>
             <InputLabel id="route-label">Route</InputLabel>
             <Select
               labelId="route-label"
@@ -80,7 +80,6 @@ export default function Details(props) {
               value={currDropdownVal}
               label="Route"
               onChange={handleDropdownChange}
-              // input={<OutlinedInput label="Route" />}
               MenuProps={MenuProps}
             >
               {dropdown.map((route) => (
@@ -92,25 +91,23 @@ export default function Details(props) {
           </FormControl>
         </div>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12}>
         <Typography variant={"h6"}>Origin</Typography>
-      </Grid>
-      <Grid item xs={6}>
         <Chip label={currDisplayedPrevOrigin}></Chip>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12}>
         <Typography variant={"h6"}>Destination</Typography>
-      </Grid>
-      <Grid item xs={6}>
         <Chip label={currDisplayedPrevDest}></Chip>
       </Grid>
-      <Grid>
-        <Button variant="contained" type="submit" onClick={clearSavedRoutes}>
-          Clear Saved Routes
-        </Button>
-        <Button variant="contained" type="submit" onClick={viewSavedRoute}>
-          View Saved Route
-        </Button>
+      <Grid item xs={12}>
+        <ButtonGroup variant={"contained"}>
+          <Button variant="contained" type="submit" onClick={clearSavedRoutes}>
+            Clear Saved Routes
+          </Button>
+          <Button variant="contained" type="submit" onClick={viewSavedRoute}>
+            View Saved Route
+          </Button>
+        </ButtonGroup>
       </Grid>
     </Grid>
   );

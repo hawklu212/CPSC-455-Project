@@ -4,12 +4,12 @@ import { Autocomplete } from "@react-google-maps/api";
 
 export default function Inputs(props) {
   return (
-    <Box>
+    <Box sx={{ width: 1}}>
       <Autocomplete>
-        <input type="text" placeholder="Origin" ref={props.origin} />
+        <input type="text" placeholder="Origin" style={{width: '100%', fontSize: '14px'}} ref={props.origin} />
       </Autocomplete>
       <Autocomplete>
-        <input type="text" placeholder="Destination" ref={props.destination} />
+        <input type="text" placeholder="Destination" style={{width: '100%', fontSize: '14px'}} ref={props.destination} />
       </Autocomplete>
     </Box>
   );

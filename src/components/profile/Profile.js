@@ -6,7 +6,7 @@ import {
   Select,
   MenuItem,
   FormControl,
-  FormHelperText,
+  FormHelperText, ButtonGroup,
 } from "@mui/material";
 import "../../components-styling/colours.css";
 import { Slider, TextField } from "@mui/material";
@@ -217,7 +217,6 @@ export default function Profile() {
         <br />
         <Divider style={{ width: "50%" }}></Divider>
         <br />
-
         <Button variant="outlined" onClick={handleSave}>
           Save
         </Button>

@@ -44,12 +44,14 @@ textarea {
   border: var(--border-size);
   border-style: none;
   border-color: var(--border-color);
+  flex-grow: 1;
 }
 
 #LEFT_BOTTOM {
   border: var(--border-size);
   border-style: none;
   border-color: var(--border-color);
+  flex-grow: 1;
 }
 
 #BOTTOM_DIV {
